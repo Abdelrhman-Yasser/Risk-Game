@@ -3,7 +3,7 @@
 /* init game environment */
 /******************************************/
 /* constructor */
-environment::environment()
+environment::environment(string init_file_dir)
 {
 	// nothing
 }
@@ -13,13 +13,6 @@ environment::~environment()
 {
 	// TODO
 }
-
-int
-environment::init(string init_file_dir, enum p1_type, enum p2_type)
-{
-	// initialize
-}
-
 
 /* interface methods */
 /******************************************/
