@@ -1,23 +1,11 @@
-#ifndef CONTAINER
+#ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
 /* import libraries */
 /******************************************/
 #include <string>
-
-
-/* global variables */
-/******************************************/
-struct country {
-	enum owner_type; // HUMAN, GREEDY
-	int troops_count;
-	int id;
-}
-
-struct border {
-	struct country *country1;
-	struct country *country2;
-}
+#include "data_structures.h"
+#include "../utilities/data_container.h"
 
 
 /* class definition */
@@ -25,14 +13,14 @@ struct border {
 class environment
 {
 	private:
-		vector<country> country_list;
-		vector<border> border_list;
-		vector<vector<country> > continent_list;
+		vector<struct country> country_list;
+		vector<struct border> border_list;
+		vector<struct continent> continent_list;
 		int game_status;
 
 	public:
 		/* constructor */
-		environment(string init_file_dir);
+		environment(char *init_file_dir);
 		~environment();
 
 		/* interface methods */

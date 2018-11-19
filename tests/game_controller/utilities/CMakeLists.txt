@@ -7,8 +7,8 @@ add_executable(
 		
         game
 
-        ../test.cpp
-        ../io_handler.cpp
-        ../file_parser.cpp
+        ./utilities_test.cpp
+        ../../../src/game_controller/utilities/io_handler.cpp
+        ../../../src/game_controller/utilities/file_parser.cpp
 
 )

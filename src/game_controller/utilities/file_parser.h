@@ -8,7 +8,8 @@
 #include <vector>
 #include <string>
 #include <cstring>
-#include "../environment/container.h" // data structures of environment
+#include "io_handler.h"
+#include "../environment/data_structures.h" // data structures of environment
 
 using namespace std;
 
@@ -17,18 +18,25 @@ using namespace std;
 class file_parser
 {
 	public:
-		static void parse_file(vector<string> *init_file_lines, struct init_info *init_info_container);
+		file_parser(char *init_file_dir);
+		void obtain_border_list(vector<struct border> *border_list);
+		void obtain_continent_list(vector<struct continent> *continent_list);
+		// some getters
+		int get_country_count();
+		int get_border_count();
+		int get_continent_count();
 
 	private:
-		// Disallow creating an instance of this object
-		file_parser(){}
+		// attributes
+		vector<string> init_file_lines; // buffered init file as vectors of lines
+		int country_count = 0;
+		int border_count = 0;
+		int continent_count = 0;
 
 		// utility functions
-		static vector<string> tokenize(string target_line);
-		static void obtain_count(vector<string> *init_file_lines, struct init_info *init_info_container);
-		static int parse_count(int line_number, vector<string> *init_file_lines);
-		static void obtain_edge_list(vector<string> *init_file_lines, struct init_info *init_info_container);
-		static void obtain_continent_list(vector<string> *init_file_lines, struct init_info *init_info_container);
+		vector<string> tokenize(string target_line); // splits string by delimiter
+		int parse_count(int line_number); // gets count for specific attribute (country, border, continent)
+		
 };
 
 #endif 
