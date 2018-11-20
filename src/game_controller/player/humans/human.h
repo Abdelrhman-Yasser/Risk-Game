@@ -6,6 +6,7 @@
 #include <string>
 #include "../player.h"
 #include "../../environment/environment.h"
+#include "../../environment/data_structures.h"
 
 
 /* class definition */
@@ -16,13 +17,14 @@ class human: public player
 	public:
 		/* constructor */
 		human(environment *game_environment);
+		human();
 		~human();
 
 		/* interface methods */
 		int make_move();
 
 	private:
-		string get_user_input(); 
+		int get_user_input(char *country_name); 
 
 };
 

@@ -5,26 +5,27 @@
 /******************************************/
 #include <string>
 #include "../environment/environment.h"
+#include "../environment/data_structures.h"
 
 
 /* class definition */
 /******************************************/
-enum player_type = {HUMAN, GREEDY};
-
 class player
 {
 
 	protected:
 		environment *game_environment;
-		string army_color;
+		player_type p_type;
 
 	public:
 		/* constructor */
 		player(environment *game_environment);
+		player();
 		~player();
 
 		/* interface methods */
 		virtual int make_move(); // implements algorthim
+		player_type get_type();
 
 };
 

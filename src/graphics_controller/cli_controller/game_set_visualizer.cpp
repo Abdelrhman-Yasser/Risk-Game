@@ -6,7 +6,7 @@ void
 game_set_visualizer::display_country_info(struct country *c)
 {
 	cout << "(id : " << c->id << ")\t";
-	cout << "(owner : " << c->owner << ")\t";
+	cout << "(owner : " << c->o_id << ")\t";
 	cout << "(troops count : " << c->troops_count << ")" << endl;
 }
 

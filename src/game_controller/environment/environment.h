@@ -19,20 +19,27 @@ class environment
 		vector<struct border> border_list;
 		vector<struct continent> continent_list;
 		int game_status;
+		string winner;
+
+		// utility methods
+		void init_game_map(char *map_init_file_dir); // game map (country, border, continent)
+		void init_ownership(char *ownership_init_file_dir); // country ownership, and troops count
 
 	public:
 		/* constructor */
-		environment(char *init_file_dir);
+		environment(char *map_init_file_dir);
+		environment();
 		~environment();
 
 		/* interface methods */
 		int invade(int from_country_id, int to_country_id); // attempts to make move
 
 		// some getters
+		int get_game_status();
+		string get_winner();
 		vector<struct country> *get_country_list();
 		vector<struct border> *get_border_list();
 		vector<struct continent> *get_continent_list();
-		int get_game_status();
 		//environment *get_game_environment();
 
 

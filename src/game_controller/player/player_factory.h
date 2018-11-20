@@ -7,8 +7,8 @@
 #include "../environment/environment.h"
 #include "player.h"
 #include "./humans/human.h"
-#include "./agents/greedy_agent.h"
-
+//#include "./agents/greedy_agent.h"
+#include "../environment/data_structures.h"
 
 /* class definition */
 /******************************************/
@@ -17,7 +17,6 @@
 class player_factory
 {
 	private:
-		enum p_type = {HUMAN, GREEDY}; // player types
 		environment *game_environment;
 
 	public:
@@ -26,7 +25,7 @@ class player_factory
 		~player_factory();
 
 		/* interface methods */
-		player create_player(enum p_type);
+		player *create_player(player_type p_type);
 
 };
 
