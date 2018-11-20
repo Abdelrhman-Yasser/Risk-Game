@@ -5,7 +5,9 @@
 /******************************************/
 #include <string>
 #include "data_structures.h"
-#include "../utilities/data_container.h"
+#include "../utilities/file_parser.h"
+
+using namespace std;
 
 
 /* class definition */
@@ -25,8 +27,14 @@ class environment
 
 		/* interface methods */
 		int invade(int from_country_id, int to_country_id); // attempts to make move
+
+		// some getters
+		vector<struct country> *get_country_list();
+		vector<struct border> *get_border_list();
+		vector<struct continent> *get_continent_list();
 		int get_game_status();
-		environment *get_game_environment();
+		//environment *get_game_environment();
+
 
 };
 

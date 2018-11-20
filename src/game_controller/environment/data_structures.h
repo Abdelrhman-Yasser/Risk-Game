@@ -10,6 +10,7 @@ using namespace std;
 /******************************************/
 struct country {
 	//enum player_type owner; // HUMAN, GREEDY
+	int owner;
 	int troops_count;
 	int id;
 };
@@ -22,15 +23,6 @@ struct border {
 struct continent {
 	int reward;
 	vector<int> country_list; // indices of comprising countries
-};
-
-struct init_info {
-	int country_count;
-	int border_count;
-	int continent_count;
-
-	vector<struct border> edge_list;
-	vector<struct continent> continent_list;
 };
 
 

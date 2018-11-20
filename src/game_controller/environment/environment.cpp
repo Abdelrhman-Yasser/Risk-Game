@@ -9,15 +9,16 @@ environment::environment(char *init_file_dir)
 	file_parser parser(init_file_dir);
 
 	// create countries
-	this->country_list = vector<struct country>();
-	int count = file_parser.get_country_count();
-	for(count > 0)
+	int country_count = parser.get_country_count();
+	int counter = 1;
+	while(counter <= country_count)
 	{
 		struct country tmp;
-		tmp.id = 1;
+		tmp.id = counter;
 		tmp.troops_count = 0;
-		tmp.owner = NONE;
+		tmp.owner = 0;//tmp.owner = NONE; 
 		this->country_list.push_back(tmp);
+		counter++;
 	}
 
 	// create borders
@@ -28,6 +29,7 @@ environment::environment(char *init_file_dir)
 
 	// game status
 	this->game_status = 1;
+
 }
 
 /* destructor */
@@ -39,7 +41,7 @@ environment::~environment()
 /* interface methods */
 /******************************************/
 int
-environment::invade()
+environment::invade(int from_country_id, int to_country_id)
 {
 	
 }
@@ -52,9 +54,28 @@ environment::get_game_status()
 	return this->game_status;
 }
 
-environment*
+
+vector<struct country> 
+*environment::get_country_list()
+{
+	return &country_list;
+}
+
+vector<struct border> 
+*environment::get_border_list()
+{
+	return &border_list;
+}
+
+vector<struct continent> 
+*environment::get_continent_list()
+{
+	return &continent_list;
+}
+
+
+/*environment*
 environment::get_game_environment()
 {
 	return *this;
-}
-
+}*/
