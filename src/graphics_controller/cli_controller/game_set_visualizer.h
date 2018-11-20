@@ -7,6 +7,7 @@
 #include <iostream> // read write screen
 #include <vector>
 #include <string>
+#include <sstream>
 using namespace std;
 
 #include "../../game_controller/environment/environment.h"
@@ -25,6 +26,9 @@ class game_set_visualizer
 
 		// utility methods
 		static void display_country_info(struct country *c);
+		static void display_banner(string title);
+		static void display_continents(environment *game_set);
+		static void display_player_perspective(owner_id player_id, environment *game_set);
 };
 
 #endif 

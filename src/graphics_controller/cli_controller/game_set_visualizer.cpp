@@ -11,55 +11,23 @@ game_set_visualizer::display_country_info(struct country *c)
 }
 
 void
-game_set_visualizer::display_game_board(environment *game_set)
+game_set_visualizer::display_banner(string title)
 {
 	cout << "**************************************************************************************" << endl;
 	cout << "**************************************************************************************" << endl;
-	cout << "\t\t\t\t    COUNTRIES" << endl;
+	cout << "\t\t\t\t    " << title << endl;
 	cout << "**************************************************************************************" << endl;
 	cout << "**************************************************************************************" << endl;
 	cout << endl;
+}
 
-	vector<struct country>::iterator ptr1;
-	for (ptr1 = game_set->get_country_list()->begin(); ptr1 < game_set->get_country_list()->end(); ptr1++) 
-	{
-		// display country info
-		cout << "\t****************************************************************" << endl;
-		cout << "\tcountry : ";
-		display_country_info(&(*ptr1));
-		cout << "\t****************************************************************" << endl;
 
-		// display bordering countries
-		vector<struct border>::iterator ptr2;
-		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
-		{
-			// country on 1st side of border
-			if(ptr1->id == ptr2->country1)
-			{
-				cout << "\tNeighbor : ";
-				display_country_info(&game_set->get_country_list()->at(ptr2->country2 - 1));
-				continue;
-			}
-			// country on 2nd side of border
-			if(ptr1->id == ptr2->country2)
-			{
-				cout << "\tNeighbor : ";
-				display_country_info(&game_set->get_country_list()->at(ptr2->country1 - 1));
-				continue;
-			}
-		}
-
-		cout << endl;
-	}
-
-	// display continents
-	//cout << endl << endl;
-	cout << "**************************************************************************************" << endl;
-	cout << "**************************************************************************************" << endl;
-	cout << "\t\t\t\t    CONTINENTS" << endl;
-	cout << "**************************************************************************************" << endl;
-	cout << "**************************************************************************************" << endl;
-	cout << endl;
+/* visualize environment */
+/******************************************/
+void
+game_set_visualizer::display_continents(environment *game_set)
+{
+	display_banner(string("CONTINENTS"));
 
 	vector<struct continent>::iterator ptr3;
 	for (ptr3 = game_set->get_continent_list()->begin(); ptr3 < game_set->get_continent_list()->end(); ptr3++) 
@@ -80,3 +48,65 @@ game_set_visualizer::display_game_board(environment *game_set)
 	cout << "**************************************************************************************" << endl;
 
 }
+
+void
+game_set_visualizer::display_player_perspective(owner_id player_id, environment *game_set)
+{
+	// display player banner
+	string title = "PLAYER " + to_string(player_id + 1);
+	display_banner(title);
+
+	// display countries owned by player
+	vector<struct country>::iterator ptr1;
+	for (ptr1 = game_set->get_country_list()->begin(); ptr1 < game_set->get_country_list()->end(); ptr1++) 
+	{
+		if(ptr1->o_id != player_id) // country NOT belong to player
+		{
+			continue;
+		}
+		// display country info
+		cout << "\t*******************************************************************" << endl;
+		cout << "\tOWNED COUNTRY : ";
+		display_country_info(&(*ptr1));
+		cout << "\t*******************************************************************" << endl;
+
+		// display bordering countries
+		vector<struct border>::iterator ptr2;
+		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
+		{
+			// country on 1st side of border
+			if(ptr1->id == ptr2->country1)
+			{
+				if(game_set->get_country_list()->at(ptr2->country2 - 1).o_id == player_id){continue;} // not an enemy
+				cout << "\tENEMY : ";
+				display_country_info(&game_set->get_country_list()->at(ptr2->country2 - 1));
+				continue;
+			}
+			// country on 2nd side of border
+			if(ptr1->id == ptr2->country2)
+			{
+				if(game_set->get_country_list()->at(ptr2->country1 - 1).o_id == player_id){continue;} // not an enemy
+				cout << "\tENEMY : ";
+				display_country_info(&game_set->get_country_list()->at(ptr2->country1 - 1));
+				continue;
+			}
+		}
+
+		cout << endl;
+	}
+}
+
+/* visualize environment */
+/******************************************/
+void
+game_set_visualizer::display_game_board(environment *game_set)
+{
+	// 01. display player perspective
+	display_player_perspective(owner_id::P1, game_set);
+	display_player_perspective(owner_id::P2, game_set);
+
+	// 02. display continent info
+	display_continents(game_set);
+}
+
+
