@@ -9,11 +9,11 @@ using namespace std;
 /* definitions - environment variables */
 /******************************************/
 enum player_type {NONE, HUMAN, GREEDY}; // agent type
-enum owner_id {P1, P2}; // player 1 or 2 or ...
+enum gameplay_id {P1, P2}; // player 1 or 2 or ...
 
 struct country {
 	player_type p_type; // HUMAN, GREEDY
-	owner_id o_id; // p1 or p2
+	gameplay_id owner_id; // p1 or p2
 	int troops_count;
 	int id;
 };

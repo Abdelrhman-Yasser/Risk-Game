@@ -1,6 +1,7 @@
 /* import libraries */
 /*************************************/
 #include "./game_controller/game_controller.h"
+#include "./game_controller/environment/data_structures.h"
 
 
 /* main function */
@@ -8,11 +9,10 @@
 int
 main(int argc, char const *argv[]) 
 { 
-    enum player1_type = HUMAN;
-    enum player2_type = GREEDY;
-
-    game_controller controller(player1_type, player2_type);
-    controller.start_new_game();
+    char map_init_file_dir[] = "map_init.txt";
+	char ownership_init_file_dir[] = "map_init.txt";
+	game_controller game(map_init_file_dir, ownership_init_file_dir, player_type::HUMAN, player_type::HUMAN);
+	game.start_new_game();
     
     return 0; 
 }

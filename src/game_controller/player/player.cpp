@@ -3,9 +3,10 @@
 #include "player.h"
 
 /* constructor */
-player::player(environment *game_environment)
+player::player(environment *game_environment, gameplay_id player_id)
 {
 	this->game_environment = game_environment;
+	this->player_id = player_id;
 }
 
 player::player()
@@ -24,6 +25,12 @@ player_type
 player::get_type()
 {
 	return this->p_type;
+}
+
+gameplay_id
+player::get_gameplay_id()
+{
+	return this->player_id;
 }
 
 int

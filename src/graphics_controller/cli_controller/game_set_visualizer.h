@@ -28,7 +28,7 @@ class game_set_visualizer
 		static void display_country_info(struct country *c);
 		static void display_banner(string title);
 		static void display_continents(environment *game_set);
-		static void display_player_perspective(owner_id player_id, environment *game_set);
+		static void display_player_perspective(gameplay_id player_id, environment *game_set);
 };
 
 #endif 

@@ -6,7 +6,7 @@ void
 game_set_visualizer::display_country_info(struct country *c)
 {
 	cout << "(id : " << c->id << ")\t";
-	cout << "(owner : " << c->o_id << ")\t";
+	cout << "(owner : " << c->owner_id << ")\t";
 	cout << "(troops count : " << c->troops_count << ")" << endl;
 }
 
@@ -46,11 +46,11 @@ game_set_visualizer::display_continents(environment *game_set)
 	cout << endl;
 	cout << "**************************************************************************************" << endl;
 	cout << "**************************************************************************************" << endl;
-
+	cout << endl;
 }
 
 void
-game_set_visualizer::display_player_perspective(owner_id player_id, environment *game_set)
+game_set_visualizer::display_player_perspective(gameplay_id player_id, environment *game_set)
 {
 	// display player banner
 	string title = "PLAYER " + to_string(player_id + 1);
@@ -60,13 +60,13 @@ game_set_visualizer::display_player_perspective(owner_id player_id, environment 
 	vector<struct country>::iterator ptr1;
 	for (ptr1 = game_set->get_country_list()->begin(); ptr1 < game_set->get_country_list()->end(); ptr1++) 
 	{
-		if(ptr1->o_id != player_id) // country NOT belong to player
+		if(ptr1->owner_id != player_id) // country NOT belong to player
 		{
 			continue;
 		}
 		// display country info
 		cout << "\t*******************************************************************" << endl;
-		cout << "\tOWNED COUNTRY : ";
+		cout << "\tOWNED : ";
 		display_country_info(&(*ptr1));
 		cout << "\t*******************************************************************" << endl;
 
@@ -77,7 +77,7 @@ game_set_visualizer::display_player_perspective(owner_id player_id, environment 
 			// country on 1st side of border
 			if(ptr1->id == ptr2->country1)
 			{
-				if(game_set->get_country_list()->at(ptr2->country2 - 1).o_id == player_id){continue;} // not an enemy
+				if(game_set->get_country_list()->at(ptr2->country2 - 1).owner_id == player_id){continue;} // not an enemy
 				cout << "\tENEMY : ";
 				display_country_info(&game_set->get_country_list()->at(ptr2->country2 - 1));
 				continue;
@@ -85,7 +85,7 @@ game_set_visualizer::display_player_perspective(owner_id player_id, environment 
 			// country on 2nd side of border
 			if(ptr1->id == ptr2->country2)
 			{
-				if(game_set->get_country_list()->at(ptr2->country1 - 1).o_id == player_id){continue;} // not an enemy
+				if(game_set->get_country_list()->at(ptr2->country1 - 1).owner_id == player_id){continue;} // not an enemy
 				cout << "\tENEMY : ";
 				display_country_info(&game_set->get_country_list()->at(ptr2->country1 - 1));
 				continue;
@@ -101,12 +101,12 @@ game_set_visualizer::display_player_perspective(owner_id player_id, environment 
 void
 game_set_visualizer::display_game_board(environment *game_set)
 {
-	// 01. display player perspective
-	display_player_perspective(owner_id::P1, game_set);
-	display_player_perspective(owner_id::P2, game_set);
-
-	// 02. display continent info
+	// 01. display continent info
 	display_continents(game_set);
+
+	// 02. display player perspective
+	display_player_perspective(gameplay_id::P1, game_set);
+	display_player_perspective(gameplay_id::P2, game_set);	
 }
 
 

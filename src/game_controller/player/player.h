@@ -16,16 +16,18 @@ class player
 	protected:
 		environment *game_environment;
 		player_type p_type;
+		gameplay_id player_id;
 
 	public:
 		/* constructor */
-		player(environment *game_environment);
+		player(environment *game_environment, gameplay_id player_id);
 		player();
 		~player();
 
 		/* interface methods */
 		virtual int make_move(); // implements algorthim
 		player_type get_type();
+		gameplay_id get_gameplay_id();
 
 };
 

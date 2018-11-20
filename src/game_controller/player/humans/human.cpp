@@ -3,7 +3,7 @@
 /* init player */
 /******************************************/
 /* constructor */
-human::human(environment *game_environment) : player(game_environment){
+human::human(environment *game_environment, gameplay_id player_id) : player(game_environment, player_id){
 	this->p_type = player_type::HUMAN;	
 }
 
@@ -30,7 +30,7 @@ human::make_move()
 	int to_country_id = get_user_input("TO");
 
 	// apply move
-	this->game_environment->invade(from_country_id, to_country_id);
+	this->game_environment->invade(player_id, from_country_id, to_country_id);
 }
 
 

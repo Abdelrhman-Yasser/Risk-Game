@@ -16,7 +16,7 @@ class human: public player
 
 	public:
 		/* constructor */
-		human(environment *game_environment);
+		human(environment *game_environment, gameplay_id player_id);
 		human();
 		~human();
 

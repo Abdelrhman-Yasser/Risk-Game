@@ -21,7 +21,10 @@ class game_controller
 		environment game_environment;
 		player *player1;
 		player *player2;
-		player_type player_turn;
+		gameplay_id player_turn;
+
+		// some utilities
+		void announce_player_turn();
 
 	public:
 		/* constructor */

@@ -25,7 +25,7 @@ class player_factory
 		~player_factory();
 
 		/* interface methods */
-		player *create_player(player_type p_type);
+		player *create_player(player_type p_type, gameplay_id player_id);
 
 };
 
