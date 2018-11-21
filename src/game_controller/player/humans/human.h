@@ -20,7 +20,6 @@ class human: public player
 		human();
 		~human();
 
-	protected:
 		/* strategy methods */
 		int deploy_reserve_troops(int reserve_count); // deploy bonuce troops (if any)
 		int march_troops(); // march troops to get ready for invasion

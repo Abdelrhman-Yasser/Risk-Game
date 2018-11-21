@@ -33,6 +33,17 @@ player::get_gameplay_id()
 	return this->player_id;
 }
 
+void
+player::set_reserve_troops(int reserve_troops)
+{
+	this->reserve_troops = reserve_troops;
+}
+int
+player::get_reserve_troops()
+{
+	return this->reserve_troops;
+}
+
 /* strategy methods */
 /******************************************/
 int
@@ -62,7 +73,7 @@ player::invade()
 
 /* interface methods */
 /******************************************/
-int
+/*int
 player::play_turn(int reserve_count)
 {
 	int sucess;
@@ -79,4 +90,4 @@ player::play_turn(int reserve_count)
 	// 03. make invasion (optional - can skip)
 	int reward = invade();
 	return reward; // returns new reward
-}
+}*/

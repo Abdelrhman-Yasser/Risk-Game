@@ -26,31 +26,37 @@ game_controller::~game_controller()
 void
 game_controller::start_new_game()
 {
-
+	player *curr_player;
 	// players take turns
 	while(game_environment.get_game_status() == status::ONGOING)
 	{
-		// display game set
-		game_set_visualizer::display_game_board(&game_environment);
-
-		// take turns
-		if(player_turn == player1->get_gameplay_id())
-		{
-			game_set_visualizer::announce_player_turn(player_turn, player1_reserve_troops);
-			// play turn
-			player1_reserve_troops = player1->play_turn(player1_reserve_troops);
-			// change turns
-			player_turn = player2->get_gameplay_id();
-			continue;
-		}
+		// identify player currently playing
+		curr_player = player1;
 		if(player_turn == player2->get_gameplay_id())
 		{
-			game_set_visualizer::announce_player_turn(player_turn, player2_reserve_troops);
-			// play turn
-			player2_reserve_troops = player2->play_turn(player2_reserve_troops);
-			// change turns
-			player_turn = player1->get_gameplay_id();
-			continue;
+			curr_player = player2;
+		}
+
+		// strategy methods
+		// 01. deploy reserve troops
+		if(curr_player->get_reserve_troops() != 0)
+		{
+			game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+			curr_player->deploy_reserve_troops(curr_player->get_reserve_troops());
+		}
+		// 02. march neiboring troops
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+		curr_player->march_troops();
+		// 03. attempt invasion
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+		int reward = curr_player->invade();
+		curr_player->set_reserve_troops(reward);
+
+		// change turns
+		player_turn = player1->get_gameplay_id();
+		if(curr_player->get_gameplay_id() == player1->get_gameplay_id())
+		{
+			player_turn = player2->get_gameplay_id();
 		}
 
 	}

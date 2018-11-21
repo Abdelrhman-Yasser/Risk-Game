@@ -20,8 +20,6 @@ class game_controller
 		environment game_environment;
 		player *player1;
 		player *player2;
-		int player1_reserve_troops = 0;
-		int player2_reserve_troops = 0;
 		gameplay_id player_turn;
 
 	public:

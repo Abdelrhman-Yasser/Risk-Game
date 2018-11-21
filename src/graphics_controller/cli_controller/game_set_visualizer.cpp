@@ -123,22 +123,6 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 /* visualize environment */
 /******************************************/
 void
-game_set_visualizer::display_game_board(environment *game_set)
-{
-	// clear display
-	system("clear");
-
-	// 01. display continent info
-	display_continents(game_set);
-
-	// 02. display player perspective
-	display_player_perspective(gameplay_id::P1, game_set);
-	display_player_perspective(gameplay_id::P2, game_set);	
-}
-
-/* visualize environment */
-/******************************************/
-void
 game_set_visualizer::announce_player_turn(gameplay_id player_turn, int reserve_troops_count)
 {
 	cout << endl;
@@ -148,6 +132,25 @@ game_set_visualizer::announce_player_turn(gameplay_id player_turn, int reserve_t
 	cout << "\t      (reserve troops = " << reserve_troops_count << ")" << endl;
 	cout << "********************************************" << endl;
 	cout << "********************************************" << endl;
+}
+
+/* visualize environment */
+/******************************************/
+void
+game_set_visualizer::display_game_board(environment *game_set, gameplay_id player_turn, int reserve_troops_count)
+{
+	// clear display
+	system("clear");
+
+	// 01. display continent info
+	display_continents(game_set);
+
+	// 02. display player perspective
+	display_player_perspective(gameplay_id::P1, game_set);
+	display_player_perspective(gameplay_id::P2, game_set);
+
+	// 03. display player turn
+	announce_player_turn(player_turn, reserve_troops_count);
 }
 
 /* visualize environment */
