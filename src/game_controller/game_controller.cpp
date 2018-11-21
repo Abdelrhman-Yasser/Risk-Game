@@ -28,26 +28,26 @@ game_controller::start_new_game()
 {
 
 	// players take turns
-	while(game_environment.get_game_status() == 1)
+	while(game_environment.get_game_status() == status::ONGOING)
 	{
 		// display game set
-		system("clear");
 		game_set_visualizer::display_game_board(&game_environment);
-		announce_player_turn();
 
 		// take turns
 		if(player_turn == player1->get_gameplay_id())
 		{
-			// play
-			player1->make_move();
+			game_set_visualizer::announce_player_turn(player_turn, player1_reserve_troops);
+			// play turn
+			player1_reserve_troops = player1->play_turn(player1_reserve_troops);
 			// change turns
 			player_turn = player2->get_gameplay_id();
 			continue;
 		}
 		if(player_turn == player2->get_gameplay_id())
 		{
-			// play
-			player2->make_move();
+			game_set_visualizer::announce_player_turn(player_turn, player2_reserve_troops);
+			// play turn
+			player2_reserve_troops = player2->play_turn(player2_reserve_troops);
 			// change turns
 			player_turn = player1->get_gameplay_id();
 			continue;
@@ -56,18 +56,8 @@ game_controller::start_new_game()
 	}
 
 	// game ends
-	string winner = game_environment.get_winner();
-    cout << "Game Winner : " << winner << std::endl;
+	gameplay_id winner = game_environment.get_winner();
+	game_set_visualizer::display_winner_banner(winner);
+    
 
-}
-
-void
-game_controller::announce_player_turn()
-{
-	cout << endl;
-	cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-	cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-	cout << "\t\tplayer turn : P" << player_turn + 1 << endl;
-	cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-	cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
 }

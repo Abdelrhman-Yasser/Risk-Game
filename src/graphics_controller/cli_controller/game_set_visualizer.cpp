@@ -6,8 +6,8 @@ void
 game_set_visualizer::display_country_info(struct country *c)
 {
 	cout << "(id : " << c->id << ")\t";
-	cout << "(owner : " << c->owner_id << ")\t";
-	cout << "(troops count : " << c->troops_count << ")" << endl;
+	cout << "(troops count : " << c->troops_count << ")\t";
+	cout << "(owner : " << c->owner_id << ")" << endl;
 }
 
 void
@@ -69,8 +69,10 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 		cout << "\tOWNED : ";
 		display_country_info(&(*ptr1));
 		cout << "\t*******************************************************************" << endl;
+		cout << "\tNeighboring Countries : " << endl;
+		cout << "\t************************" << endl;
 
-		// display bordering countries
+		// display bordering countries - ENEMIES
 		vector<struct border>::iterator ptr2;
 		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
 		{
@@ -92,6 +94,28 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 			}
 		}
 
+		// display bordering countries - NEIGHBORS MINE
+		cout << endl;
+		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
+		{
+			// country on 1st side of border
+			if(ptr1->id == ptr2->country1)
+			{
+				if(game_set->get_country_list()->at(ptr2->country2 - 1).owner_id != player_id){continue;} // not an enemy
+				cout << "\tMYCNT : ";
+				display_country_info(&game_set->get_country_list()->at(ptr2->country2 - 1));
+				continue;
+			}
+			// country on 2nd side of border
+			if(ptr1->id == ptr2->country2)
+			{
+				if(game_set->get_country_list()->at(ptr2->country1 - 1).owner_id != player_id){continue;} // not an enemy
+				cout << "\tMYCNT : ";
+				display_country_info(&game_set->get_country_list()->at(ptr2->country1 - 1));
+				continue;
+			}
+		}
+
 		cout << endl;
 	}
 }
@@ -101,6 +125,9 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 void
 game_set_visualizer::display_game_board(environment *game_set)
 {
+	// clear display
+	system("clear");
+
 	// 01. display continent info
 	display_continents(game_set);
 
@@ -109,4 +136,31 @@ game_set_visualizer::display_game_board(environment *game_set)
 	display_player_perspective(gameplay_id::P2, game_set);	
 }
 
+/* visualize environment */
+/******************************************/
+void
+game_set_visualizer::announce_player_turn(gameplay_id player_turn, int reserve_troops_count)
+{
+	cout << endl;
+	cout << "********************************************" << endl;
+	cout << "********************************************" << endl;
+	cout << "\t\tplayer turn : P" << player_turn + 1 << endl;
+	cout << "\t      (reserve troops = " << reserve_troops_count << ")" << endl;
+	cout << "********************************************" << endl;
+	cout << "********************************************" << endl;
+}
 
+/* visualize environment */
+/******************************************/
+void
+game_set_visualizer::display_winner_banner(gameplay_id winner_id)
+{
+	// clear display
+	system("clear");
+	
+	cout << "********************************************" << endl;
+	cout << "********************************************" << endl;
+	cout << "\tGAME WINNER : P" << winner_id + 1 << endl;
+	cout << "********************************************" << endl;
+	cout << "********************************************" << endl;
+}
