@@ -11,6 +11,8 @@
 #include "./humans/human.h"
 #include "./agents/simple_agents/passive_agent.h"
 #include "./agents/simple_agents/aggressive_agent.h"
+#include "./agents/simple_agents/pacifist_agent.h"
+#include "./agents/intelligent_agents/greedy_agent.h"
 
 
 /* class definition */

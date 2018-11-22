@@ -35,4 +35,16 @@ player_factory::create_player(agent_type p_type, gameplay_id player_id)
 		return tmp;
 	}
 
+	if(p_type == agent_type::PACIFIST)
+	{
+		pacifist_agent *tmp = new pacifist_agent(game_environment, player_id);
+		return tmp;
+	}
+
+	if(p_type == agent_type::GREEDY)
+	{
+		greedy_agent *tmp = new greedy_agent(game_environment, player_id);
+		return tmp;
+	}
+
 }

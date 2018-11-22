@@ -1,9 +1,10 @@
-#ifndef GREEDY_AGENT_H
-#define GREEDY_AGENT_H
+#ifndef PACIFIST_AGENT_H
+#define PACIFIST_AGENT_H
 
 /* import libraries */
 /******************************************/
 #include <string>
+#include <climits> // for MAX_INT var
 #include "../../player.h"
 #include "../../../environment/environment.h"
 #include "../../../environment/data_structures.h"
@@ -11,14 +12,14 @@
 
 /* class definition */
 /******************************************/
-class greedy_agent: public player
+class pacifist_agent: public player
 {
 
 	public:
 		/* constructor */
-		greedy_agent(environment *game_environment, gameplay_id player_id);
-		greedy_agent();
-		~greedy_agent();
+		pacifist_agent(environment *game_environment, gameplay_id player_id);
+		pacifist_agent();
+		~pacifist_agent();
 
 		/* strategy methods */
 		int deploy_reserve_troops(int reserve_count); // deploy bonuce troops (if any)

@@ -2,10 +2,10 @@
 
 /* game init */
 /*************************************/
-game_controller::game_controller(char *map_init_file_dir, char *ownership_init_file_dir, agent_type p1_type, agent_type p2_type)
+game_controller::game_controller(char *map_init_file_dir, char *pop_init_file_dir, agent_type p1_type, agent_type p2_type)
 {
 	// init environment
-	this->game_environment = environment(map_init_file_dir);
+	this->game_environment = environment(map_init_file_dir, pop_init_file_dir);
 
 	// init players
 	player_factory p_factory(&game_environment);

@@ -9,6 +9,8 @@ game_set_visualizer::enum_agent_type_to_string(agent_type p_type)
 	if(p_type == 0){return string("HUMAN");}
 	if(p_type == 1){return string("PASSIVE");}
 	if(p_type == 2){return string("AGGRESSIVE");}
+	if(p_type == 3){return string("PACIFIST");}
+	if(p_type == 4){return string("GREEDY");}
 }
 
 string

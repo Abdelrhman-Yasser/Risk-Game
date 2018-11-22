@@ -21,11 +21,10 @@ class game_controller
 		player *player1;
 		player *player2;
 		gameplay_id player_turn;
-		//game_set_visualizer graphics_controller;
 
 	public:
 		/* constructor */
-		game_controller(char *map_init_file_dir, char *ownership_init_file_dir, agent_type p1_type, agent_type p2_type);
+		game_controller(char *map_init_file_dir, char *pop_init_file_dir, agent_type p1_type, agent_type p2_type);
 		~game_controller();
 
 		/* interface methods */

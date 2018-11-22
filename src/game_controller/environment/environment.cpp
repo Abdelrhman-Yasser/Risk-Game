@@ -3,12 +3,10 @@
 /* init game environment */
 /******************************************/
 /* constructor */
-environment::environment(char *map_init_file_dir)
+environment::environment(char *map_init_file_dir, char *pop_init_file_dir)
 {
 	// game map
-	init_game_map(map_init_file_dir);
-	// country ownership and troops count
-	//init_ownership();
+	init_environment(map_init_file_dir, pop_init_file_dir);
 	// game status
 	this->game_status = status::ONGOING;
 	this->winner = gameplay_id::NONE;
@@ -29,41 +27,20 @@ environment::~environment()
 /* init game environment */
 /******************************************/
 void
-environment::init_game_map(char *map_init_file_dir)
+environment::init_environment(char *map_init_file_dir, char *pop_init_file_dir)
 {
-	// parse input file
-	file_parser parser(map_init_file_dir);
-
 	// create countries
-	// for testing purpose - game population
-	int country_count = parser.get_country_count();
-	int counter = 1;
-	int player_id = 1;
-	while(counter <= country_count)
-	{
-		struct country tmp;
-		tmp.id = counter;
+	map_file_parser map_parser(map_init_file_dir);
+	population_file_parser pop_parser(pop_init_file_dir);
 
-		if(player_id == 1)
-		{
-			tmp.troops_count = 5;
-			tmp.owner_id = gameplay_id::P1;
-			player_id = 2;
-		}else{
-			tmp.troops_count = 5;
-			tmp.owner_id = gameplay_id::P2;
-			player_id = 1;
-		}
-		
-		this->country_list.push_back(tmp);
-		counter++;
-	}
+	// create and populate countries
+	pop_parser.populate_countries(&country_list);
 
 	// create borders
-	parser.obtain_border_list(&(this->border_list));
+	map_parser.obtain_border_list(&(this->border_list));
 
-	// create continents
-	parser.obtain_continent_list(&(this->continent_list));
+	// create continents and associate countries with continents
+	map_parser.obtain_continent_list(&(this->continent_list));
 
 	// associate country with continent
 	int continent_id = 1;

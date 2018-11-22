@@ -10,7 +10,8 @@ add_executable(
         ./test.cpp
 
         ../../../src/game_controller/utilities/io_handler.cpp
-        ../../../src/game_controller/utilities/file_parser.cpp
+        ../../../src/game_controller/utilities/map_file_parser.cpp
+        ../../../src/game_controller/utilities/population_file_parser.cpp
 
         ../../../src/game_controller/environment/environment.cpp
         ../../../src/game_controller/game_controller.cpp
@@ -22,6 +23,8 @@ add_executable(
         ../../../src/game_controller/player/humans/human.cpp
         ../../../src/game_controller/player/agents/simple_agents/passive_agent.cpp
         ../../../src/game_controller/player/agents/simple_agents/aggressive_agent.cpp
+        ../../../src/game_controller/player/agents/simple_agents/pacifist_agent.cpp
+        ../../../src/game_controller/player/agents/intelligent_agents/greedy_agent.cpp
 
 
 )

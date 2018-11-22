@@ -3,9 +3,13 @@
 /* init player */
 /******************************************/
 /* constructor */
-greedy_agent::greedy_agent(environment *game_environment)
+greedy_agent::greedy_agent(environment *game_environment, gameplay_id player_id) : player(game_environment, player_id){
+	this->p_type = agent_type::GREEDY;	
+}
+
+greedy_agent::greedy_agent()
 {
-	player::player(game_environment);
+	// TODO
 }
 
 /* destructor */
@@ -14,18 +18,28 @@ greedy_agent::~greedy_agent()
 	// TODO
 }
 
+/* utility methods */
+/******************************************/
+
 
 /* interface methods */
 /******************************************/
 int
-greedy_agent::make_move()
+greedy_agent::deploy_reserve_troops(int reserve_count)
 {
-	// apply greedy algorithm
-
-	// make move
-	this->game_environment.invade(/* some move */);
+	return 1;
 }
 
+int
+greedy_agent::march_troops()
+{
+	// no marching - UNKNOWN
+	return 1;
+}
 
-/* internal methods */
-/******************************************/
+int
+greedy_agent::invade()
+{
+	return 0; // no invasion
+}
+

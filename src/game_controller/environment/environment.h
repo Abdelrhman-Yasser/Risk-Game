@@ -5,7 +5,8 @@
 /******************************************/
 #include <string>
 #include "data_structures.h"
-#include "../utilities/file_parser.h"
+#include "../utilities/map_file_parser.h"
+#include "../utilities/population_file_parser.h"
 
 using namespace std;
 #define INVASION_REWARD 2
@@ -22,7 +23,7 @@ class environment
 		gameplay_id winner;
 
 		// utility methods
-		void init_game_map(char *map_init_file_dir); // game map (country, border, continent)
+		void init_environment(char *map_init_file_dir, char* pop_init_file_dir); // game map (country, border, continent)
 		void init_ownership(char *ownership_init_file_dir); // country ownership, and troops count
 		int border_exists(int country1_id, int country2_id); // checks if there's border between two given countries
 		int is_owner(gameplay_id test_player, int country_id); // checks ownership of country for given player
@@ -31,7 +32,7 @@ class environment
 
 	public:
 		/* constructor */
-		environment(char *map_init_file_dir);
+		environment(char *map_init_file_dir, char *pop_init_file_dir);
 		environment();
 		~environment();
 
