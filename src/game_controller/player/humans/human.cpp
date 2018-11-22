@@ -4,7 +4,7 @@
 /******************************************/
 /* constructor */
 human::human(environment *game_environment, gameplay_id player_id) : player(game_environment, player_id){
-	this->p_type = player_type::HUMAN;	
+	this->p_type = agent_type::HUMAN;	
 }
 
 human::human()

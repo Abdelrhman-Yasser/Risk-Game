@@ -21,8 +21,8 @@ player::~player()
 
 /* some getters */
 /******************************************/
-player_type
-player::get_type()
+agent_type
+player::get_agent_type()
 {
 	return this->p_type;
 }

@@ -7,7 +7,7 @@
 #include "../environment/environment.h"
 #include "player.h"
 #include "./humans/human.h"
-//#include "./agents/greedy_agent.h"
+#include "./agents/simple_agents/passive_agent.h"
 #include "../environment/data_structures.h"
 
 /* class definition */
@@ -25,7 +25,7 @@ class player_factory
 		~player_factory();
 
 		/* interface methods */
-		player *create_player(player_type p_type, gameplay_id player_id);
+		player *create_player(agent_type p_type, gameplay_id player_id);
 
 };
 

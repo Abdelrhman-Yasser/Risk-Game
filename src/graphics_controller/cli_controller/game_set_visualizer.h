@@ -19,19 +19,23 @@ using namespace std;
 class game_set_visualizer
 {
 	public:
-		static void display_game_board(environment *game_set, gameplay_id player_turn, int reserve_troops_count);
+		static void display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count);
 		static void display_winner_banner(gameplay_id winner_id);
 
 	private:
 		// Disallow creating an instance of this object
 		game_set_visualizer(){}
 
-		// utility methods
+		// display helpers
 		static void display_country_info(struct country *c);
 		static void display_banner(string title);
 		static void display_continents(environment *game_set);
 		static void display_player_perspective(gameplay_id player_id, environment *game_set);
-		static void announce_player_turn(gameplay_id player_turn, int reserve_troops_count);
+		static void announce_player_turn(gameplay_id player_turn, agent_type p_type, int reserve_troops_count);
+
+		// utilities
+		static string enum_agent_type_to_string(agent_type p_type);
+		static string enum_gameplay_id_to_string(gameplay_id player_id);
 };
 
 #endif 

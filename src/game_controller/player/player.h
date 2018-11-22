@@ -16,9 +16,9 @@ class player
 	protected:
 		// attributes
 		environment *game_environment;
-		player_type p_type;
+		agent_type p_type;
 		gameplay_id player_id;
-		int reserve_troops = 0;
+		int reserve_troops = 3;
 
 	public:
 		/* constructor */
@@ -33,7 +33,7 @@ class player
 		virtual int invade(); // attempts invasion
 		
 		/* some getters and setters */
-		player_type get_type();
+		agent_type get_agent_type();
 		gameplay_id get_gameplay_id();
 		void set_reserve_troops(int reserve_troops);
 		int get_reserve_troops();

@@ -2,7 +2,7 @@
 
 /* game init */
 /*************************************/
-game_controller::game_controller(char *map_init_file_dir, char *ownership_init_file_dir, player_type p1_type, player_type p2_type)
+game_controller::game_controller(char *map_init_file_dir, char *ownership_init_file_dir, agent_type p1_type, agent_type p2_type)
 {
 	// init environment
 	this->game_environment = environment(map_init_file_dir);
@@ -41,14 +41,15 @@ game_controller::start_new_game()
 		// 01. deploy reserve troops
 		if(curr_player->get_reserve_troops() != 0)
 		{
-			game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+			game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
 			curr_player->deploy_reserve_troops(curr_player->get_reserve_troops());
+			curr_player->set_reserve_troops(0);
 		}
 		// 02. march neiboring troops
-		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
 		curr_player->march_troops();
 		// 03. attempt invasion
-		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_reserve_troops());
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
 		int reward = curr_player->invade();
 		curr_player->set_reserve_troops(reward);
 

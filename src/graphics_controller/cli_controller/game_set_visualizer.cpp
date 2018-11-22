@@ -1,5 +1,23 @@
 #include "game_set_visualizer.h"
 
+
+/* utilities */
+/******************************************/
+string
+game_set_visualizer::enum_agent_type_to_string(agent_type p_type)
+{
+	if(p_type == 0){return string("HUMAN");}
+	if(p_type == 1){return string("PASSIVE");}
+}
+
+string
+game_set_visualizer::enum_gameplay_id_to_string(gameplay_id player_id)
+{
+	if(player_id == 0){return string("NONE");}
+	if(player_id == 1){return string("P1");}
+	if(player_id == 2){return string("P2");}
+}
+
 /* visualize environment */
 /******************************************/
 void
@@ -7,7 +25,7 @@ game_set_visualizer::display_country_info(struct country *c)
 {
 	cout << "(id : " << c->id << ")\t";
 	cout << "(troops count : " << c->troops_count << ")\t";
-	cout << "(owner : " << c->owner_id << ")" << endl;
+	cout << "(owner : " << enum_gameplay_id_to_string(c->owner_id) << ")" << endl;
 }
 
 void
@@ -33,7 +51,8 @@ game_set_visualizer::display_continents(environment *game_set)
 	for (ptr3 = game_set->get_continent_list()->begin(); ptr3 < game_set->get_continent_list()->end(); ptr3++) 
 	{
 		cout << "\t****************************************************************" << endl;
-		cout << "\tcontinent : " << "(reward = " << ptr3->reward << ")" << endl;
+		cout << "\tcontinent : " << "(reward = " << ptr3->reward << ")";
+		cout << "\t(owner = " << enum_gameplay_id_to_string(ptr3->owner_id) << ")" << endl;
 		cout << "\t****************************************************************" << endl;
 		vector<int>::iterator ptr4;
 		for (ptr4 = ptr3->country_list.begin(); ptr4 < ptr3->country_list.end(); ptr4++) 
@@ -53,7 +72,7 @@ void
 game_set_visualizer::display_player_perspective(gameplay_id player_id, environment *game_set)
 {
 	// display player banner
-	string title = "PLAYER " + to_string(player_id + 1);
+	string title = "PLAYER " + to_string(player_id);
 	display_banner(title);
 
 	// display countries owned by player
@@ -69,10 +88,11 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 		cout << "\tOWNED : ";
 		display_country_info(&(*ptr1));
 		cout << "\t*******************************************************************" << endl;
-		cout << "\tNeighboring Countries : " << endl;
-		cout << "\t************************" << endl;
-
+		
 		// display bordering countries - ENEMIES
+		cout << "\tBordering Enemies :" << endl;
+		cout << "\t*******************" << endl;
+
 		vector<struct border>::iterator ptr2;
 		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
 		{
@@ -96,6 +116,8 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 
 		// display bordering countries - NEIGHBORS MINE
 		cout << endl;
+		cout << "\tBordering NEIGHBORS :" << endl;
+		cout << "\t*********************" << endl;
 		for (ptr2 = game_set->get_border_list()->begin(); ptr2 < game_set->get_border_list()->end(); ptr2++) 
 		{
 			// country on 1st side of border
@@ -120,15 +142,19 @@ game_set_visualizer::display_player_perspective(gameplay_id player_id, environme
 	}
 }
 
+
 /* visualize environment */
 /******************************************/
 void
-game_set_visualizer::announce_player_turn(gameplay_id player_turn, int reserve_troops_count)
+game_set_visualizer::announce_player_turn(gameplay_id player_turn, agent_type p_type, int reserve_troops_count)
 {
+	//string a_type;
+	//if()
 	cout << endl;
 	cout << "********************************************" << endl;
 	cout << "********************************************" << endl;
-	cout << "\t\tplayer turn : P" << player_turn + 1 << endl;
+	cout << "\t\tplayer turn : " << enum_gameplay_id_to_string(player_turn) << endl;
+	cout << "\t     (agent type : " << enum_agent_type_to_string(p_type) << ")" << endl;
 	cout << "\t      (reserve troops = " << reserve_troops_count << ")" << endl;
 	cout << "********************************************" << endl;
 	cout << "********************************************" << endl;
@@ -137,7 +163,7 @@ game_set_visualizer::announce_player_turn(gameplay_id player_turn, int reserve_t
 /* visualize environment */
 /******************************************/
 void
-game_set_visualizer::display_game_board(environment *game_set, gameplay_id player_turn, int reserve_troops_count)
+game_set_visualizer::display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count)
 {
 	// clear display
 	system("clear");
@@ -150,7 +176,7 @@ game_set_visualizer::display_game_board(environment *game_set, gameplay_id playe
 	display_player_perspective(gameplay_id::P2, game_set);
 
 	// 03. display player turn
-	announce_player_turn(player_turn, reserve_troops_count);
+	announce_player_turn(player_turn, p_type, reserve_troops_count);
 }
 
 /* visualize environment */
@@ -163,7 +189,7 @@ game_set_visualizer::display_winner_banner(gameplay_id winner_id)
 	
 	cout << "********************************************" << endl;
 	cout << "********************************************" << endl;
-	cout << "\tGAME WINNER : P" << winner_id + 1 << endl;
+	cout << "\tGAME WINNER : " << enum_gameplay_id_to_string(winner_id) << endl;
 	cout << "********************************************" << endl;
 	cout << "********************************************" << endl;
 }

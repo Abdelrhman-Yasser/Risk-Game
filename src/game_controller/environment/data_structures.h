@@ -8,8 +8,8 @@ using namespace std;
 
 /* definitions - environment variables */
 /******************************************/
-enum player_type {HUMAN, GREEDY}; // agent type
-enum gameplay_id {P1, P2, NONE}; // player 1 or 2 or ...
+enum agent_type {HUMAN, PASSIVE}; // agent type
+enum gameplay_id {NONE, P1, P2}; // player 1 or 2 or ...
 enum status {ONGOING, ENDED};
 
 struct country {
