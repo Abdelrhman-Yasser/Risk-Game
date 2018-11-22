@@ -9,14 +9,22 @@ add_executable(
 
         ../src/main.cpp
 
-        ../src/game_controller/game_controller.cpp
-        ../src/game_controller/environment/environment.cpp
-        ../src/game_controller/utilities/file_handler.cpp
-        ../src/game_controller/player/player.cpp
+        ../src/game_engine/utilities/io_handler.cpp
+        ../src/game_engine/utilities/map_file_parser.cpp
+        ../src/game_engine/utilities/population_file_parser.cpp
 
-        ../src/game_controller/player/player_factory.cpp
-        ../src/game_controller/player/humans/human.cpp
-        ../src/game_controller/player/agents/greedy_agent.cpp
+        ../src/game_engine/player/player_factory.cpp
+        ../src/game_engine/player/player.cpp
+        ../src/game_engine/player/humans/human.cpp
+        ../src/game_engine/player/agents/simple_agents/passive_agent.cpp
+        ../src/game_engine/player/agents/simple_agents/aggressive_agent.cpp
+        ../src/game_engine/player/agents/simple_agents/pacifist_agent.cpp
+        ../src/game_engine/player/agents/intelligent_agents/greedy_agent.cpp
+
+        ../src/game_engine/environment/environment.cpp
+
+        ../src/graphics_engine/cli_engine/utilities/gameset_visualizer.cpp
+        ../src/graphics_engine/cli_engine/cli_engine.cpp
 
 
 )
