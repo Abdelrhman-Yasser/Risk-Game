@@ -71,6 +71,12 @@ aggressive_agent::invade()
 		// country on 1st side of border
 		if(ptr->country1 == this->max_troops_country_id)
 		{
+			// check if neighbor is enemy
+			if(game_environment->get_country_list()->at(ptr->country2 - 1).owner_id == player_id)
+			{
+				continue;
+			}
+			// attempt invasion
 			int j = game_environment->get_country_list()->at(ptr->country2 - 1).troops_count;
 			if(i - j > 1) // do invade
 			{
@@ -81,6 +87,12 @@ aggressive_agent::invade()
 		// country on 2nd side of border
 		if(ptr->country2 == this->max_troops_country_id)
 		{
+			// check if neighbor is enemy
+			if(game_environment->get_country_list()->at(ptr->country1 - 1).owner_id == player_id)
+			{
+				continue;
+			}
+			// attempt invasion
 			int j = game_environment->get_country_list()->at(ptr->country1 - 1).troops_count;
 			if(i - j > 1) // do invade
 			{

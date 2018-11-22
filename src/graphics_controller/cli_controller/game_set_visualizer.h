@@ -10,7 +10,7 @@
 #include <sstream>
 #include <cstdlib> // for system calls
 
-#define WAIT_TIME 7 // in seconds
+#define WAIT_TIME 1 // in seconds
 #include <unistd.h> // for thread sleep - in order to see agent action
 
 using namespace std;

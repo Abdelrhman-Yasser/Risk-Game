@@ -235,14 +235,12 @@ environment::invade(gameplay_id owner_id, int from_country_id, int to_country_id
 	int j = country_list.at(to_country_id - 1).troops_count;
 	if((i - j) > 1) // successfull invasion
 	{
+		cout << "successful invasion" << endl;
+		cout << "from country ID : " << from_country_id << endl;
+		cout << "to country ID : " << to_country_id << endl;
 		// reduce troops - killed in battle
-		int reduction_count = 2;
-		if(country_list.at(to_country_id - 1).troops_count == 1)
-		{
-			reduction_count = 1;
-		}
-		country_list.at(from_country_id - 1).troops_count = i - reduction_count;
-		country_list.at(to_country_id - 1).troops_count = j - reduction_count;
+		country_list.at(to_country_id - 1).troops_count = 0;
+		country_list.at(from_country_id - 1).troops_count -= j;
 
 		// march 1 division of troops to invaded country
 		country_list.at(from_country_id - 1).troops_count -= 1;
