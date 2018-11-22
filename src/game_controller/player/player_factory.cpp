@@ -29,4 +29,10 @@ player_factory::create_player(agent_type p_type, gameplay_id player_id)
 		return tmp;
 	}
 
+	if(p_type == agent_type::AGGRESSIVE)
+	{
+		aggressive_agent *tmp = new aggressive_agent(game_environment, player_id);
+		return tmp;
+	}
+
 }

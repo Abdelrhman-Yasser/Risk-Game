@@ -26,7 +26,7 @@ class environment
 		void init_ownership(char *ownership_init_file_dir); // country ownership, and troops count
 		int border_exists(int country1_id, int country2_id); // checks if there's border between two given countries
 		int is_owner(gameplay_id test_player, int country_id); // checks ownership of country for given player
-		int owns_continent(gameplay_id test_player, int continent_id);
+		int is_continent_new_owner(gameplay_id test_player, int continent_id); // if player newly acquired given continent
 		gameplay_id game_ended(gameplay_id test_player);
 
 	public:

@@ -9,6 +9,10 @@
 #include <string>
 #include <sstream>
 #include <cstdlib> // for system calls
+
+#define WAIT_TIME 7 // in seconds
+#include <unistd.h> // for thread sleep - in order to see agent action
+
 using namespace std;
 
 #include "../../game_controller/environment/environment.h"
@@ -19,7 +23,7 @@ using namespace std;
 class game_set_visualizer
 {
 	public:
-		static void display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count);
+		static void display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count, action a_type);
 		static void display_winner_banner(gameplay_id winner_id);
 
 	private:
@@ -36,6 +40,7 @@ class game_set_visualizer
 		// utilities
 		static string enum_agent_type_to_string(agent_type p_type);
 		static string enum_gameplay_id_to_string(gameplay_id player_id);
+		static string enum_action_to_string(action a_type);
 };
 
 #endif 

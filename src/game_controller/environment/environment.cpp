@@ -26,6 +26,8 @@ environment::~environment()
 	// TODO
 }
 
+/* init game environment */
+/******************************************/
 void
 environment::init_game_map(char *map_init_file_dir)
 {
@@ -117,63 +119,10 @@ vector<struct continent>
 	return &continent_list;
 }
 
-/* interface methods */
+
+
+/* utility methods */
 /******************************************/
-int
-environment::invade(gameplay_id owner_id, int from_country_id, int to_country_id)
-{
-	// 01. check player turn
-	// --> already checked at 'game_controller' side P1 then P2 forever
-	// 02. check there's a border
-	if(border_exists(from_country_id, to_country_id) == 0){return 0;} // throws exception
-	// 03. check no ownership tampering
-	// --> already checked when player passed gameplay_id their own 'this->player_id'
-	// 04. check invader owns 'from_country'
-	if(is_owner(owner_id, from_country_id) == 0){return 0;} // throws exception
-
-	/* 01. apply move */
-	// update troops count and ownership
-	int i = country_list.at(from_country_id - 1).troops_count;
-	int j = country_list.at(to_country_id - 1).troops_count;
-	if((i - j) > 1) // successfull invasion
-	{
-		// reduce troops - killed in battle
-		country_list.at(from_country_id - 1).troops_count = i-2;
-		country_list.at(to_country_id - 1).troops_count = j-2;
-
-		// march 1 division of troops to invaded country
-		country_list.at(from_country_id - 1).troops_count -= 1;
-		country_list.at(to_country_id - 1).troops_count += 1;
-		
-		// update ownership
-		country_list.at(to_country_id - 1).owner_id = country_list.at(from_country_id - 1).owner_id;
-
-		/* 02. check continent ownership for reward */
-		int reward = INVASION_REWARD;
-		int continent_id = country_list.at(to_country_id - 1).continent_id;
-		if(owns_continent(owner_id, continent_id) == 1)
-		{
-			//cout << "hurray owns continent" << endl;
-			reward = continent_list.at(continent_id - 1).reward;
-		}
-
-		/* 03. update game status */
-		if(game_ended(owner_id) == owner_id)
-		{
-			game_status = status::ENDED;
-			winner = owner_id;
-		}
-		//game_status = ;
-		return reward;
-
-	}else{
-		// unsucessfull invasion
-		return 0; // no reward
-	}
-
-}
-
-
 int
 environment::border_exists(int country1_id, int country2_id)
 {
@@ -198,13 +147,19 @@ environment::is_owner(gameplay_id test_player, int country_id)
 
 
 int
-environment::owns_continent(gameplay_id test_player, int continent_id)
+environment::is_continent_new_owner(gameplay_id test_player, int continent_id)
 {
+	// if player already owns continent
+	if(continent_list.at(continent_id - 1).owner_id == test_player){return 0;}
+
+	// check ownership of all countries
 	vector<int>::iterator ptr;
 	for (ptr = continent_list.at(continent_id - 1).country_list.begin(); ptr < continent_list.at(continent_id - 1).country_list.end(); ptr++) 
 	{
+		// if any of the countries does not belong to test player --> return 0
 		if(country_list.at(*ptr - 1).owner_id != test_player){return 0;}
 	}
+	
 	return 1;
 }
 
@@ -258,4 +213,67 @@ environment::march_troops(gameplay_id owner_id, int from_country_id, int to_coun
 	country_list.at(from_country_id - 1).troops_count -= troops_count;
 	country_list.at(to_country_id - 1).troops_count += troops_count;
 	return 1;
+}
+
+/* interface methods */
+/******************************************/
+int
+environment::invade(gameplay_id owner_id, int from_country_id, int to_country_id)
+{
+	// 01. check player turn
+	// --> already checked at 'game_controller' side P1 then P2 forever
+	// 02. check there's a border
+	if(border_exists(from_country_id, to_country_id) == 0){return 0;} // throws exception
+	// 03. check no ownership tampering
+	// --> already checked when player passed gameplay_id their own 'this->player_id'
+	// 04. check invader owns 'from_country'
+	if(is_owner(owner_id, from_country_id) == 0){return 0;} // throws exception
+
+	/* 01. apply move */
+	// update troops count and ownership
+	int i = country_list.at(from_country_id - 1).troops_count;
+	int j = country_list.at(to_country_id - 1).troops_count;
+	if((i - j) > 1) // successfull invasion
+	{
+		// reduce troops - killed in battle
+		int reduction_count = 2;
+		if(country_list.at(to_country_id - 1).troops_count == 1)
+		{
+			reduction_count = 1;
+		}
+		country_list.at(from_country_id - 1).troops_count = i - reduction_count;
+		country_list.at(to_country_id - 1).troops_count = j - reduction_count;
+
+		// march 1 division of troops to invaded country
+		country_list.at(from_country_id - 1).troops_count -= 1;
+		country_list.at(to_country_id - 1).troops_count += 1;
+		
+		// update ownership
+		country_list.at(to_country_id - 1).owner_id = country_list.at(from_country_id - 1).owner_id;
+
+		/* 02. check continent ownership for reward */
+		int reward = INVASION_REWARD;
+		int continent_id = country_list.at(to_country_id - 1).continent_id;
+		if(is_continent_new_owner(owner_id, continent_id) == 1)
+		{
+			// updated continent ownership
+			continent_list.at(continent_id - 1).owner_id = owner_id;
+			// update given reward
+			reward = continent_list.at(continent_id - 1).reward;
+		}
+
+		/* 03. update game status */
+		if(game_ended(owner_id) == owner_id)
+		{
+			game_status = status::ENDED;
+			winner = owner_id;
+		}
+		//game_status = ;
+		return reward;
+
+	}else{
+		// unsucessfull invasion
+		return 0; // no reward
+	}
+
 }

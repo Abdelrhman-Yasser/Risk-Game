@@ -8,6 +8,7 @@ game_set_visualizer::enum_agent_type_to_string(agent_type p_type)
 {
 	if(p_type == 0){return string("HUMAN");}
 	if(p_type == 1){return string("PASSIVE");}
+	if(p_type == 2){return string("AGGRESSIVE");}
 }
 
 string
@@ -16,6 +17,14 @@ game_set_visualizer::enum_gameplay_id_to_string(gameplay_id player_id)
 	if(player_id == 0){return string("NONE");}
 	if(player_id == 1){return string("P1");}
 	if(player_id == 2){return string("P2");}
+}
+
+string
+game_set_visualizer::enum_action_to_string(action a_type)
+{
+	if(a_type == 0){return string("deploy reserve troops");}
+	if(a_type == 1){return string("march troops");}
+	if(a_type == 2){return string("attempt invasion");}
 }
 
 /* visualize environment */
@@ -160,10 +169,11 @@ game_set_visualizer::announce_player_turn(gameplay_id player_turn, agent_type p_
 	cout << "********************************************" << endl;
 }
 
+
 /* visualize environment */
 /******************************************/
 void
-game_set_visualizer::display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count)
+game_set_visualizer::display_game_board(environment *game_set, gameplay_id player_turn, agent_type p_type, int reserve_troops_count, action a_type)
 {
 	// clear display
 	system("clear");
@@ -177,6 +187,13 @@ game_set_visualizer::display_game_board(environment *game_set, gameplay_id playe
 
 	// 03. display player turn
 	announce_player_turn(player_turn, p_type, reserve_troops_count);
+
+	// 04. display current action
+	cout << "\t<< " << enum_action_to_string(a_type) << " >>" << endl;
+	if(p_type != agent_type::HUMAN)
+	{
+		sleep(WAIT_TIME); // sleep in order to see agent action
+	}
 }
 
 /* visualize environment */

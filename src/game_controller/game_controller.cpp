@@ -26,6 +26,7 @@ game_controller::~game_controller()
 void
 game_controller::start_new_game()
 {
+	cout << "LOADING NEW GAME ..." << endl;
 	player *curr_player;
 	// players take turns
 	while(game_environment.get_game_status() == status::ONGOING)
@@ -41,15 +42,15 @@ game_controller::start_new_game()
 		// 01. deploy reserve troops
 		if(curr_player->get_reserve_troops() != 0)
 		{
-			game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
+			game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops(), action::DEPLOY);
 			curr_player->deploy_reserve_troops(curr_player->get_reserve_troops());
 			curr_player->set_reserve_troops(0);
 		}
 		// 02. march neiboring troops
-		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops(), action::MARCH);
 		curr_player->march_troops();
 		// 03. attempt invasion
-		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops());
+		game_set_visualizer::display_game_board(&game_environment, curr_player->get_gameplay_id(), curr_player->get_agent_type(), curr_player->get_reserve_troops(), action::INVADE);
 		int reward = curr_player->invade();
 		curr_player->set_reserve_troops(reward);
 

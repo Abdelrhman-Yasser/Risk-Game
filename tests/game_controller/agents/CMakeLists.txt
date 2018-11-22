@@ -21,6 +21,7 @@ add_executable(
         ../../../src/game_controller/player/player.cpp
         ../../../src/game_controller/player/humans/human.cpp
         ../../../src/game_controller/player/agents/simple_agents/passive_agent.cpp
+        ../../../src/game_controller/player/agents/simple_agents/aggressive_agent.cpp
 
 
 )

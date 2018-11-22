@@ -8,9 +8,10 @@ using namespace std;
 
 /* definitions - environment variables */
 /******************************************/
-enum agent_type {HUMAN, PASSIVE}; // agent type
+enum agent_type {HUMAN, PASSIVE, AGGRESSIVE}; // agent type
 enum gameplay_id {NONE, P1, P2}; // player 1 or 2 or ...
 enum status {ONGOING, ENDED};
+enum action {DEPLOY, MARCH, INVADE};
 
 struct country {
 	gameplay_id owner_id; // p1 or p2
@@ -20,8 +21,8 @@ struct country {
 };
 
 struct border {
-	int country1; // index of country1
-	int country2; // index of country2
+	int country1; // ID of country1
+	int country2; // ID of country2
 };
 
 struct continent {

@@ -38,7 +38,6 @@ int
 human::deploy_reserve_troops(int reserve_count)
 {
 	// get user input
-	cout << "\t<< deploy reserve troops >>" << endl;
 	int target_country = get_user_input("deploy TO : \t");
 
 	// depoly troops
@@ -50,7 +49,6 @@ int
 human::march_troops()
 {
 	// get user input
-	cout << "\t<< march troops >>" << endl;
 	int skip_flag = get_user_input("MARCH? 1/0 : \t");
 	if(skip_flag != 1){return 0;}
 
@@ -67,7 +65,6 @@ int
 human::invade()
 {
 	// get user input
-	cout << "\t<< attempt invasion >>" << endl;
 	int skip_flag = get_user_input("INVADE? 1/0 : \t");
 	if(skip_flag != 1){return 0;} // no reward
 

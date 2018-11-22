@@ -5,10 +5,13 @@
 /******************************************/
 #include <string>
 #include "../environment/environment.h"
+#include "../environment/data_structures.h"
+
 #include "player.h"
 #include "./humans/human.h"
 #include "./agents/simple_agents/passive_agent.h"
-#include "../environment/data_structures.h"
+#include "./agents/simple_agents/aggressive_agent.h"
+
 
 /* class definition */
 /******************************************/

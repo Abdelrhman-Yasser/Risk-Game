@@ -18,27 +18,11 @@ passive_agent::~passive_agent()
 	// TODO
 }
 
-/* utility methods */
-/******************************************/
-int
-passive_agent::get_user_input(char *msg)
-{
-	// scan user command
-	int user_input;
-	cout << msg;
-	scanf("%d", &user_input);
-
-	return user_input;
-}
-
-
 /* interface methods */
 /******************************************/
 int
 passive_agent::deploy_reserve_troops(int reserve_count)
 {
-	cout << "\t<< deploy reserve troops >>" << endl;
-	sleep(WAIT_TIME);
 	// deploy to country with least troops - PASSIVE
 	int min_troops_country_id = -1;
 	int min_troops_count = INT_MAX;
@@ -66,8 +50,6 @@ int
 passive_agent::march_troops()
 {
 	// no marching - PASSIVE
-	cout << "\t<< march troops >>" << endl;
-	sleep(WAIT_TIME);
 	return 1;
 }
 
@@ -75,8 +57,6 @@ int
 passive_agent::invade()
 {
 	// no invasion - PASSIVE
-	cout << "\t<< attempt invasion >>" << endl;
-	sleep(WAIT_TIME);
 	return 0;
 }
 

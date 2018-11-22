@@ -15,7 +15,11 @@ test_game_controller(){
 
 	char map_init_file_dir[] = "map_init.txt";
 	char ownership_init_file_dir[] = "map_init.txt";
-	game_controller game(map_init_file_dir, ownership_init_file_dir, agent_type::HUMAN, agent_type::PASSIVE);
+
+	agent_type p1_type = agent_type::AGGRESSIVE;
+	agent_type p2_type = agent_type::PASSIVE;
+
+	game_controller game(map_init_file_dir, ownership_init_file_dir, p1_type, p2_type);
 	game.start_new_game();
 }
 
