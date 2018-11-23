@@ -1,0 +1,8 @@
+echo 'must have python'
+python --version
+echo 'must have easy_install'
+easy_install --version
+echo 'installing django ...'
+easy_install django
+echo 'must have django'
+django-admin --version
