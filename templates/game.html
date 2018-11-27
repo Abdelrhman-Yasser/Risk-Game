@@ -1,3 +1,10 @@
-<h1>
-	{{ object.game_status }}
+
+<h1 id="1">
 </h1>
+
+<script>
+	{% block content %}
+		var obj = {{ data|safe }} ;
+	{% endblock %}
+	document.getElementById("1").innerHTML = obj.game_status
+</script>

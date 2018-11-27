@@ -19,12 +19,12 @@ from django.urls import path
 from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+handler404 = 'game_server.views.handler404'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
-    path('index/', views.index),
-    path('game/', views.game , name = 'game'),
+    path('start_game/', views.start_game),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
