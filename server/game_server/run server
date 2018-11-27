@@ -1,4 +1,0 @@
-echo 'handling migratons ....'
-python manage.py migrate
-echo 'running server ....'
-python manage.py runserver

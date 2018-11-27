@@ -1,2 +1,0 @@
-echo 'creating project for game_server'
-django-admin startproject game_server

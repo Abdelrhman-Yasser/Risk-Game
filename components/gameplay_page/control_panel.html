@@ -1,0 +1,74 @@
+<!-- side tabs -->
+<nav class="w3-sidenav w3-card-2 w3-light-grey" style="width:250px">
+	<!-- logo -->
+	<div class="w3-red w3-xxlarge w3-center"
+		style="padding-top: 40px; padding-bottom: 40px; font-weight: bold;">
+		RISK
+	</div>
+  
+  	<!-- control panel -->
+  	<div class="w3-container" style="padding-left: 20px; color: #3D3D3D">
+
+  		<!-- game players info -->
+  		<div style="padding-top: 20px; padding-bottom: 10px;">
+  			 
+  			<div style="font-weight: bold; padding-bottom: 5px;">
+				Game Players
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">player 1 : </div>
+				<div id="p1_type">HUMAN</div>
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">player 2 : </div>
+				<div id="p2_type">HUMAN</div>
+			</div>
+
+  		</div>
+
+  		<!-- game status info -->
+  		<div style="padding-top: 20px; padding-bottom: 10px;">
+  			 
+  			<div style="font-weight: bold; padding-bottom: 5px;">
+				Game Status
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">turn &emsp; &ensp; : </div>
+				<div id="player_turn">P1</div>
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">status &nbsp; &nbsp;: </div>
+				<div id="game_status">OnGoing</div>
+			</div>
+
+  		</div>
+
+  		<!-- controls for human players -->
+  		<div id="human_controls_panel" style="padding-top: 20px; padding-bottom: 10px; display:none;">
+  			 
+  			<div style="font-weight: bold; padding-bottom: 5px;">
+				Human Action
+			</div>
+
+			<div id="from_country_input" class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 50px; text-align: center;">from</div>
+				<input class="w3-col" style="width: 100px;" type="number" name="from_country_id" />
+			</div>
+			<div id="to_country_input" class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 50px; text-align: center;">to</div>
+				<input class="w3-col" style="width: 100px;" type="number" name="to_country_id" />
+			</div>
+			<div id="troops_count_input" class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 50px; text-align: center;">count</div>
+				<input class="w3-col" style="width: 100px;" type="number" name="troops_count" />
+			</div>
+
+  		</div>
+  		
+  	</div>
+	
+</nav>
