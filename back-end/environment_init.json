@@ -1,0 +1,68 @@
+{
+	"country_list":[
+		
+		{
+			"id": 1,
+			"owner": "p1",
+			"troops_count": 3,
+			"continent": 1
+		},
+
+		{
+			"id": 2,
+			"owner": "p2",
+			"troops_count": 6,
+			"continent": 1
+		},
+
+		{
+			"id": 3,
+			"owner": "p1",
+			"troops_count": 4,
+			"continent": 2
+		},
+
+		{
+			"id": 4,
+			"owner": "p2",
+			"troops_count": 7,
+			"continent": 2
+		}
+	],
+
+	"border_list":[
+		
+		{
+			"country1":1,
+			"country2":2
+		},
+
+		{
+			"country1":2,
+			"country2":3
+		},
+
+		{
+			"country1":3,
+			"country2":4
+		},
+
+		{
+			"country1":1,
+			"country2":3
+		}
+	],
+
+	"continent_list":[
+		
+		{
+			"id":1,
+			"reward":5
+		},
+
+		{
+			"id":2,
+			"reward":3
+		}
+	]
+}
