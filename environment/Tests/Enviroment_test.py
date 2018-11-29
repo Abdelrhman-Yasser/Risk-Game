@@ -1,7 +1,7 @@
-import unittest
 from environment.Environment import Environment
 from environment.Structures import *
-
+import unittest
+import copy
 
 class MyTestCase(unittest.TestCase):
     def test_init(self):
@@ -77,7 +77,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_invade_1(self):
         env = Environment("map_init.txt", "population_init.txt")
-        env.invade(GamePlayId.P2, 2, 3)
+        env.invade(GamePlayId.P2, 2, 3, 6)
         self.assertEqual(env.country_list[1].troops_count, 1)
         self.assertEqual(env.country_list[2].troops_count, 1)
         self.assertEqual(env.country_list[1].owner_id , GamePlayId.P2)
@@ -85,18 +85,29 @@ class MyTestCase(unittest.TestCase):
     def test_invade_2(self):
         env = Environment("map_init.txt", "population_init.txt")
         try:
-            env.invade(GamePlayId.P2, 2, 4)
+            env.invade(GamePlayId.P2, 2, 4, 1)
         except Exception as error:
             self.assertEqual(str(error),"Can't invade your own country")
 
     def test_invade_3(self):
         env = Environment("map_init.txt", "population_init.txt")
         try:
-            env.invade(GamePlayId.P2, 1, 4)
+            env.invade(GamePlayId.P2, 1, 4, 1)
         except Exception as error:
             self.assertEqual(str(error),
                              "Can't invade no route from ( " + str(1)
                              + " ) to ( " + str(4) + " )")
+
+    def test_copy(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        env_c = copy.deepcopy(env)
+        env_c.country_list[0].owner_id = None
+        env_c.border_list[0].country1 = None
+        env_c.continent_list[0].owner_id = None
+        self.assertNotEqual(env.country_list[0].owner_id, None)
+        self.assertNotEqual(env.border_list[0].country1, None)
+        self.assertNotEqual(env.continent_list[0].owner_id, None)
+
 
 if __name__ == '__main__':
     unittest.main()
