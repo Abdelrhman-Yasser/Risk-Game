@@ -319,6 +319,7 @@ function gameplay_controller_update_player_turn()
 /*****************************************/
 function gameplay_controller_handle_deployment()
 {
+	$("#gameplay_page_control_panel_play_action").text("deploy");
 	if(variables_curr_player["reserve"] == 0)
 	{
 		apply_next_in_chain(gameplay_controller_handle_marching);
@@ -341,6 +342,7 @@ function gameplay_controller_handle_deployment()
 
 function gameplay_controller_handle_marching()
 {
+	$("#gameplay_page_control_panel_play_action").text("march");
 	if(variables_curr_player["type"].toLowerCase() == "human")
 	{
 		gameplay_page_display_human_march_controls();
@@ -357,6 +359,7 @@ function gameplay_controller_handle_marching()
 
 function gameplay_controller_handle_invasion()
 {
+	$("#gameplay_page_control_panel_play_action").text("invade");
 	if(variables_curr_player["type"].toLowerCase() == "human")
 	{
 		gameplay_page_display_human_invade_controls();
@@ -376,6 +379,7 @@ function gameplay_controller_handle_invasion()
 /*****************************************/
 function gameplay_controller_start_game()
 {
+
 	gameplay_controller_update_curr_player();
 }
 

@@ -176,16 +176,16 @@ function gameplay_page_init_graph()
         edges: edges
     };
     var options = {
-        /*nodes: {
-            shape: 'dot',
-            size: 40,
+        nodes: {
             font: {
-                size: 20,
+                face: 'cursive'
             },
-            borderWidth: 2
-        },*/
+        },
         edges: {
-            width: 2
+            width: 2,
+            color: {
+                color: 'grey'
+            }
         },
         physics: {
             enabled: false
