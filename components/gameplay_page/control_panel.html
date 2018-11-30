@@ -75,7 +75,7 @@
 
   		<!-- controls for human players -->
   		<!-- ************************** -->
-  		<div id="gameplay_page_control_panel_human_controls" style="padding-top: 10px; display:none;">
+  		<div id="gameplay_page_control_panel_human_controls" style="padding-top: 10px; display: none;">
   			 
   			<div style="font-weight: bold; padding-bottom: 5px;">
 				Human Action
@@ -86,14 +86,14 @@
 				<div id="gameplay_page_control_panel_from_country_input" class="w3-col w3-padding-4" style="width: 95px;">
 					<div class="w3-row">
 						<div class="w3-col" style="width: 50px; text-align: center;">from</div>
-						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_from_country_id" />
+						<input class="w3-col" style="width: 40px;" type="number" id="gameplay_page_control_panel_from_country_id" />
 					</div>
 				</div>
 
 				<div id="gameplay_page_control_panel_to_country_input" class="w3-col w3-padding-4" style="width: 100px;">
 					<div class="w3-row">
 						<div class="w3-col" style="width: 30px; text-align: center;">to</div>
-						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_to_country_id" />
+						<input class="w3-col" style="width: 40px;" type="number" id="gameplay_page_control_panel_to_country_id" />
 					</div>
 				</div>
 
@@ -103,20 +103,35 @@
 				<div id="gameplay_page_control_panel_troops_count_input" class="w3-col w3-padding-4" style="width: 95px;">
 					<div class="w3-row">
 						<div class="w3-col" style="width: 50px; text-align: center;">count</div>
-						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_troops_count_val" />
+						<input class="w3-col" style="width: 40px;" type="number" id="gameplay_page_control_panel_troops_count_val" />
 					</div>
 				</div>
 			</div>
 
 			<div class="w3-row">
-				<button id="gameplay_page_control_panel_human_apply_btn"
+				<button id="gameplay_page_control_panel_human_deploy_btn"
 					class="w3-col w3-btn w3-green w3-round-medium"
-					style="width: 60px; height: 27px; padding-left: 12px; padding-top: 0px; margin-top: 10px;">
-					apply
+					style="width: 60px; height: 27px; padding-left: 7px; padding-top: 0px; margin-top: 10px;">
+					deploy
 				</button>
-				<button id="gameplay_page_control_panel_human_skip_btn"
+				<button id="gameplay_page_control_panel_human_march_btn"
+					class="w3-col w3-btn w3-green w3-round-medium"
+					style="width: 60px; height: 27px; padding-left: 8px; padding-top: 0px; margin-top: 10px;">
+					march
+				</button>
+				<button id="gameplay_page_control_panel_human_invade_btn"
+					class="w3-col w3-btn w3-green w3-round-medium"
+					style="width: 60px; height: 27px; padding-left: 8px; padding-top: 0px; margin-top: 10px;">
+					invade
+				</button>
+				<button id="gameplay_page_control_panel_human_skip_march_btn"
 					class="w3-col w3-btn w3-red w3-round-medium"
-					style="width: 60px; height: 27px; padding-left: 12px; padding-top: 0px; margin-top: 10px; margin-left: 10px;">
+					style="width: 60px; height: 27px; padding-left: 16px; padding-top: 0px; margin-top: 10px; margin-left: 10px;">
+					skip
+				</button>
+				<button id="gameplay_page_control_panel_human_skip_invade_btn"
+					class="w3-col w3-btn w3-red w3-round-medium"
+					style="width: 60px; height: 27px; padding-left: 16px; padding-top: 0px; margin-top: 10px; margin-left: 10px;">
 					skip
 				</button>
 			</div>

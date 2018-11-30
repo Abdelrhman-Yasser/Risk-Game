@@ -57,8 +57,13 @@ let environment = JSON.parse(rawdata);
 app.post('/new_game', urlencodedParser, function (req, res) {
 		
 		// 01. get player types
-		var p1_type = req.body.p1_type; // console.log(p1_type);
-		var p2_type = req.body.p1_type; // console.log(p2_type);
+		var p1_type = req.body.p1_type;
+		var p2_type = req.body.p1_type;
+
+    console.log("new_game");
+    console.log("p1_type : " + p1_type);
+    console.log("p2_type : " + p2_type);
+    console.log("****************************************");
 
 		// 02. init new game with player types
 
@@ -72,8 +77,13 @@ app.post('/new_game', urlencodedParser, function (req, res) {
 app.post('/deploy_human', urlencodedParser, function (req, res) {
     
     // 01. get player types
-    var target = req.body.target; // console.log(target);
-    var count = req.body.count; // console.log(count);
+    var target = req.body.target;
+    var count = req.body.count;
+
+    console.log("human deploy");
+    console.log("target : " + target);
+    console.log("count : "+ count);
+    console.log("****************************************");
 
     // 02. init new game with player types
     var response = {
@@ -88,9 +98,15 @@ app.post('/deploy_human', urlencodedParser, function (req, res) {
 app.post('/march_human', urlencodedParser, function (req, res) {
     
     // 01. get player types
-    var from_country = req.body.from; // console.log(p1_type);
-    var to_country = req.body.to; // console.log(p2_type);
-    var count = req.body.count; // console.log(p2_type);
+    var from_country = req.body.from; 
+    var to_country = req.body.to;
+    var count = req.body.count;
+
+    console.log("human march");
+    console.log("from : " + from_country);
+    console.log("to : "+ to_country);
+    console.log("count : "+ count);
+    console.log("****************************************");
 
     // 02. init new game with player types
     var response = {
@@ -105,15 +121,21 @@ app.post('/march_human', urlencodedParser, function (req, res) {
 app.post('/invade_human', urlencodedParser, function (req, res) {
     
     // 01. get player types
-    var from_country = req.body.from; // console.log(p1_type);
-    var to_country = req.body.to; // console.log(p2_type);
+    var from_country = req.body.from;
+    var to_country = req.body.to;
+
+    console.log("human invade");
+    console.log("from : " + from_country);
+    console.log("to : "+ to_country);
+    console.log("****************************************");
 
     // 02. init new game with player types
     var response = {
       "success": 1,
       "msg": "none",
       "game_status": "ongoing",
-      "winner": "none"
+      "winner": "none",
+      "reward": 8
     };
 
     // 03. send environment config to front-end  
@@ -131,6 +153,10 @@ app.get('/deploy_pc', function (req, res) {
       "count": 5
     };
 
+    console.log("agent deploy");
+    console.log(response);
+    console.log("****************************************");
+
     // 03. send environment config to front-end  
     res.end(JSON.stringify(response));
 });
@@ -146,6 +172,10 @@ app.get('/march_pc', function (req, res) {
       "count": 5
     };
 
+    console.log("agent march");
+    console.log(response);
+    console.log("****************************************");
+
     // 03. send environment config to front-end  
     res.end(JSON.stringify(response));
 });
@@ -158,8 +188,13 @@ app.get('/invade_pc', function (req, res) {
       "from": 3,
       "to": 5,
       "game_status": "ongoing",
-      "winner": "none"
+      "winner": "none",
+      "reward": 5
     };
+
+    console.log("agent invade");
+    console.log(response);
+    console.log("****************************************");
 
     // 03. send environment config to front-end  
     res.end(JSON.stringify(response));

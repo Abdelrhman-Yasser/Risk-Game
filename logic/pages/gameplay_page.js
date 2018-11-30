@@ -36,10 +36,22 @@ function gameplay_page_init_canvas_layout()
 /*****************************************/
 function gameplay_page_init_event_listeners()
 {
-    $("#gameplay_page_control_panel_human_apply_btn").click(function(e){
-        variables_country_list[0]["continent"] = 2;
-        gameplay_page_init_graph();
+    $("#gameplay_page_control_panel_human_deploy_btn").click(function(e){
+        gameplay_controller_handle_human_deployment();
     });
+    $("#gameplay_page_control_panel_human_march_btn").click(function(e){
+        gameplay_controller_handle_human_marching();
+    });
+    $("#gameplay_page_control_panel_human_invade_btn").click(function(e){
+        gameplay_controller_handle_human_invasion();
+    });
+    
+    $("#gameplay_page_control_panel_human_skip_march_btn").click(function(e){
+        gameplay_controller_handle_human_skip_march();
+    });
+    $("#gameplay_page_control_panel_human_skip_invade_btn").click(function(e){
+        gameplay_controller_handle_human_skip_invasion();
+    }); 
 }
 
 /* init variables - control panel */
@@ -54,6 +66,54 @@ function gamepaly_page_init_control_panel()
 
     $("#gameplay_page_control_panel_p1_reserve").text(variables_player_info["p1"]["reserve"]);
     $("#gameplay_page_control_panel_p2_reserve").text(variables_player_info["p2"]["reserve"]);
+}
+
+/*****************************************/
+/* control human input view */
+/*****************************************/
+function gameplay_page_display_human_deploy_controls()
+{
+    $("#gameplay_page_control_panel_human_controls").show();
+    $("#gameplay_page_control_panel_from_country_input").hide(); // from
+    $("#gameplay_page_control_panel_to_country_input").show(); // to
+    $("#gameplay_page_control_panel_troops_count_input").hide(); // count
+
+    $("#gameplay_page_control_panel_human_skip_march_btn").hide(); // skip
+    $("#gameplay_page_control_panel_human_skip_invade_btn").hide(); // skip
+
+    $("#gameplay_page_control_panel_human_deploy_btn").show();
+    $("#gameplay_page_control_panel_human_march_btn").hide();
+    $("#gameplay_page_control_panel_human_invade_btn").hide();
+}
+
+function gameplay_page_display_human_march_controls()
+{
+    $("#gameplay_page_control_panel_human_controls").show();
+    $("#gameplay_page_control_panel_from_country_input").show(); // from
+    $("#gameplay_page_control_panel_to_country_input").show(); // to
+    $("#gameplay_page_control_panel_troops_count_input").show(); // count
+    
+    $("#gameplay_page_control_panel_human_skip_march_btn").show(); // skip
+    $("#gameplay_page_control_panel_human_skip_invade_btn").hide(); // skip
+
+    $("#gameplay_page_control_panel_human_deploy_btn").hide();
+    $("#gameplay_page_control_panel_human_march_btn").show();
+    $("#gameplay_page_control_panel_human_invade_btn").hide();
+}
+
+function gameplay_page_display_human_invade_controls()
+{
+    $("#gameplay_page_control_panel_human_controls").show();
+    $("#gameplay_page_control_panel_from_country_input").show(); // from
+    $("#gameplay_page_control_panel_to_country_input").show(); // to
+    $("#gameplay_page_control_panel_troops_count_input").hide(); // count
+    
+    $("#gameplay_page_control_panel_human_skip_march_btn").hide(); // skip
+    $("#gameplay_page_control_panel_human_skip_invade_btn").show(); // skip
+
+    $("#gameplay_page_control_panel_human_deploy_btn").hide();
+    $("#gameplay_page_control_panel_human_march_btn").hide();
+    $("#gameplay_page_control_panel_human_invade_btn").show();
 }
 
 
