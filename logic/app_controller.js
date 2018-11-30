@@ -36,9 +36,10 @@ function app_controller_load_gameplay_page()
                 gameplay_page_init_graph();
 
                 // 02. start new game
-                setTimeout(function(){ 
+                setTimeout(function(){
                     gameplay_controller_start_game();
-                }, variables_delay); 
+                }, variables_delay);
+                
                 
             });
         });

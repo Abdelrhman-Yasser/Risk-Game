@@ -6,9 +6,12 @@ function gameplay_controller_update_curr_player()
 	if(variables_player_turn.toLowerCase() == "p1")
 	{
 		variables_curr_player = variables_player_info["p1"];
-		return;
 	}
-	variables_curr_player = variables_player_info["p2"];
+	else{
+		variables_curr_player = variables_player_info["p2"];
+	}
+	// apply next in chain
+	apply_next_in_chain(gameplay_controller_handle_deployment);
 }
 
 function gameplay_controller_update_player_turn()
@@ -16,9 +19,20 @@ function gameplay_controller_update_player_turn()
 	if(variables_player_turn.toLowerCase() == "p1")
 	{
 		variables_player_turn = "p2";
-		return;
+	}else{
+		variables_player_turn = "p1";	
 	}
-	variables_player_turn = "p1";
+	
+	// check game status
+	if(variables_game_status.toLowerCase() == "ongoing")
+	{
+		gameplay_controller_update_curr_player();
+	}else
+	{
+		// game ends
+		$("#gameplay_page_winner_modal_winner_id").text(variables_game_winner);
+		$("#gameplay_page_winner_modal").show();
+	}
 }
 
 /*****************************************/
@@ -105,6 +119,8 @@ function gameplay_controller_handle_deployment()
 			// apply move on graph --------->> TODO
 			// 03. update player reserve troops
 			variables_player_info[variables_curr_player["type"].toLowerCase()]["reserve"] = 0;
+			// apply next in chain
+			apply_next_in_chain(gameplay_controller_handle_marching);
 			return;
 		}
 
@@ -125,6 +141,8 @@ function gameplay_controller_handle_deployment()
 			{
 				// no error
 				// apply move on graph --------->> TODO
+				// apply next in chain
+				apply_next_in_chain(gameplay_controller_handle_marching);
 				return;
 			}
 			// else an error occured
@@ -132,6 +150,7 @@ function gameplay_controller_handle_deployment()
 		}
 		
 	}
+	apply_next_in_chain(gameplay_controller_handle_marching);
 }
 
 function gameplay_controller_handle_marching()
@@ -147,6 +166,8 @@ function gameplay_controller_handle_marching()
 		if(response["change"] == 0)
 		{
 			// no change happened
+			// apply next in chain
+			apply_next_in_chain(gameplay_controller_handle_invasion);
 			return;
 		}
 		var from_country = response["from"];
@@ -154,6 +175,8 @@ function gameplay_controller_handle_marching()
 		var count = response["count"];
 		// 02. apply move on graph
 		// apply move on graph --------->> TODO
+		// apply next in chain
+		apply_next_in_chain(gameplay_controller_handle_invasion);
 		return;
 	}
 
@@ -163,7 +186,12 @@ function gameplay_controller_handle_marching()
 	{
 		// 00. skip flag
 		var skip_flag = prompt("march 1/0?");
-		if(skip_flag == 0){return;} // skip NO march
+		if(skip_flag == 0) // skip no marching
+		{
+			// apply next in chain
+			apply_next_in_chain(gameplay_controller_handle_invasion);
+			return;
+		}
 		// 01. get data move from user
 		var from_country = prompt("march from");
 		var to_country = prompt("march to");
@@ -180,6 +208,8 @@ function gameplay_controller_handle_marching()
 		{
 			// no error
 			// apply move on graph --------->> TODO
+			// apply next in chain
+			apply_next_in_chain(gameplay_controller_handle_invasion);
 			return;
 		}
 		// else an error occured
@@ -200,6 +230,8 @@ function gameplay_controller_handle_invasion()
 		if(response["change"] == 0)
 		{
 			// no change happened
+			// apply next in chain
+			gameplay_controller_update_player_turn();
 			return;
 		}
 		var from_country = response["from"];
@@ -209,6 +241,8 @@ function gameplay_controller_handle_invasion()
 		// 03. update game status
 		variables_game_status = response["game_status"];
 		variables_game_winner = response["winner"];
+		// apply next in chain
+		gameplay_controller_update_player_turn();
 		return;
 	}
 	// human player
@@ -217,7 +251,12 @@ function gameplay_controller_handle_invasion()
 	{
 		// 00. skip flag
 		var skip_flag = prompt("invade 1/0?");
-		if(skip_flag == 0){return;} // skip NO invade
+		if(skip_flag == 0)
+		{
+			// apply next in chain
+			gameplay_controller_update_player_turn();
+			return;
+		} // skip NO invade
 		// 01. get data move from user
 		var from_country = prompt("march from");
 		var to_country = prompt("march to");
@@ -235,6 +274,8 @@ function gameplay_controller_handle_invasion()
 			// 04. update game status
 			variables_game_status = response["game_status"];
 			variables_game_winner = response["winner"];
+			// apply next in chain
+			gameplay_controller_update_player_turn();
 			return;
 		}
 		// else an error occured
@@ -245,17 +286,28 @@ function gameplay_controller_handle_invasion()
 /*****************************************/
 /* gameplay controller */
 /*****************************************/
+function apply_next_in_chain(next_function)
+{
+	// delay before march
+	setTimeout(function(){
+		console.log("success");
+	    next_function();
+	}, variables_delay);
+}
+
 function gameplay_controller_start_game()
+{
+	window.alert("success");
+	gameplay_controller_update_curr_player();
+}
+
+/*function gameplay_controller_start_game()
 {
 	display_human_march_controls();
 	while(variables_game_status.toLowerCase() == "ongoing")
 	{
 		// identify player currently playing
 		gameplay_controller_update_curr_player();
-		if(variables_curr_player["type"].toLowerCase() != "human")
-		{
-			$("#gameplay_page_control_panel_human_controls").hide();
-		}
 
 		// 01. deploy reserve troops
 		gameplay_controller_handle_deployment();
@@ -269,13 +321,11 @@ function gameplay_controller_start_game()
 		// change turns
 		gameplay_controller_update_player_turn();
 
-		console.log(variables_game_status);
-
-
 	}
 
 	// game ends
 	$("#gameplay_page_winner_modal_winner_id").text(variables_game_winner);
 	$("#gameplay_page_winner_modal").show();
 
-}
+}*/
+

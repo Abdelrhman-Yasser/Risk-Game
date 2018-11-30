@@ -48,6 +48,9 @@ let rawdata = fs.readFileSync('environment_init.json');
 let environment = JSON.parse(rawdata); 
 //console.log(environment)
 
+//var sleep = require('system-sleep');
+//sleep(200);
+
 
 /* REQUEST-ROUTING TABLE */
 /*********************************************/
