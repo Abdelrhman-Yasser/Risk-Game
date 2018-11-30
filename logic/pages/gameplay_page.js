@@ -36,18 +36,24 @@ function gameplay_page_init_canvas_layout()
 /*****************************************/
 function gameplay_page_init_event_listeners()
 {
-
+    $("#gameplay_page_control_panel_human_apply_btn").click(function(e){
+        variables_country_list[0]["continent"] = 2;
+        gameplay_page_init_graph();
+    });
 }
 
 /* init variables - control panel */
 /*****************************************/
 function gamepaly_page_init_control_panel()
 {
-    $("#gameplay_page_control_panel_p1_type").text(variables_player1);
-    $("#gameplay_page_control_panel_p2_type").text(variables_player2);
+    $("#gameplay_page_control_panel_p1_type").text(variables_player_info["p1"]["type"]);
+    $("#gameplay_page_control_panel_p2_type").text(variables_player_info["p2"]["type"]);
 
     $("#gameplay_page_control_panel_player_turn").text(variables_player_turn);
     $("#gameplay_page_control_panel_game_status").text(variables_game_status);
+
+    $("#gameplay_page_control_panel_p1_reserve").text(variables_player_info["p1"]["reserve"]);
+    $("#gameplay_page_control_panel_p2_reserve").text(variables_player_info["p2"]["reserve"]);
 }
 
 
@@ -110,15 +116,25 @@ function gameplay_page_init_graph()
     };
     var options = {
         nodes: {
-            shape: 'dot',
-            size: 20,
+            shape: 'circle',
+            size: 40,
             font: {
-                size: 32,
+                size: 20,
             },
             borderWidth: 2
         },
         edges: {
             width: 2
+        },
+        physics: {
+            enabled: false
+        },
+        manipulation:{
+            enabled: true,
+            editNode: function(nodeData,callback) {
+                nodeData.label = 'hello world';
+                callback(nodeData);
+            }
         }
     };
     network = new vis.Network(container, data, options);

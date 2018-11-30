@@ -21,8 +21,8 @@ function start_page_init_event_listeners()
 		var p2_type = $("#start_page_p2_type").val(); //console.log(p2_type);
 
 		// update game controller players
-		variables_player1 = p1_type.toUpperCase();
-		variables_player2 = p2_type.toUpperCase();
+		variables_player_info["p1"]["type"] = p1_type.toUpperCase();
+		variables_player_info["p2"]["type"] = p2_type.toUpperCase();
 
 		// 02. send POSt request with player types
 		// and obtain environment setup from server

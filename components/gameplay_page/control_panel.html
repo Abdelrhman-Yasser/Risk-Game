@@ -1,5 +1,5 @@
 <!-- side tabs -->
-<nav class="w3-sidenav w3-card-2 w3-light-grey" style="width:250px">
+<nav class="w3-sidenav w3-card-2 w3-light-grey" style="width:250px; font-size: 16px;">
 	<!-- logo -->
 	<div class="w3-indigo w3-xxlarge w3-center"
 		style="padding-top: 40px; padding-bottom: 40px; font-weight: bold;">
@@ -7,10 +7,12 @@
 	</div>
   
   	<!-- control panel -->
-  	<div class="w3-container" style="padding-left: 20px; color: #3D3D3D">
+  	<div class="w3-container" style="padding-left: 20px; color: #3D3D3D;">
+
 
   		<!-- game players info -->
-  		<div style="padding-top: 20px; padding-bottom: 10px;">
+  		<!-- ***************** -->
+  		<div style="padding-top: 20px; padding-bottom: 7px; border-bottom-style: solid; border-color: grey; border-width: 1px;">
   			 
   			<div style="font-weight: bold; padding-bottom: 5px;">
 				Game Players
@@ -18,18 +20,41 @@
 
 			<div class="w3-row w3-padding-4">
 				<div class="w3-col" style="width: 90px; font-weight: bold;">player 1 : </div>
-				<div id="gameplay_page_control_panel_p1_type">HUMAN</div>
+				<div id="gameplay_page_control_panel_p1_type">none</div>
 			</div>
 
 			<div class="w3-row w3-padding-4">
 				<div class="w3-col" style="width: 90px; font-weight: bold;">player 2 : </div>
-				<div id="gameplay_page_control_panel_p2_type">HUMAN</div>
+				<div id="gameplay_page_control_panel_p2_type">none</div>
 			</div>
 
   		</div>
 
+
+  		<!-- game players info -->
+  		<!-- ***************** -->
+  		<div style="padding-top: 10px; padding-bottom: 7px; border-bottom-style: solid; border-color: grey; border-width: 1px;">
+  			 
+  			<div style="font-weight: bold; padding-bottom: 5px;">
+				Reserve Troops
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">player 1 : </div>
+				<div id="gameplay_page_control_panel_p1_reserve">none</div>
+			</div>
+
+			<div class="w3-row w3-padding-4">
+				<div class="w3-col" style="width: 90px; font-weight: bold;">player 2 : </div>
+				<div id="gameplay_page_control_panel_p2_reserve">none</div>
+			</div>
+
+  		</div>
+
+
   		<!-- game status info -->
-  		<div style="padding-top: 20px; padding-bottom: 10px;">
+  		<!-- **************** -->
+  		<div style="padding-top: 10px; padding-bottom: 7px; border-bottom-style: solid; border-color: grey; border-width: 1px;">
   			 
   			<div style="font-weight: bold; padding-bottom: 5px;">
 				Game Status
@@ -47,24 +72,53 @@
 
   		</div>
 
+
   		<!-- controls for human players -->
-  		<div id="human_controls_panel" style="padding-top: 20px; padding-bottom: 10px; display:none;">
+  		<!-- ************************** -->
+  		<div id="gameplay_page_control_panel_human_controls" style="padding-top: 10px; display:none;">
   			 
   			<div style="font-weight: bold; padding-bottom: 5px;">
 				Human Action
 			</div>
 
-			<div id="gameplay_page_control_panel_from_country_input" class="w3-row w3-padding-4">
-				<div class="w3-col" style="width: 50px; text-align: center;">from</div>
-				<input class="w3-col" style="width: 100px;" type="number" name="from_country_id" />
+			<div class="w3-row">
+
+				<div id="gameplay_page_control_panel_from_country_input" class="w3-col w3-padding-4" style="width: 95px;">
+					<div class="w3-row">
+						<div class="w3-col" style="width: 50px; text-align: center;">from</div>
+						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_from_country_id" />
+					</div>
+				</div>
+
+				<div id="gameplay_page_control_panel_to_country_input" class="w3-col w3-padding-4" style="width: 100px;">
+					<div class="w3-row">
+						<div class="w3-col" style="width: 30px; text-align: center;">to</div>
+						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_to_country_id" />
+					</div>
+				</div>
+
 			</div>
-			<div id="gameplay_page_control_panel_to_country_input" class="w3-row w3-padding-4">
-				<div class="w3-col" style="width: 50px; text-align: center;">to</div>
-				<input class="w3-col" style="width: 100px;" type="number" name="to_country_id" />
+
+			<div class="w3-row">
+				<div id="gameplay_page_control_panel_troops_count_input" class="w3-col w3-padding-4" style="width: 95px;">
+					<div class="w3-row">
+						<div class="w3-col" style="width: 50px; text-align: center;">count</div>
+						<input class="w3-col" style="width: 40px;" type="number" name="gameplay_page_control_panel_troops_count_val" />
+					</div>
+				</div>
 			</div>
-			<div id="gameplay_page_control_panel_troops_count_input" class="w3-row w3-padding-4">
-				<div class="w3-col" style="width: 50px; text-align: center;">count</div>
-				<input class="w3-col" style="width: 100px;" type="number" name="troops_count" />
+
+			<div class="w3-row">
+				<button id="gameplay_page_control_panel_human_apply_btn"
+					class="w3-col w3-btn w3-green w3-round-medium"
+					style="width: 60px; height: 27px; padding-left: 12px; padding-top: 0px; margin-top: 10px;">
+					apply
+				</button>
+				<button id="gameplay_page_control_panel_human_skip_btn"
+					class="w3-col w3-btn w3-red w3-round-medium"
+					style="width: 60px; height: 27px; padding-left: 12px; padding-top: 0px; margin-top: 10px; margin-left: 10px;">
+					skip
+				</button>
 			</div>
 
   		</div>
