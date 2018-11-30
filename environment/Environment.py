@@ -1,6 +1,9 @@
 from environment.GameEnums import *
 from utilities.Parser import *
+from environment.Encoders import Encoder
 import copy
+import json
+import math
 
 
 class Environment:
@@ -35,6 +38,9 @@ class Environment:
                            border_list=copy.deepcopy(self.__border_list, memodict),
                            adj_list=copy.deepcopy(self.__adj_list,memodict))
 
+    def __str__(self):
+        return json.dumps(self.reprJson(), cls=Encoder, indent=2) + "--------------------------------------------------"
+
     def __make_adj_list(self):
         adj_list = dict()
         for country in self.__country_list:
@@ -45,11 +51,11 @@ class Environment:
         return adj_list
 
     def reprJson(self):
-        return dict(game_status = self.__game_status.name,
-                    winner = self.__winner.name,
-                    country_list = self.country_list,
-                    border_list = self.border_list,
-                    continent_list = self.continent_list)
+        return dict(game_status=self.__game_status.name,
+                    winner=self.__winner.name,
+                    country_list=self.country_list,
+                    border_list=self.border_list,
+                    continent_list=self.continent_list)
 
     def __readconfigfiles__(self, map_config_file, pop_config_file):
         read_data_map = MapFileParser(map_config_file)
@@ -64,7 +70,7 @@ class Environment:
         return False
 
     def __is_owner(self, test_player_id , country_id):
-        return self.country_list[country_id - 1].owner_id == GamePlayId.NONE or self.country_list[country_id - 1].owner_id == test_player_id
+        return self.country_list[country_id - 1].owner_id == test_player_id
 
     def __game_ended(self,test_player_id):
         for country in self.country_list:
@@ -76,7 +82,7 @@ class Environment:
         if self.continent_list[continent_id - 1].owner_id == test_player_id :
             return 0
         for country_id in self.continent_list[continent_id - 1].country_list:
-            if self.country_list[country_id].owner_id != test_player_id:
+            if self.country_list[country_id -1].owner_id != test_player_id:
                 return 0
         return 1
 
@@ -118,8 +124,13 @@ class Environment:
 
     def march_troops(self, owner_id, from_country_id, to_country_id, troops_count):
 
-        if troops_count == 0.5:
-            troops_count = int(self.country_list[from_country_id - 1].troops_count/2)
+        if troops_count == 0.9:
+            troops_count = self.country_list[from_country_id - 1].troops_count \
+                     - self.country_list[to_country_id - 1].troops_count - 1
+
+        if troops_count < 1:
+            troops_count = math.floor((self.country_list[from_country_id - 1].troops_count -
+                             self.country_list[to_country_id - 1].troops_count) * troops_count)
 
         if not self.__is_owner(owner_id, from_country_id):
             raise ValueError("Can't march troops from unowned country : country owner ("
@@ -141,6 +152,15 @@ class Environment:
         self.country_list[to_country_id - 1].troops_count += troops_count
 
     def invade(self, owner_id, from_country_id, to_country_id, troops):
+
+        if troops == 0.9:
+            troops = self.country_list[from_country_id - 1].troops_count \
+                     - self.country_list[to_country_id - 1].troops_count - 1
+
+        if troops < 1:
+            troops = math.floor((self.country_list[from_country_id - 1].troops_count -
+                                 self.country_list[to_country_id - 1].troops_count) * troops)
+
         if self.__is_owner(owner_id, from_country_id) and self.__is_owner(owner_id, to_country_id):
             raise ValueError("Can't invade your own country")
         if not self.__border_exists(from_country_id,to_country_id):
@@ -150,30 +170,22 @@ class Environment:
             raise ValueError("Can't invade from unowned country : country owner ("
                              + str(self.country_list[from_country_id - 1].owner_id) + ") ,"
                              + "player (" + str(owner_id) + ")")
-        if troops >= self.country_list[from_country_id - 1].troops_count :
+        if self.country_list[from_country_id - 1].troops_count - self.country_list[to_country_id - 1].troops_count < 2:
             raise ValueError("Not enough troops not invade with")
 
-        self.country_list[from_country_id - 1].troops_count -= troops
-        self.country_list[to_country_id - 1].troops_count -= troops
+        self.country_list[from_country_id - 1].troops_count -= troops + self.country_list[to_country_id - 1].troops_count
+        self.country_list[to_country_id - 1].troops_count = troops
+        self.country_list[to_country_id - 1].owner_id = owner_id
 
-        reward = 0
         continent_id = self.country_list[to_country_id - 1].continent_id
+        reward = self.INVASION_REWARD
 
-        if self.country_list[to_country_id - 1].troops_count == 0:
-            if self.continent_list[continent_id - 1].owner_id == self.country_list[to_country_id - 1].owner_id:
-                self.continent_list[continent_id - 1].owner_id = GamePlayId.NONE
-            self.country_list[to_country_id - 1].owner_id = GamePlayId.NONE
-
-        if self.country_list[to_country_id - 1].troops_count < 0:
-            self.country_list[to_country_id - 1].troops_count *= -1
-            self.country_list[to_country_id - 1].owner_id = owner_id
-            reward = self.INVASION_REWARD
-            if self.__is_continent_new_owner(owner_id,continent_id):
+        if self.__is_continent_new_owner(owner_id,continent_id):
                 self.continent_list[continent_id -1].owner_id = owner_id
-                reward = self.continent_list[continent_id -1].reward
+                reward += self.continent_list[continent_id -1].reward
 
-            if self.__game_ended(owner_id):
-                self.__game_status = GameStatus.ENDED
-                self.__winner = owner_id
+        if self.__game_ended(owner_id):
+            self.__game_status = GameStatus.ENDED
+            self.__winner = owner_id
 
         return reward

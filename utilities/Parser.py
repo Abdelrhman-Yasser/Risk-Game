@@ -39,6 +39,7 @@ class MapFileParser:
         continent_list = []
         line_number = 1 + self.__borderCount + 2
         count = self.__continentCount
+        continent_no = 1
         while count > 0:
             line = self.__bufferedFile[line_number]
             tokens = self.__tokenize(line)
@@ -48,7 +49,8 @@ class MapFileParser:
                 if not tokens[i].isnumeric():
                     break
                 country_list.append(int(tokens[i]))
-            continent_list.append(Continent(reward, country_list))
+            continent_list.append(Continent(reward, country_list, id=continent_no))
+            continent_no += 1
             line_number += 1
             count -= 1
         return continent_list

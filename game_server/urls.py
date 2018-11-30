@@ -24,7 +24,19 @@ handler404 = 'game_server.views.handler404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
-    path('start_game/', views.start_game),
+
+    path('new_game', views.new_game),
+    path('deploy_human', views.deploy_human),
+    path('home/components/start_page/start_page.html', views.get_start_page),
+    path('home/components/start_page/start_modal.html', views.get_start_modal),
+    path('home/components/gameplay_page/gameplay_page.html', views.get_gameplay_page),
+    path('home/components/gameplay_page/control_panel.html', views.get_control_panel),
+    path('home/components/gameplay_page/game_canvas.html', views.get_game_canvas),
+    path('home/components/gameplay_page/winner_modal.html', views.get_winner_modal),
+   # path('invade_human/', views.invade_human),
+   # path('deploy_agent/', views.deploy_agent),
+   # path('march_agent/', views.march_agent),
+   # path('invade_agent/', views.invade_agent),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

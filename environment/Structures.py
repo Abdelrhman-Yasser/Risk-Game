@@ -16,28 +16,27 @@ class Country:
                        continent_id=copy.deepcopy(self.continent_id,memodict))
 
     def reprJson(self):
-        return dict(owner_id=self.owner_id.name,
+        return dict(owner=self.owner_id.name,
                     id=self.id,
                     troops_count=self.troops_count,
-                    continent_id=self.continent_id)
+                    continent=self.continent_id)
 
 
 class Continent:
 
-    def __init__(self, reward, country_list, owner_id = GamePlayId.NONE):
+    def __init__(self, reward, country_list, owner_id=GamePlayId.NONE, id=None):
         self.reward = reward
         self.owner_id = owner_id
         self.country_list = country_list
+        self.id = id
 
     def __deepcopy__(self, memodict={}):
         return Continent(reward=copy.deepcopy(self.reward,memodict),
-                         country_list=copy.deepcopy(self.country_list,memodict),
-                         owner_id=copy.deepcopy(self.country_list,memodict))
+                         id=copy.deepcopy(self.id,memodict))
 
     def reprJson(self):
         return dict(reward=self.reward,
-                    owner_id=self.owner_id.name,
-                    country_list=self.country_list)
+                    owner_id=self.owner_id.name)
 
 
 class Border:
@@ -51,5 +50,5 @@ class Border:
                       copy.deepcopy(self.country2,memodict))
 
     def reprJson(self):
-        return dict(country1 = self.country1,
-                    country2 = self.country2)
+        return dict(country1=self.country1,
+                    country2=self.country2)

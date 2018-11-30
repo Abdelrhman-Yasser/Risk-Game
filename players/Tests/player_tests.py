@@ -1,6 +1,7 @@
 import unittest
 from environment.Environment import Environment,GamePlayId,GameStatus
 from players.humans import Human
+from players.agents import PassiveAgent
 from players.state import EnvState
 from players.player import Player
 from players.ai import Greedy
@@ -139,8 +140,10 @@ class AiTests(unittest.TestCase):
     def test1(self):
         env = Environment("map_init.txt", "population_init.txt")
         state = EnvState(env, None)
-        player = Greedy(GamePlayId.P1)
-        states = player.expand(state)
+        player1 = Greedy(GamePlayId.P1)
+        player2 = PassiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+
 
 
 
