@@ -1,4 +1,4 @@
-/* canvas variables */
+/* gameplay variables */
 /*****************************************/
 var variables_player_turn = "P1";
 var variables_game_status = "OnGoing";
@@ -27,3 +27,7 @@ var variables_player_info = {
 		"view_id_reserve_troops": "#gameplay_page_control_panel_p2_reserve"
 	}
 };
+
+/* canvas variables */
+/*****************************************/
+var variables_canvas_nodes;

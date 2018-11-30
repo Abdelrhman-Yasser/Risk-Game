@@ -42,6 +42,17 @@ function apply_next_in_chain(next_function)
 /*****************************************/
 /* handle deployment */
 /*****************************************/
+function game_controller_deployment_update_view(to_country)
+{
+	var new_count = variables_country_list[to_country - 1]["troops_count"] + variables_curr_player["reserve"];
+	variables_country_list[to_country - 1]["troops_count"] = new_count;
+	var node_update = {
+		id : to_country,
+		label: "(id=" + to_country + ")\n" + "(cont=" + variables_country_list[to_country - 1]["continent"] + ")\n" + "(Troops=" + new_count + ")"
+	};
+	variables_canvas_nodes.update([node_update]);
+}
+
 function gameplay_controller_handle_human_deployment()
 {
 	// 01. get data move from user
@@ -57,6 +68,7 @@ function gameplay_controller_handle_human_deployment()
 	{
 		// no error
 		// apply move on graph --------->> TODO
+		game_controller_deployment_update_view(to_country);
 		// update reserve troops
 		variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = 0;
 		// update view
@@ -77,6 +89,7 @@ function gameplay_controller_handle_agent_deployment()
 	var count = response["count"];
 	// 02. apply change on graph
 	// apply move on graph --------->> TODO
+	game_controller_deployment_update_view(to_country);
 	// 03. update player reserve troops
 	variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = 0;
 	// update view
@@ -89,6 +102,25 @@ function gameplay_controller_handle_agent_deployment()
 /*****************************************/
 /* handle marching */
 /*****************************************/
+function gameplay_controller_march_update_view(from_country_id, to_country_id, count)
+{
+	// from country
+	var from_new_count = variables_country_list[from_country_id - 1]["troops_count"] - count;
+	variables_country_list[from_country_id - 1]["troops_count"] = from_new_count;
+	var from_node_update = {
+		id : from_country_id,
+		label: "(id=" + from_country_id + ")\n" + "(cont=" + variables_country_list[from_country_id - 1]["continent"] + ")\n" + "(Troops=" + from_new_count + ")"
+	};
+	variables_canvas_nodes.update([from_node_update]);
+	// to country
+	var to_new_count = variables_country_list[to_country_id - 1]["troops_count"] - (-1)*count;
+	variables_country_list[to_country_id - 1]["troops_count"] = to_new_count;
+	var to_node_update = {
+		id : to_country_id,
+		label: "(id=" + to_country_id + ")\n" + "(cont=" + variables_country_list[to_country_id - 1]["continent"] + ")\n" + "(Troops=" + to_new_count + ")"
+	};
+	variables_canvas_nodes.update([to_node_update]);
+}
 
 function gameplay_controller_handle_human_skip_march()
 {
@@ -113,6 +145,7 @@ function gameplay_controller_handle_human_marching()
 	{
 		// no error
 		// apply move on graph --------->> TODO
+		gameplay_controller_march_update_view(from_country, to_country, count);
 		// apply next in chain
 		apply_next_in_chain(gameplay_controller_handle_invasion);
 		return;
@@ -137,6 +170,7 @@ function gameplay_controller_handle_agent_marching()
 	var count = response["count"];
 	// 02. apply move on graph
 	// apply move on graph --------->> TODO
+	gameplay_controller_march_update_view(from_country, to_country, count);
 	// apply next in chain
 	apply_next_in_chain(gameplay_controller_handle_invasion);
 	return;
@@ -145,6 +179,29 @@ function gameplay_controller_handle_agent_marching()
 /*****************************************/
 /* handle invasion */
 /*****************************************/
+function gameplay_controller_invade_update_view(from_country_id, to_country_id, residual_troops)
+{
+	var tmp = variables_country_list[to_country_id - 1]["troops_count"];
+	// from country
+	var from_new_count = variables_country_list[from_country_id - 1]["troops_count"] - tmp - residual_troops;
+	variables_country_list[from_country_id - 1]["troops_count"] = from_new_count;
+	var from_node_update = {
+		id : from_country_id,
+		label: "(id=" + from_country_id + ")\n" + "(cont=" + variables_country_list[from_country_id - 1]["continent"] + ")\n" + "(Troops=" + from_new_count + ")"
+	};
+	variables_canvas_nodes.update([from_node_update]);
+	// to country
+	var to_new_count = residual_troops;
+	variables_country_list[to_country_id - 1]["troops_count"] = to_new_count;
+	variables_country_list[to_country_id - 1]["owner"] = variables_player_turn.toLowerCase();
+	var to_node_update = {
+		id : to_country_id,
+		label: "(id=" + to_country_id + ")\n" + "(cont=" + variables_country_list[to_country_id - 1]["continent"] + ")\n" + "(Troops=" + to_new_count + ")",
+		group: variables_country_list[from_country_id - 1]["owner"]
+	};
+	variables_canvas_nodes.update([to_node_update]);
+}
+
 function gameplay_controller_handle_human_skip_invasion()
 {
 	gameplay_controller_update_player_turn();
@@ -155,22 +212,25 @@ function gameplay_controller_handle_human_invasion()
 	// 01. get data move from user
 	var from_country = $("#gameplay_page_control_panel_from_country_id").val();
 	var to_country = $("#gameplay_page_control_panel_to_country_id").val();
+	var residual_troops = $("#gameplay_page_control_panel_troops_count_val").val();
 	// 02. send request to apply to server
 	var send_data = {
 		"from" : from_country,
-		"to" : to_country
+		"to" : to_country,
+		"residual_troops": residual_troops
 	};
 	var response = send_POST_request("invade_human", send_data);
 	// 03. apply move - or prompt error
 	if(response["success"] == 1)
 	{
 		// no error
-		// apply move on graph --------->> TODO
 		// 04. update game status
 		variables_game_status = response["game_status"];
 		variables_game_winner = response["winner"];
 		var reward = response["reward"];
 		variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = reward;
+		// apply move on graph --------->> TODO
+		gameplay_controller_invade_update_view(from_country, to_country, residual_troops);
 		// update view
 		$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 		// apply next in chain
@@ -194,13 +254,14 @@ function gameplay_controller_handle_agent_invasion()
 	}
 	var from_country = response["from"];
 	var to_country = response["to"];
-	// 02. apply move on graph
-	// apply move on graph --------->> TODO
+	var residual_troops = response["residual_troops"];
 	// 03. update game status
 	variables_game_status = response["game_status"];
 	variables_game_winner = response["winner"];
 	var reward = response["reward"];
 	variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = reward;
+	// apply move on graph --------->> TODO
+	gameplay_controller_invade_update_view(from_country, to_country, residual_troops);
 	// update view
 	$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 	// apply next in chain

@@ -106,7 +106,7 @@ function gameplay_page_display_human_invade_controls()
     $("#gameplay_page_control_panel_human_controls").show();
     $("#gameplay_page_control_panel_from_country_input").show(); // from
     $("#gameplay_page_control_panel_to_country_input").show(); // to
-    $("#gameplay_page_control_panel_troops_count_input").hide(); // count
+    $("#gameplay_page_control_panel_troops_count_input").show(); // count
     
     $("#gameplay_page_control_panel_human_skip_march_btn").hide(); // skip
     $("#gameplay_page_control_panel_human_skip_invade_btn").show(); // skip
@@ -128,8 +128,8 @@ function gameplay_canvas_init_node_list()
         var country = variables_country_list[index];
         var tmp = {
             id: country["id"],
-            label: country["owner"],
-            group: country["continent"],
+            label: "(id=" + country["id"] + ")\n" + "(cont=" + country["continent"] + ")\n" + "(Troops=" + country["troops_count"] + ")",
+            group: country["owner"],
             //troops: country["troops_count"]
         };
         node_set.push(tmp);
@@ -161,6 +161,7 @@ function gameplay_page_init_graph()
     // 01. obtain nodes and edges of environment
 
     var nodes = gameplay_canvas_init_node_list();
+    variables_canvas_nodes = new vis.DataSet(nodes); // nodes object to be manipulated
 
     var edges = gameplay_canvas_init_border_list();
 
@@ -171,31 +172,31 @@ function gameplay_page_init_graph()
     // create a network
     var container = document.getElementById('gameplay_page_canvas');
     var data = {
-        nodes: nodes,
+        nodes: variables_canvas_nodes,
         edges: edges
     };
     var options = {
-        nodes: {
-            shape: 'circle',
+        /*nodes: {
+            shape: 'dot',
             size: 40,
             font: {
                 size: 20,
             },
             borderWidth: 2
-        },
+        },*/
         edges: {
             width: 2
         },
         physics: {
             enabled: false
-        },
-        manipulation:{
+        }
+        /*manipulation:{
             enabled: true,
             editNode: function(nodeData,callback) {
                 nodeData.label = 'hello world';
                 callback(nodeData);
             }
-        }
+        }*/
     };
     network = new vis.Network(container, data, options);
 }
