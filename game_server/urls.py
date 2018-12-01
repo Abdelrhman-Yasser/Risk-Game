@@ -27,6 +27,8 @@ urlpatterns = [
 
     path('new_game', views.new_game),
     path('deploy_human', views.deploy_human),
+    path('march_human', views.march_human),
+    path('invade_human', views.invade_human),
     path('home/components/start_page/start_page.html', views.get_start_page),
     path('home/components/start_page/start_modal.html', views.get_start_modal),
     path('home/components/gameplay_page/gameplay_page.html', views.get_gameplay_page),

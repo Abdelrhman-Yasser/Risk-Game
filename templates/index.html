@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	
+	<!-- define header -->
+	<head>
+
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'stylesheet/libs/w3.css' %}">
+		<link rel="stylesheet" href="{% static 'stylesheet/styles.css' %}">
+
+		<!-- graph plotting -->
+		<script type="text/javascript" src="{% static 'logic/libs/visjs/vis.min.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'logic/libs/visjs/vis.min.css' %}">
+
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+		<!-- scripts -->
+		<script type="text/javascript" src="{% static 'logic/libs/jquery-3.3.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'logic/environment_variables.js' %}"></script>
+		<script type="text/javascript" src="{% static 'logic/gameplay_controller.js' %}"></script>
+		<script type="text/javascript" src="{% static 'logic/pages/start_page.js' %}"></script>
+		<script type="text/javascript" src="{% static 'logic/pages/gameplay_page.js' %}"></script>
+		<script type="text/javascript" src="{% static 'logic/app_controller.js' %}"></script>
+
+	</head>
+
+</html>

@@ -12,6 +12,7 @@ import json
 
 __controller = -1
 
+
 def home(request):
     return render(request, 'index.html')
 
@@ -26,7 +27,6 @@ def new_game(request):
 
 
 def deploy_human(request):
-    #controller = request.session['controller']
     target = request.POST.get('target')
     count = request.POST.get('count')
     try:
@@ -35,7 +35,30 @@ def deploy_human(request):
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
-    request.session.modified = True
+
+
+def march_human(request):
+    from_id = request.POST.get('from')
+    target_id = request.POST.get('to')
+    count = request.POST.get('count')
+    try:
+        global __controller
+        __controller.march(from_id, target_id, count)
+        return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
+    except Exception as e:
+        return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
+
+
+def invade_human(request):
+    from_id = request.POST.get('from')
+    target_id = request.POST.get('to')
+    count = request.POST.get('residual_troops')
+    try:
+        global __controller
+        __controller.invade(from_id, target_id, count)
+        return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
+    except Exception as e:
+        return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
 
 
 def get_start_page(request):

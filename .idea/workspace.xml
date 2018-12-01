@@ -2,26 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29736471-50c7-4573-8f6d-c2b3071ee58c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/game_server/controllers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/Environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/Environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/Structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/Structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_server/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/controllers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_server/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/Tests/player_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/Tests/player_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/agents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/ai.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/ai.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/pruners.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/pruners.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_files/map_init.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_files/map_init.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/back.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/IoHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/IoHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/Parser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/logic/pages/gameplay_page.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4524">
-              <caret line="183" column="9" selection-start-line="183" selection-start-column="9" selection-end-line="183" selection-end-column="9" />
+            <state relative-caret-position="163">
+              <caret line="184" column="26" lean-forward="true" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -61,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/logic/gameplay_controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="164" column="30" lean-forward="true" selection-start-line="164" selection-start-column="30" selection-end-line="164" selection-end-column="30" />
+            <state relative-caret-position="899">
+              <caret line="154" column="30" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -70,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_server/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+            <state relative-caret-position="290">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -80,9 +64,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game_server/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_server/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2660">
+            <state relative-caret-position="464">
               <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
@@ -91,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_server/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="232">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -149,12 +142,12 @@
         <option value="$PROJECT_DIR$/environment/Environment.py" />
         <option value="$PROJECT_DIR$/templates/home/components/start_page/start_page.html" />
         <option value="$PROJECT_DIR$/templates/home/components/gameplay_page/game_canvas.html" />
-        <option value="$PROJECT_DIR$/game_server/urls.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/logic/pages/start_page.js" />
         <option value="$PROJECT_DIR$/game_server/settings.py" />
-        <option value="$PROJECT_DIR$/game_server/views.py" />
         <option value="$PROJECT_DIR$/static/logic/gameplay_controller.js" />
+        <option value="$PROJECT_DIR$/game_server/urls.py" />
+        <option value="$PROJECT_DIR$/game_server/views.py" />
         <option value="$PROJECT_DIR$/game_server/controllers.py" />
       </list>
     </option>
@@ -359,6 +352,14 @@
       <option name="presentableId" value="Default" />
       <updated>1543343771541</updated>
     </task>
+    <task id="LOCAL-00001" summary="&quot;connecting backend and front end&quot;">
+      <created>1543621082380</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1543621082380</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -397,7 +398,26 @@
     <frame x="0" y="-1" width="1920" height="1046" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5060622" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18713759" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34149054" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.541713" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32925472" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32925472" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18713759" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -414,29 +434,14 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5060622" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34149054" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.541713" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32925472" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32925472" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;connecting backend and front end&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;connecting backend and front end&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -456,15 +461,10 @@
           <line>130</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/game_server/controllers.py</url>
-          <line>27</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/game_server/views.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="90" />
+          <line>40</line>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -474,10 +474,18 @@
         <watch expression="self.sigmoid(fraction)" language="Python" />
         <watch expression="(total - n_owned_countries)" language="Python" />
       </configuration>
+      <configuration name="PythonConfigurationType">
+        <watch expression="__controller" language="Python" />
+      </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>__controller</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>(total - n_owned_countries)</expression-string>
         <language-id>Python</language-id>
@@ -780,13 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_server/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/django/utils/deprecation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -801,22 +802,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game_server/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-232" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_server/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2660">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="261">
+          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -827,41 +821,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/game_server/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        <state relative-caret-position="464">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/logic/pages/gameplay_page.js">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4524">
-          <caret line="183" column="9" selection-start-line="183" selection-start-column="9" selection-end-line="183" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/logic/gameplay_controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="164" column="30" lean-forward="true" selection-start-line="164" selection-start-column="30" selection-end-line="164" selection-end-column="30" />
+        <state relative-caret-position="2564">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game_server/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+        <state relative-caret-position="290">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/game_server/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/logic/pages/gameplay_page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="184" column="26" lean-forward="true" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/logic/gameplay_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="154" column="30" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game_server/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="232">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>

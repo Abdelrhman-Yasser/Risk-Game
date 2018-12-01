@@ -4,6 +4,7 @@ from players.ai import *
 from players.humans import Human
 from environment.Environment import Environment
 
+
 class Controller:
 
     def __init__(self, player1_type, player2_type):
@@ -12,7 +13,7 @@ class Controller:
         self.player1.reserve_troops = 2
         self.player2.reserve_troops = 2
         self.env = Environment("/server_files/map_init.txt", "/server_files/population_init.txt")
-        self.turn = 0
+        self.turn = True
 
     def get_player(self, player1_type, player_id):
         if player1_type == "human":
@@ -29,3 +30,24 @@ class Controller:
         count = int(count)
         if self.turn:
             self.player1.deploy_reserve_troops(self.env, target, count)
+        else:
+            self.player2.deploy_reserve_troops(self.env, target, count)
+
+    def march(self, from_id, target_id, count):
+        from_id = int(from_id)
+        target_id = int(target_id)
+        count = int(count)
+        if self.turn:
+            self.player1.march_troops(self.env, from_id, target_id, count)
+        else:
+            self.player2.march_troops(self.env, from_id, target_id, count)
+
+    def invade(self, from_id, target_id, count):
+        from_id = int(from_id)
+        target_id = int(target_id)
+        count = int(count)
+        if self.turn:
+            self.player1.invade(self.env, from_id, target_id, count)
+        else:
+            self.player2.invade(self.env, from_id, target_id, count)
+        self.turn != self.turn
