@@ -5,6 +5,7 @@ class MoveType(Enum):
     DEPLOY = 1
     INVADE = 2
     MARCH = 3
+    NOMOVE = 4
 
 
 class AgentType(Enum):

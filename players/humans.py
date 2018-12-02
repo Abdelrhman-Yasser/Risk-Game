@@ -12,8 +12,8 @@ class Human(Player):
     def player_type(self):
         return self.player_type
 
-    def deploy_reserve_troops(self, env, target_country_id, count):
-        env.deploy_reserve_troops(self.player_id, target_country_id, count)
+    def deploy_reserve_troops(self, env, target_country_id):
+        env.deploy_reserve_troops(self.player_id, target_country_id)
 
     def march_troops(self, env, from_country_id, to_country_id,  count):
         env.march_troops(self.player_id, from_country_id, to_country_id, count)

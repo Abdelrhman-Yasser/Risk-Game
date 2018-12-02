@@ -32,7 +32,9 @@ class Continent:
 
     def __deepcopy__(self, memodict={}):
         return Continent(reward=copy.deepcopy(self.reward,memodict),
-                         id=copy.deepcopy(self.id,memodict))
+                         id=copy.deepcopy(self.id,memodict),
+                         country_list=copy.deepcopy(self.country_list,memodict),
+                         owner_id=copy.deepcopy(self.owner_id,memodict))
 
     def reprJson(self):
         return dict(reward=self.reward,

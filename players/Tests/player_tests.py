@@ -1,10 +1,11 @@
 import unittest
 from environment.Environment import Environment,GamePlayId,GameStatus
 from players.humans import Human
-from players.agents import PassiveAgent
+from players.agents import PassiveAgent, PacifistAgent, AggressiveAgent
 from players.state import EnvState
 from players.player import Player
-from players.ai import Greedy
+from players.ai import Greedy, AStar, RTAStar
+
 
 class PlayerTests(unittest.TestCase):
     def test_reference(self):
@@ -127,7 +128,7 @@ class TestEnvState(unittest.TestCase):
 
     def test1(self):
         env1 = Environment("map_init.txt", "population_init.txt")
-        state1 = EnvState(env1, None)
+        state1 = EnvState(env1, None, None, GamePlayId.P1)
         env2 = Environment("map_init.txt", "population_init.txt")
         env2.country_list[0].owner_id = GamePlayId.NONE
         state2 = EnvState(env2, None)
@@ -137,14 +138,77 @@ class TestEnvState(unittest.TestCase):
 
 class AiTests(unittest.TestCase):
 
-    def test1(self):
+    def test1_greedy(self):
         env = Environment("map_init.txt", "population_init.txt")
-        state = EnvState(env, None)
+        state = EnvState(env, None, None, GamePlayId.P1)
         player1 = Greedy(GamePlayId.P1)
         player2 = PassiveAgent(GamePlayId.P2)
         player1.search(state, player2)
+        print(player1.writeout_path())
 
+    def test2_greedy(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = Greedy(GamePlayId.P1)
+        player2 = PacifistAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
 
+    def test3_greedy(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = Greedy(GamePlayId.P1)
+        player2 = AggressiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test1_Astar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = AStar(GamePlayId.P1)
+        player2 = PassiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test2_Astar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = AStar(GamePlayId.P1)
+        player2 = PacifistAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test3_Astar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = AStar(GamePlayId.P1)
+        player2 = AggressiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test1_RTAstar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = RTAStar(GamePlayId.P1)
+        player2 = PassiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test2_RTAstar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = RTAStar(GamePlayId.P1)
+        player2 = PacifistAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
+
+    def test3_RTAstar(self):
+        env = Environment("map_init.txt", "population_init.txt")
+        state = EnvState(env, None, None, GamePlayId.P1)
+        player1 = RTAStar(GamePlayId.P1)
+        player2 = AggressiveAgent(GamePlayId.P2)
+        player1.search(state, player2)
+        print(player1.writeout_path())
 
 
 

@@ -17,107 +17,92 @@ class TreePrune:
         if move_type == MoveType.DEPLOY:
             prune1 = DefensivePrune()
             envs = self.__get_envs(state.env, player, number_elements, move_type, prune1)
-#            prune2 = ActualPrune()
-#            for env in self.__get_envs(state.env, player, number_elements, move_type, prune2):
-#                envs.append(env)
+            prune2 = ActualPrune()
+            for env in self.__get_envs(state.env, player, number_elements, move_type, prune2):
+                envs.append(env)
+
         if move_type == MoveType.INVADE:
             prune1 = OffensivePrune()
-            envs = self.__get_envs(state.env, player, number_elements, move_type, prune1)
- #           prune2 = ActualPrune()
- #           for env in self.__get_envs(state.env, player, number_elements, move_type, prune2):
- #               envs.append(env)
+            envs = self.__get_envs(state.env, player, number_elements, move_type, prune1, True)
+            prune2 = ActualPrune()
+            for env in self.__get_envs(state.env, player, number_elements, move_type, prune2, True):
+                envs.append(env)
+
         if move_type == MoveType.MARCH:
             prune1 = OffensivePrune()
             envs = self.__get_envs(state.env, player, number_elements, move_type, prune1)
-  #          prune2 = NeutralPrune()
-  #          for env in self.__get_envs(state.env, player, number_elements, move_type, prune2):
-   #             envs.append(env)
 
         states = []
         for env in envs:
-            states.append(EnvState(env, state))
+            states.append(EnvState(env, state, move_type, player.player_id))
+
+        if move_type == MoveType.MARCH or move_type == MoveType.INVADE:
+            states.append(EnvState(state.env, state, move_type, player.player_id))
 
         return states
 
-    def __get_envs(self, env, player, number_elements, move_type, prune , attack=False):
-        #print("--------------env_int--------------")
-        #print(env)
+    def __get_envs(self, env, player, number_elements, move_type, prune=None, attack=False):
         actions = self.__get_actions(env, player.player_id, number_elements, prune, move_type, attack)
         envs = []
-        #print(actions)
         for action in actions:
             if move_type == MoveType.DEPLOY:
-                #print("--------------move--------------")
-                #print(move_type.name, action)
                 env_c = copy.deepcopy(env)
                 try:
-                    env_c.deploy_reserve_troops(player.player_id, action[1], player.reserve_troops)
+                    env_c.deploy_reserve_troops(player.player_id, action[1])
+                    envs.append(env_c)
                 except Exception as e:
-                    print(e)
-                #print("--------------result--------------")
-                #print(env_c)
-                envs.append(env_c)
+                    pass
             if move_type == MoveType.MARCH:
-                #print("--------------move--------------")
-                #print(move_type.name, action)
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.march_troops(player.player_id, action[0], action[1], 0.5)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
+                    pass
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.march_troops(player.player_id, action[0], action[1], 0.75)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
+                    pass
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.march_troops(player.player_id, action[0], action[1], 0.9)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
-
-                #print("--------------result--------------")
-                #print(env_c)
-
+                    pass
             if move_type == MoveType.INVADE:
-                #print("--------------move--------------")
-                #print(move_type.name, action)
-                env_c = copy.deepcopy(env)
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.invade(player.player_id, action[1], action[2], 0.5)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
+                    pass
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.invade(player.player_id, action[1], action[2], 0.75)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
+                    pass
                 try:
                     env_c = copy.deepcopy(env)
                     env_c.invade(player.player_id, action[1], action[2], 0.9)
                     envs.append(env_c)
                 except Exception as e:
-                    print(e)
-                #print("--------------result--------------")
-                #print(env_c)
+                    pass
         return envs
 
     def __get_actions(self, env, player_id, number_elements, prune, move_type, attack=False):
         array = OrderedDict()
-        actions = 0
+        actions = []
 
+        #"""
         if move_type == MoveType.MARCH:
             for border in env.border_list:
                 if env.country_list[border.country1 - 1].owner_id == env.country_list[border.country2 - 1].owner_id:
                     array[(env.country_list[border.country1 - 1].id, env.country_list[border.country2 - 1].id, -1, -1)] = 0
                     array[(env.country_list[border.country2 - 1].id, env.country_list[border.country1 - 1].id, -1, -1)] = 0
-
+            actions = array.keys()
         elif move_type == MoveType.DEPLOY:
             for country in env.country_list:
                 if country.owner_id == player_id:
@@ -131,18 +116,25 @@ class TreePrune:
                         array[(-1, country1.id, country2.id, -1)] = 0
                     elif country2.owner_id == player_id and country2.troops_count > country1.troops_count+1:
                         array[(-1, country2.id, country1.id, -1)] = 0
-
-        """                
-        for border in env.border_list:
-            if env.country_list[border.country1 - 1].owner_id != env.country_list[border.country2 - 1].owner_id and \
-                    env.country_list[border.country1 - 1].owner_id != GamePlayId.NONE:
-                key, cost = prune.compute(env, border, player_id)
-                if key is None:
-                    continue
-                array[key] = cost
-        """
-
         actions = array.keys()
+        #"""
+        """
+        if move_type == MoveType.MARCH:
+            for border in env.border_list:
+                if env.country_list[border.country1 - 1].owner_id == env.country_list[border.country2 - 1].owner_id:
+                    array[(env.country_list[border.country1 - 1].id, env.country_list[border.country2 - 1].id, -1, -1)] = 0
+                    array[(env.country_list[border.country2 - 1].id, env.country_list[border.country1 - 1].id, -1, -1)] = 0
+            actions = array.keys()
+        else:
+            for border in env.border_list:
+                if env.country_list[border.country1 - 1].owner_id != env.country_list[border.country2 - 1].owner_id and \
+                        env.country_list[border.country1 - 1].owner_id != GamePlayId.NONE:
+                    key, cost = prune.compute(env, border, player_id)
+                    if key is None:
+                        continue
+                    array[key] = cost
+            actions = self.__get_keys(array,number_elements,attack)
+        """
 
         return actions
 
@@ -156,8 +148,6 @@ class TreePrune:
         array = [k for k,v in array]
 
         keys = []
-
-        return array
 
         if len(array) <= 3:
             return array

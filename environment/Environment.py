@@ -11,7 +11,10 @@ class Environment:
     INVASION_REWARD = 2
 
     def __init__(self, map_config_file=None, pop_config_file=None, game_status=None, winner=None,
-                 country_list=None, border_list=None, continent_list=None, adj_list=None):
+                 country_list=None, border_list=None, continent_list=None, adj_list=None, reserve_1 = 0, reserve_2 = 0):
+
+        self.reserve_1 = reserve_1
+        self.reserve_2 = reserve_2
 
         if map_config_file is None or pop_config_file is None:
             self.__game_status = game_status
@@ -36,10 +39,19 @@ class Environment:
                            continent_list=copy.deepcopy(self.__continent_list, memodict),
                            country_list=copy.deepcopy(self.__country_list, memodict),
                            border_list=copy.deepcopy(self.__border_list, memodict),
-                           adj_list=copy.deepcopy(self.__adj_list,memodict))
+                           adj_list=copy.deepcopy(self.__adj_list,memodict),
+                           reserve_1=copy.deepcopy(self.reserve_1,memodict),
+                           reserve_2=copy.deepcopy(self.reserve_2,memodict))
 
     def __str__(self):
-        return json.dumps(self.reprJson(), cls=Encoder, indent=2) + "--------------------------------------------------"
+        strg = "country list:\n"
+        for country in self.country_list:
+            strg += json.dumps(country, cls=Encoder) + "\n"
+        strg += "\ncontinent list:\n"
+        for continent in self.continent_list:
+            strg += json.dumps(continent, cls=Encoder) + "\n"
+        strg += "\n" + str(self.game_status) + "\n------------*****-----------" + "\n"
+        return strg
 
     def __make_adj_list(self):
         adj_list = dict()
@@ -115,22 +127,32 @@ class Environment:
     def continent_list(self):
         return self.__continent_list
 
-    def deploy_reserve_troops(self, owner_id, target_country_id, reserve_count):
+    def deploy_reserve_troops(self, owner_id, target_country_id):
         if not self.__is_owner(owner_id, target_country_id):
             raise ValueError("Can't deploy troops to unowned country : country owner ("
                              + str(self.country_list[target_country_id - 1].owner_id) + ") ,"
                              + "player " + str(owner_id) + ")")
-        self.country_list[target_country_id - 1].troops_count += reserve_count
+
+        if owner_id == GamePlayId.P1:
+            if self.reserve_1 > 0:
+                self.country_list[target_country_id - 1].troops_count += self.reserve_1
+                self.reserve_1 = 0
+            else:
+                raise ValueError("no troops to deploy")
+        else:
+            if self.reserve_2 > 0:
+                self.country_list[target_country_id - 1].troops_count += self.reserve_2
+                self.reserve_2 = 0
+            else:
+                raise ValueError("no troops to deploy")
 
     def march_troops(self, owner_id, from_country_id, to_country_id, troops_count):
 
         if troops_count == 0.9:
-            troops_count = self.country_list[from_country_id - 1].troops_count \
-                     - self.country_list[to_country_id - 1].troops_count - 1
+            troops_count = self.country_list[from_country_id - 1].troops_count - 1
 
         if troops_count < 1:
-            troops_count = math.floor((self.country_list[from_country_id - 1].troops_count -
-                             self.country_list[to_country_id - 1].troops_count) * troops_count)
+            troops_count = math.floor(self.country_list[from_country_id - 1].troops_count * troops_count)
 
         if not self.__is_owner(owner_id, from_country_id):
             raise ValueError("Can't march troops from unowned country : country owner ("
@@ -156,10 +178,12 @@ class Environment:
         if troops == 0.9:
             troops = self.country_list[from_country_id - 1].troops_count \
                      - self.country_list[to_country_id - 1].troops_count - 1
-
-        if troops < 1:
+        elif troops < 1:
             troops = math.floor((self.country_list[from_country_id - 1].troops_count -
                                  self.country_list[to_country_id - 1].troops_count) * troops)
+
+        if troops < 1:
+            raise ValueError("Not enough troops not invade with")
 
         if self.__is_owner(owner_id, from_country_id) and self.__is_owner(owner_id, to_country_id):
             raise ValueError("Can't invade your own country")
@@ -170,8 +194,6 @@ class Environment:
             raise ValueError("Can't invade from unowned country : country owner ("
                              + str(self.country_list[from_country_id - 1].owner_id) + ") ,"
                              + "player (" + str(owner_id) + ")")
-        if self.country_list[from_country_id - 1].troops_count - self.country_list[to_country_id - 1].troops_count < 2:
-            raise ValueError("Not enough troops not invade with")
 
         self.country_list[from_country_id - 1].troops_count -= troops + self.country_list[to_country_id - 1].troops_count
         self.country_list[to_country_id - 1].troops_count = troops
@@ -188,4 +210,7 @@ class Environment:
             self.__game_status = GameStatus.ENDED
             self.__winner = owner_id
 
-        return reward
+        if owner_id == GamePlayId.P1:
+            self.reserve_1 += reward
+        else:
+            self.reserve_2 += reward
