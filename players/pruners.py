@@ -37,7 +37,7 @@ class TreePrune:
             states.append(EnvState(env, state, move_type, player.player_id))
 
         if move_type == MoveType.MARCH or move_type == MoveType.INVADE:
-            states.append(EnvState(state.env, state, move_type, player.player_id))
+            states.append(state.expand_same(move_type, player.player_id))
 
         return states
 
@@ -46,8 +46,8 @@ class TreePrune:
         envs = []
         for action in actions:
             if move_type == MoveType.DEPLOY:
-                env_c = copy.deepcopy(env)
                 try:
+                    env_c = copy.deepcopy(env)
                     env_c.deploy_reserve_troops(player.player_id, action[1])
                     envs.append(env_c)
                 except Exception as e:

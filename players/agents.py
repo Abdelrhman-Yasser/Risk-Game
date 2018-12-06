@@ -16,28 +16,26 @@ class AggressiveAgent(Player):
         return self.__player_type
 
     def expand(self, state):
-        try:
-            state = self.__deploy_reserve_troops(state)
-        except Exception as e:
-            pass
-        try:
-            return self.__invade(state)
-        except Exception as e:
-            return EnvState(state.env, state, MoveType.NOMOVE, self.player_id)
+        state = self.deploy_reserve_troops(state)
+        state = state.expand_same(MoveType.MARCH, self.player_id)
+        return self.invade(state)
 
     def deploy_reserve_troops(self, state):
-        env_c = copy.deepcopy(state.env)
-        max_troops_country_id = -1
-        max_troops_count = 0
-        for country in env_c.country_list:
-            if country.owner_id == self.player_id and country.troops_count > max_troops_count:
-                max_troops_count = country.troops_count
-                max_troops_country_id = self.player_id
-        env_c.deploy_reserve_troops(self.player_id, max_troops_country_id)
-        return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+        try:
+            env_c = copy.deepcopy(state.env)
+            max_troops_country_id = -1
+            max_troops_count = 0
+            for country in env_c.country_list:
+                if country.owner_id == self.player_id and country.troops_count > max_troops_count:
+                    max_troops_count = country.troops_count
+                    max_troops_country_id = self.player_id
+            env_c.deploy_reserve_troops(self.player_id, max_troops_country_id)
+            return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+        except Exception as e:
+            return state.expand_same(MoveType.DEPLOY, self.player_id)
 
-    def __march_troops(self):
-        pass
+    def march_troops(self, state):
+        return state.expand_same(MoveType.MARCH, self.player_id)
 
     def __get_most_damage(self, env):
         max_enemy = 0
@@ -64,11 +62,14 @@ class AggressiveAgent(Player):
                 own_id = country2.id
         return own_id, max_enemy_id
 
-    def __invade(self, state):
-        env_c = copy.deepcopy(state.env)
-        from_country, to_country = self.__get_most_damage(env_c)
-        env_c.invade(self.player_id, from_country, to_country, 0.9)
-        return EnvState(env_c, state, MoveType.INVADE, self.player_id)
+    def invade(self, state):
+        try:
+            env_c = copy.deepcopy(state.env)
+            from_country, to_country = self.__get_most_damage(env_c)
+            env_c.invade(self.player_id, from_country, to_country, 0.9)
+            return EnvState(env_c, state, MoveType.INVADE, self.player_id)
+        except Exception as e:
+            return state.expand_same(MoveType.INVADE, self.player_id)
 
 
 class PacifistAgent(Player):
@@ -82,28 +83,26 @@ class PacifistAgent(Player):
         return self.__player_type
 
     def expand(self, state):
-        try:
-            state = self.__deploy_reserve_troops(state)
-        except Exception as e:
-            pass
-        try:
-            return self.__invade(state)
-        except Exception as e:
-            return EnvState(state.env, state, MoveType.NOMOVE, self.player_id)
+        state = self.deploy_reserve_troops(state)
+        state = self.march_troops(state)
+        return self.invade(state)
 
-    def __deploy_reserve_troops(self, state):
-        env_c = copy.deepcopy(state.env)
-        min_troops_country_id = -1
-        min_troops_count = sys.maxsize
-        for country in env_c.country_list:
-            if country.owner_id == self.player_id and country.troops_count < min_troops_count:
-                min_troops_count = country.troops_count
-                min_troops_country_id = self.player_id
-        env_c.deploy_reserve_troops(self.player_id, min_troops_country_id)
-        return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+    def deploy_reserve_troops(self, state):
+        try:
+            env_c = copy.deepcopy(state.env)
+            min_troops_country_id = -1
+            min_troops_count = sys.maxsize
+            for country in env_c.country_list:
+                if country.owner_id == self.player_id and country.troops_count < min_troops_count:
+                    min_troops_count = country.troops_count
+                    min_troops_country_id = self.player_id
+            env_c.deploy_reserve_troops(self.player_id, min_troops_country_id)
+            return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+        except Exception as e:
+            return state.expand_same(MoveType.DEPLOY, self.player_id)
 
-    def __march_troops(self, from_country_id, to_country_id, count):
-        pass
+    def march_troops(self, state):
+        return state.expand_same(MoveType.MARCH, self.player_id)
 
     def __get_least_damage(self, env):
         min_enemy = sys.maxsize
@@ -129,11 +128,14 @@ class PacifistAgent(Player):
                 own_id = country2.id
         return own_id, min_enemy_id
 
-    def __invade(self, state):
-        env_c = copy.deepcopy(state.env)
-        from_country, to_country = self.__get_least_damage(env_c)
-        env_c.invade(self.player_id, from_country, to_country, 0.9)
-        return EnvState(env_c, state, MoveType.INVADE, self.player_id)
+    def invade(self, state):
+        try:
+            env_c = copy.deepcopy(state.env)
+            from_country, to_country = self.__get_least_damage(env_c)
+            env_c.invade(self.player_id, from_country, to_country, 0.9)
+            return EnvState(env_c, state, MoveType.INVADE, self.player_id)
+        except Exception as e:
+            return state.expand_same(MoveType.INVADE, self.player_id)
 
 
 class PassiveAgent(Player):
@@ -147,20 +149,28 @@ class PassiveAgent(Player):
         return self.__player_type
 
     def expand(self, state):
-        try:
-            return self.__deploy_reserve_troops(state)
-        except Exception as e:
-            return EnvState(state.env, state, MoveType.NOMOVE, self.player_id)
+        state = self.deploy_reserve_troops(state)
+        state = self.march_troops(state)
+        return self.invade(state)
 
-    def __deploy_reserve_troops(self, state):
-        env_c = copy.deepcopy(state.env)
-        min_troops_country_id = -1
-        min_troops_count = sys.maxsize
-        for country in env_c.country_list:
-            if country.owner_id == self.player_id and country.troops_count < min_troops_count:
-                min_troops_count = country.troops_count
-                min_troops_country_id = country.id
-        if min_troops_country_id == -1:
-            return EnvState(env_c, state)
-        env_c.deploy_reserve_troops(self.player_id, min_troops_country_id)
-        return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+    def deploy_reserve_troops(self, state):
+        try:
+            env_c = copy.deepcopy(state.env)
+            min_troops_country_id = -1
+            min_troops_count = sys.maxsize
+            for country in env_c.country_list:
+                if country.owner_id == self.player_id and country.troops_count < min_troops_count:
+                    min_troops_count = country.troops_count
+                    min_troops_country_id = country.id
+            if min_troops_country_id == -1:
+                return state.expand_state(MoveType.DEPLOY, self.player_id)
+            env_c.deploy_reserve_troops(self.player_id, min_troops_country_id)
+            return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
+        except Exception as e:
+            return state.expand_same(MoveType.DEPLOY, self.player_id)
+
+    def march_troops(self, state):
+        return state.expand_same(MoveType.MARCH, self.player_id)
+
+    def invade(self, state):
+        return state.expand_same(MoveType.INVADE, self.player_id)

@@ -2,20 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29736471-50c7-4573-8f6d-c2b3071ee58c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/action/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/action/action.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/environment/Environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/Environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/GameEnums.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/GameEnums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/Structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/Structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/Tests/Enviroment_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/Tests/Enviroment_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_server/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/controllers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_server/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_server/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players/Tests/player_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/Tests/player_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/agents.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players/ai.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/ai.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/humans.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/humans.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players/pruners.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/pruners.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players/state.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_files/map_init.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_files/map_init.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_files/population_init.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_files/population_init.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/IoHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/IoHandler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,17 +28,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/environment/Environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            <state relative-caret-position="-713">
+              <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/environment/Tests/Enviroment_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/players/ai.py">
+        <entry file="file://$PROJECT_DIR$/players/Tests/player_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="55" column="40" lean-forward="true" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+            <state relative-caret-position="347">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/players/agents.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -47,22 +74,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/players/Tests/player_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="204" column="28" lean-forward="true" selection-start-line="204" selection-start-column="28" selection-end-line="204" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/players/state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-510">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="500">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -71,10 +86,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/players/ai.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1373">
+              <caret line="357" lean-forward="true" selection-start-line="357" selection-end-line="357" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server_files/population_init.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="87">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -82,8 +109,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server_files/map_init.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+            <state relative-caret-position="145">
+              <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game_server/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game_server/controllers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2806">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,7 +160,6 @@
       <find>invade</find>
       <find>in</find>
       <find>player_id</find>
-      <find>Env</find>
       <find>EnvS,</find>
       <find>reserve_troops</find>
       <find>EnvS</find>
@@ -120,6 +167,7 @@
       <find>Envs</find>
       <find>prt</find>
       <find>print</find>
+      <find>Env</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -128,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/environment/Tests/Enviroment_test.py" />
         <option value="$PROJECT_DIR$/utilities/Parser.py" />
         <option value="$PROJECT_DIR$/templates/home/components/start_page/start_page.html" />
         <option value="$PROJECT_DIR$/templates/home/components/gameplay_page/game_canvas.html" />
@@ -136,22 +183,24 @@
         <option value="$PROJECT_DIR$/static/logic/pages/start_page.js" />
         <option value="$PROJECT_DIR$/game_server/settings.py" />
         <option value="$PROJECT_DIR$/static/logic/gameplay_controller.js" />
-        <option value="$PROJECT_DIR$/game_server/urls.py" />
-        <option value="$PROJECT_DIR$/game_server/views.py" />
-        <option value="$PROJECT_DIR$/game_server/controllers.py" />
         <option value="$PROJECT_DIR$/utilities/IoHandler.py" />
         <option value="$PROJECT_DIR$/environment/Structures.py" />
         <option value="$PROJECT_DIR$/players/player.py" />
         <option value="$PROJECT_DIR$/players/humans.py" />
-        <option value="$PROJECT_DIR$/server_files/map_init.txt" />
-        <option value="$PROJECT_DIR$/players/pruners.py" />
         <option value="$PROJECT_DIR$/environment/GameEnums.py" />
-        <option value="$PROJECT_DIR$/players/agents.py" />
-        <option value="$PROJECT_DIR$/players/state.py" />
-        <option value="$PROJECT_DIR$/players/Tests/player_tests.py" />
+        <option value="$PROJECT_DIR$/players/pruners.py" />
+        <option value="$PROJECT_DIR$/action/action.py" />
         <option value="$PROJECT_DIR$/environment/Environment.py" />
+        <option value="$PROJECT_DIR$/server_files/map_init.txt" />
+        <option value="$PROJECT_DIR$/players/state.py" />
         <option value="$PROJECT_DIR$/server_files/population_init.txt" />
+        <option value="$PROJECT_DIR$/game_server/urls.py" />
         <option value="$PROJECT_DIR$/players/ai.py" />
+        <option value="$PROJECT_DIR$/game_server/views.py" />
+        <option value="$PROJECT_DIR$/game_server/controllers.py" />
+        <option value="$PROJECT_DIR$/environment/Tests/Enviroment_test.py" />
+        <option value="$PROJECT_DIR$/players/agents.py" />
+        <option value="$PROJECT_DIR$/players/Tests/player_tests.py" />
       </list>
     </option>
   </component>
@@ -176,7 +225,44 @@
             <path>
               <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
               <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="action" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="environment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="environment" type="462c0819:PsiDirectoryNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="game_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
               <item name="players" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="players" type="462c0819:PsiDirectoryNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="server_files" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="risk-game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="risk-game" type="462c0819:PsiDirectoryNode" />
+              <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -185,7 +271,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -200,7 +286,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for player_tests.AiTests.test3_RTAstar">
+  <component name="RunManager" selected="Python tests.Unittests for player_tests.AiTests.test1_RTAstar">
     <configuration name="risk-game" type="PythonConfigurationType" factoryName="Python">
       <module name="risk-game" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -222,7 +308,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for player_tests.AiTests.test1_greedy" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for player_tests.AiTests.test1_Astar" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="risk-game" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -232,11 +318,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;player_tests.AiTests.test1_greedy&quot;" />
+      <option name="_new_target" value="&quot;player_tests.AiTests.test1_Astar&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for player_tests.AiTests.test2_greedy" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for player_tests.AiTests.test1_RTAstar" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="risk-game" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -246,7 +332,21 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;player_tests.AiTests.test2_greedy&quot;" />
+      <option name="_new_target" value="&quot;player_tests.AiTests.test1_RTAstar&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for player_tests.AiTests.test2_Astar" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="risk-game" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/players/Tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;player_tests.AiTests.test2_Astar&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -261,20 +361,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;player_tests.AiTests.test3_Astar&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="risk-game" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/players/Tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;player_tests.AiTests.test3_RTAstar&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -294,19 +380,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.risk-game" />
-      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_greedy" />
-      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test2_greedy" />
       <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_greedy" />
+      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_Astar" />
+      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test2_Astar" />
       <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_Astar" />
-      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_RTAstar" />
+      <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_RTAstar" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_RTAstar" />
+        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_RTAstar" />
         <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_Astar" />
+        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test2_Astar" />
+        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_Astar" />
         <item itemvalue="Python tests.Unittests for player_tests.AiTests.test3_greedy" />
-        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test1_greedy" />
-        <item itemvalue="Python tests.Unittests for player_tests.AiTests.test2_greedy" />
       </list>
     </recent_temporary>
   </component>
@@ -328,43 +414,50 @@
       <option name="project" value="LOCAL" />
       <updated>1543621082380</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="&quot;Finishing intelligent agents + tests&quot;">
+      <created>1543760994303</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1543760994303</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_Astar - 2018.12.02 at 16h 13m 43s.xml">
+    <history-entry file="Unittests_for_player_tests_AiTests_test1_greedy - 2018.12.06 at 18h 37m 06s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test1_greedy" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test2_greedy - 2018.12.06 at 18h 37m 11s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test2_greedy" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test2_greedy - 2018.12.06 at 18h 37m 26s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test2_greedy" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test3_greedy - 2018.12.06 at 18h 37m 39s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test3_greedy" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test3_greedy - 2018.12.06 at 18h 37m 49s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test3_greedy" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test1_Astar - 2018.12.06 at 18h 37m 59s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test1_Astar" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test2_Astar - 2018.12.06 at 18h 38m 03s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test2_Astar" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_player_tests_AiTests_test3_Astar - 2018.12.06 at 18h 38m 08s.xml">
       <configuration name="Unittests for player_tests.AiTests.test3_Astar" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 17m 49s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
+    <history-entry file="Unittests_for_player_tests_AiTests_test1_RTAstar - 2018.12.06 at 18h 38m 13s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test1_RTAstar" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 19m 23s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 19m 30s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 19m 56s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 21m 32s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 21m 33s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 22m 25s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 24m 51s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_player_tests_AiTests_test3_RTAstar - 2018.12.02 at 16h 25m 00s.xml">
-      <configuration name="Unittests for player_tests.AiTests.test3_RTAstar" configurationId="tests" />
+    <history-entry file="Unittests_for_player_tests_AiTests_test1_RTAstar - 2018.12.06 at 18h 39m 19s.xml">
+      <configuration name="Unittests for player_tests.AiTests.test1_RTAstar" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1920" height="1046" extended-state="7" />
+    <frame x="0" y="-1" width="1920" height="1046" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18766473" />
@@ -372,7 +465,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43159065" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36707452" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40266964" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,12 +479,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18713759" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18766473" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34149054" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.541713" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40266964" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -410,26 +503,33 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;connecting backend and front end&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;connecting backend and front end&quot;" />
+    <MESSAGE value="&quot;Finishing intelligent agents + tests&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Finishing intelligent agents + tests&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/players/ai.py</url>
-          <line>150</line>
-          <option name="timeStamp" value="135" />
+          <line>77</line>
+          <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/players/ai.py</url>
-          <line>365</line>
-          <option name="timeStamp" value="140" />
+          <line>85</line>
+          <option name="timeStamp" value="164" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/players/Tests/player_tests.py</url>
+          <line>181</line>
+          <option name="timeStamp" value="171" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
         <watch expression="(self.country_list[from_country_id - 1].troops_count -&#10;                                 self.country_list[to_country_id - 1].troops_count)" />
+        <watch expression="str(state.env.change)" />
       </configuration>
       <configuration name="PythonConfigurationType">
         <watch expression="__controller" language="Python" />
@@ -461,20 +561,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/importlib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/django/middleware/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
@@ -652,41 +738,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_server/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_server/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game_server/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_server/controllers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utilities/IoHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -697,92 +752,6 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="599" selection-start-line="599" selection-end-line="599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/copy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="142" selection-start-line="142" selection-end-line="142" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/environment/GameEnums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/humans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/pruners.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="43" column="68" selection-start-line="43" selection-start-column="68" selection-end-line="43" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/agents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="47" column="47" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server_files/map_init.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server_files/population_init.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/environment/Environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -814,22 +783,159 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/players/Tests/player_tests.py">
+    <entry file="file://$PROJECT_DIR$/environment/GameEnums.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="204" column="28" lean-forward="true" selection-start-line="204" selection-start-column="28" selection-end-line="204" selection-end-column="28" />
+        <state relative-caret-position="203">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utilities/IoHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="599" selection-start-line="599" selection-end-line="599" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/action/action.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1030">
+          <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/pruners.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="104" column="19" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/humans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/copy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_server/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_server/controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2806">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_server/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/players/ai.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="55" column="40" lean-forward="true" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        <state relative-caret-position="1373">
+          <caret line="357" lean-forward="true" selection-start-line="357" selection-end-line="357" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server_files/map_init.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server_files/population_init.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/environment/Environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-713">
+          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/environment/Tests/Enviroment_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/agents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/Tests/player_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

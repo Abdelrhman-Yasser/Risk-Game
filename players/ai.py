@@ -1,3 +1,7 @@
+import copy
+
+from action.action import NoAction
+from players.agents import AggressiveAgent
 from players.player import Player
 from environment.GameEnums import *
 from environment.GameEnums import MoveType
@@ -72,11 +76,22 @@ class Greedy(Player):
 
     def writeout_path(self):
         state = self.goal_state
-        path = [("\n" + str(state.env.winner) + " wins\n")]
-        while not (state is None):
-            path.append(str(state) + "\n")
+
+        path_states = []
+
+        while not state is None:
+            path_states.append(state)
             state = state.parent
-        path.reverse()
+
+        path_states.reverse()
+
+        path = []
+
+        for state in path_states:
+            path.append("Action to get state from before : " + str(state.env.change) + "\n")
+            path.append(str(state) + "\n")
+        path.append(("\n" + str(state.env.winner) + " wins\n"))
+
         strg = ""
         for s in path:
             strg += s
@@ -95,7 +110,7 @@ class Greedy(Player):
         extender = TreePrune()
         n_state = extender.get_states(state, self, MoveType.DEPLOY)
         if len(n_state) == 0:
-            return [state]
+            return [state.expand_same(MoveType.DEPLOY, self.player_id)]
         return n_state
 
     def march_troops(self, states):
@@ -104,7 +119,7 @@ class Greedy(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.MARCH)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.MARCH, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
@@ -115,7 +130,7 @@ class Greedy(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.INVADE)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.INVADE, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
@@ -174,22 +189,30 @@ class AStar(Player):
 
     def writeout_path(self):
         state = self.goal_state
-        path = [("\n" + str(state.env.winner) + " wins\n")]
-        while not (state is None):
-            path.append(str(state) + "\n")
+
+        path_states = []
+
+        while not state is None:
+            path_states.append(state)
             state = state.parent
-        path.reverse()
+
+        path_states.reverse()
+
+        path = []
+
+        for state in path_states:
+            path.append("Action to get state from before : " + str(state.env.change) + "\n")
+            path.append(str(state) + "\n")
+        path.append(("\n" + str(state.env.winner) + " wins\n"))
+
         strg = ""
         for s in path:
             strg += s
         return strg
 
     def expand(self, state):
-        #x = input()
         states = self.deploy_reserve_troops(state)
-        #x = input()
         states = self.march_troops(states)
-        #x = input()
         states = self.invade(states)
         return states
 
@@ -197,7 +220,7 @@ class AStar(Player):
         extender = TreePrune()
         n_state = extender.get_states(state, self, MoveType.DEPLOY)
         if len(n_state) == 0:
-            return [state]
+            return [state.expand_same(MoveType.DEPLOY, self.player_id)]
         return n_state
 
     def march_troops(self, states):
@@ -206,7 +229,7 @@ class AStar(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.MARCH)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.DEPLOY, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
@@ -217,7 +240,7 @@ class AStar(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.INVADE)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.DEPLOY, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
@@ -274,11 +297,22 @@ class RTAStar(Player):
 
     def writeout_path(self):
         state = self.goal_state
-        path = [("\n" + str(state.env.winner) + " wins\n")]
-        while not (state is None):
-            path.append(str(state) + "\n")
+
+        path_states = []
+
+        while not state is None:
+            path_states.append(state)
             state = state.parent
-        path.reverse()
+
+        path_states.reverse()
+
+        path = []
+
+        for state in path_states:
+            path.append("Action to get state from before : " + str(state.env.change) + "\n")
+            path.append(str(state) + "\n")
+        path.append(("\n" + str(state.env.winner) + " wins\n"))
+
         strg = ""
         for s in path:
             strg += s
@@ -297,7 +331,7 @@ class RTAStar(Player):
         extender = TreePrune()
         n_state = extender.get_states(state, self, MoveType.DEPLOY)
         if len(n_state) == 0:
-            return [state]
+            return [state.expand_same(MoveType.DEPLOY, self.player_id)]
         return n_state
 
     def march_troops(self, states):
@@ -306,7 +340,7 @@ class RTAStar(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.MARCH)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.MARCH, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
@@ -317,57 +351,63 @@ class RTAStar(Player):
         for state in states:
             n_state = extender.get_states(state, self, MoveType.INVADE)
             if len(n_state) == 0:
-                n_states.extend([state])
+                n_states.extend([state.expand_same(MoveType.INVADE, self.player_id)])
             else:
                 n_states.extend(n_state)
         return n_states
 
-    def search(self, initial_state, enemy_player):
+    def search(self, initial_state, start_move_type):
+
+        if self.player_id == GamePlayId.P1:
+            enemy_id = GamePlayId.P2
+        else:
+            enemy_id = GamePlayId.P1
+
+        enemy_player = AggressiveAgent(enemy_id)
+        initial_state.depth = 1
 
         explored = set()
         in_fringe = set()
-
         fringe = heapdict()
-        fringe[initial_state] = 0
-        in_fringe.add(initial_state)
+        game_ended = False
 
-        while True:
+        if start_move_type == MoveType.DEPLOY:
+            states = self.deploy_reserve_troops(initial_state)
+            states = self.march_troops(states)
+            states = self.invade(states)
+        elif start_move_type == MoveType.MARCH:
+            states = self.march_troops([initial_state])
+            states = self.invade(states)
+        else:
+            states = self.invade([initial_state])
 
-            try:
-                state = fringe.popitem()[0]
-            except Exception as e:
-                print("end")
-                break
-            in_fringe.remove(state)
-            explored.add(state)
-            children = self.expand(state)
+        n_children = []
+        for child in states:
+            n_state = enemy_player.expand(child)
+            n_children.append(n_state)
 
-            n_children = []
-            for child in children:
-                n_state = enemy_player.expand(child)
-                n_children.append(n_state)
+        for child in n_children:
+            if child.env.game_status == GameStatus.ENDED:
+                self.goal_state = child
 
-            for child in n_children:
-                if child.env.game_status == GameStatus.ENDED:
-                    self.goal_state = child
-                    return
-
+        if not game_ended:
             mini = sys.maxsize
             mini_child = -1
-
             H = Heuristic()
-
             for child in n_children:
                 He = H.H1(child, self) + child.distance
                 if He < mini:
                     mini = He
                     mini_child = child
+            self.goal_state = mini_child
 
-            if mini_child not in explored and mini_child not in in_fringe:
-                fringe[mini_child] = mini
-                in_fringe.add(mini_child)
-            elif mini_child in in_fringe and fringe[mini_child] > mini:
-                fringe[mini_child] = mini
-            else:
-                self.goal_state = initial_state
+        if self.goal_state.parent is None:
+            return NoAction()
+        res_state = self.goal_state
+        while res_state.parent.parent is not None:
+            res_state = res_state.parent
+        state = copy.deepcopy(res_state)
+        state.parent = None
+
+        return state
 

@@ -31,7 +31,7 @@ def deploy_human(request):
     count = request.POST.get('count')
     try:
         global __controller
-        __controller.deploy(target, count)
+        __controller.deploy_human(target, count)
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
@@ -43,7 +43,7 @@ def march_human(request):
     count = request.POST.get('count')
     try:
         global __controller
-        __controller.march(from_id, target_id, count)
+        __controller.march_human(from_id, target_id, count)
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
@@ -55,11 +55,31 @@ def invade_human(request):
     count = request.POST.get('residual_troops')
     try:
         global __controller
-        __controller.invade(from_id, target_id, count)
+        __controller.invade_human(from_id, target_id, count)
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
 
+
+def deploy_pc(request):
+    global __controller
+    action = __controller.deploy_pc
+    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+                        content_type="application/json")
+
+
+def march_pc(request):
+    global __controller
+    action = __controller.march_pc
+    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+                        content_type="application/json")
+
+
+def invade_pc(request):
+    global __controller
+    action = __controller.invade_pc
+    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+                        content_type="application/json")
 
 def get_start_page(request):
     return render(request, 'start_page.html')

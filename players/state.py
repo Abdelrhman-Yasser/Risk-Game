@@ -1,7 +1,9 @@
 from environment.Environment import Environment
 from environment.Encoders import Encoder
 from environment.GameEnums import MoveType
+from action.action import *
 import json
+import copy
 
 
 class EnvState:
@@ -30,3 +32,8 @@ class EnvState:
 
     def __hash__(self):
         return hash(json.dumps(self.env.reprJson(), cls=Encoder) + str(self.move_type) + str(self.game_play))
+
+    def expand_same(self, move_type, game_play):
+        env_c = copy.deepcopy(self.env)
+        env_c.change = NoAction()
+        return EnvState(env_c, self, move_type, game_play)

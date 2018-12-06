@@ -1,5 +1,7 @@
+import copy
 import unittest
 from environment.Environment import Environment,GamePlayId,GameStatus
+from environment.GameEnums import MoveType
 from players.humans import Human
 from players.agents import PassiveAgent, PacifistAgent, AggressiveAgent
 from players.state import EnvState
@@ -123,19 +125,6 @@ class HumanTests(unittest.TestCase):
                              "Can't invade no route from ( " + str(1)
                              + " ) to ( " + str(4) + " )")
 
-
-class TestEnvState(unittest.TestCase):
-
-    def test1(self):
-        env1 = Environment("map_init.txt", "population_init.txt")
-        state1 = EnvState(env1, None, None, GamePlayId.P1)
-        env2 = Environment("map_init.txt", "population_init.txt")
-        env2.country_list[0].owner_id = GamePlayId.NONE
-        state2 = EnvState(env2, None)
-        self.assertNotEqual(state1, state2)
-
-
-
 class AiTests(unittest.TestCase):
 
     def test1_greedy(self):
@@ -190,26 +179,12 @@ class AiTests(unittest.TestCase):
         env = Environment("map_init.txt", "population_init.txt")
         state = EnvState(env, None, None, GamePlayId.P1)
         player1 = RTAStar(GamePlayId.P1)
-        player2 = PassiveAgent(GamePlayId.P2)
-        player1.search(state, player2)
-        print(player1.writeout_path())
-
-    def test2_RTAstar(self):
-        env = Environment("map_init.txt", "population_init.txt")
-        state = EnvState(env, None, None, GamePlayId.P1)
-        player1 = RTAStar(GamePlayId.P1)
-        player2 = PacifistAgent(GamePlayId.P2)
-        player1.search(state, player2)
-        print(player1.writeout_path())
-
-    def test3_RTAstar(self):
-        env = Environment("map_init.txt", "population_init.txt")
-        state = EnvState(env, None, None, GamePlayId.P1)
-        player1 = RTAStar(GamePlayId.P1)
-        player2 = AggressiveAgent(GamePlayId.P2)
-        player1.search(state, player2)
-        print(player1.writeout_path())
-
+        state = player1.search(state, MoveType.DEPLOY)
+        print(state.env.change, state)
+        state = player1.search(state, MoveType.MARCH)
+        print(state.env.change, state)
+        state = player1.search(state, MoveType.INVADE)
+        print(state.env.change, state)
 
 
 if __name__ == '__main__':

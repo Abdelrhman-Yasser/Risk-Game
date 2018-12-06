@@ -1,3 +1,4 @@
+from action.action import DeployAction, MarchAction, InvadeAction
 from environment.GameEnums import *
 from utilities.Parser import *
 from environment.Encoders import Encoder
@@ -11,10 +12,11 @@ class Environment:
     INVASION_REWARD = 2
 
     def __init__(self, map_config_file=None, pop_config_file=None, game_status=None, winner=None,
-                 country_list=None, border_list=None, continent_list=None, adj_list=None, reserve_1 = 0, reserve_2 = 0):
+                 country_list=None, border_list=None, continent_list=None, adj_list=None, change=None, reserve_1 = 0, reserve_2 = 0):
 
         self.reserve_1 = reserve_1
         self.reserve_2 = reserve_2
+        self.change = change
 
         if map_config_file is None or pop_config_file is None:
             self.__game_status = game_status
@@ -39,9 +41,10 @@ class Environment:
                            continent_list=copy.deepcopy(self.__continent_list, memodict),
                            country_list=copy.deepcopy(self.__country_list, memodict),
                            border_list=copy.deepcopy(self.__border_list, memodict),
-                           adj_list=copy.deepcopy(self.__adj_list,memodict),
-                           reserve_1=copy.deepcopy(self.reserve_1,memodict),
-                           reserve_2=copy.deepcopy(self.reserve_2,memodict))
+                           adj_list=copy.deepcopy(self.__adj_list, memodict),
+                           reserve_1=copy.deepcopy(self.reserve_1, memodict),
+                           reserve_2=copy.deepcopy(self.reserve_2, memodict),
+                           change=copy.deepcopy(self.change, memodict))
 
     def __str__(self):
         strg = "country list:\n"
@@ -136,12 +139,14 @@ class Environment:
         if owner_id == GamePlayId.P1:
             if self.reserve_1 > 0:
                 self.country_list[target_country_id - 1].troops_count += self.reserve_1
+                self.change = DeployAction(target_country_id, self.reserve_1)
                 self.reserve_1 = 0
             else:
                 raise ValueError("no troops to deploy")
         else:
             if self.reserve_2 > 0:
                 self.country_list[target_country_id - 1].troops_count += self.reserve_2
+                self.change = DeployAction(target_country_id, self.reserve_2)
                 self.reserve_2 = 0
             else:
                 raise ValueError("no troops to deploy")
@@ -170,6 +175,7 @@ class Environment:
             raise ValueError("Can't march no route from ( " + str(from_country_id)
                              + " ) to ( " + str(to_country_id) + " )")
 
+        self.change = MarchAction(from_country_id, to_country_id, troops_count)
         self.country_list[from_country_id - 1].troops_count -= troops_count
         self.country_list[to_country_id - 1].troops_count += troops_count
 
@@ -202,9 +208,9 @@ class Environment:
         continent_id = self.country_list[to_country_id - 1].continent_id
         reward = self.INVASION_REWARD
 
-        if self.__is_continent_new_owner(owner_id,continent_id):
-                self.continent_list[continent_id -1].owner_id = owner_id
-                reward += self.continent_list[continent_id -1].reward
+        if self.__is_continent_new_owner(owner_id, continent_id):
+                self.continent_list[continent_id - 1].owner_id = owner_id
+                reward += self.continent_list[continent_id - 1].reward
 
         if self.__game_ended(owner_id):
             self.__game_status = GameStatus.ENDED
@@ -214,3 +220,5 @@ class Environment:
             self.reserve_1 += reward
         else:
             self.reserve_2 += reward
+
+        self.change = InvadeAction(from_country_id, to_country_id, troops, self.game_status, self.winner, reward)
