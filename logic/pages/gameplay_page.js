@@ -52,6 +52,10 @@ function gameplay_page_init_event_listeners()
     $("#gameplay_page_control_panel_human_skip_invade_btn").click(function(e){
         gameplay_controller_handle_human_skip_invasion();
     }); 
+
+    $("#gameplay_page_winner_modal_new_game_btn").click(function(e){
+        app_controller_load_start_page();
+    }); 
 }
 
 /* init variables - control panel */
@@ -126,6 +130,7 @@ function gameplay_canvas_init_node_list()
     for (var index in variables_country_list)
     {
         var country = variables_country_list[index];
+        variables_country_list[index]["owner"] = variables_country_list[index]["owner"].toLowerCase();
         var tmp = {
             id: country["id"],
             label: "(id=" + country["id"] + ")\n" + "(cont=" + country["continent"] + ")\n" + "(Troops=" + country["troops_count"] + ")",

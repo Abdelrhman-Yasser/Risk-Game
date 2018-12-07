@@ -202,6 +202,7 @@ function gameplay_controller_invade_update_view(from_country_id, to_country_id, 
 	var to_new_count = troops - to_troops;
 	variables_country_list[to_country_id - 1]["troops_count"] = to_new_count;
 	variables_country_list[to_country_id - 1]["owner"] = variables_player_turn.toLowerCase();
+	console.log()
 	var to_node_update = {
 		id : to_country_id,
 		label: "(id=" + to_country_id + ")\n" + "(cont=" + variables_country_list[to_country_id - 1]["continent"] + ")\n" + "(Troops=" + to_new_count + ")",
