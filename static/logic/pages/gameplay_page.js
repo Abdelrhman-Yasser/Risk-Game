@@ -52,6 +52,11 @@ function gameplay_page_init_event_listeners()
     $("#gameplay_page_control_panel_human_skip_invade_btn").click(function(e){
         gameplay_controller_handle_human_skip_invasion();
     }); 
+
+    $("#gameplay_page_winner_modal_new_game_btn").click(function(e){
+        variables_reset();
+        app_controller_load_start_page();
+    });
 }
 
 /* init variables - control panel */
@@ -92,7 +97,7 @@ function gameplay_page_display_human_march_controls()
     $("#gameplay_page_control_panel_from_country_input").show(); // from
     $("#gameplay_page_control_panel_to_country_input").show(); // to
     $("#gameplay_page_control_panel_troops_count_input").show(); // count
-    
+
     $("#gameplay_page_control_panel_human_skip_march_btn").show(); // skip
     $("#gameplay_page_control_panel_human_skip_invade_btn").hide(); // skip
 
@@ -107,7 +112,7 @@ function gameplay_page_display_human_invade_controls()
     $("#gameplay_page_control_panel_from_country_input").show(); // from
     $("#gameplay_page_control_panel_to_country_input").show(); // to
     $("#gameplay_page_control_panel_troops_count_input").show(); // count
-    
+
     $("#gameplay_page_control_panel_human_skip_march_btn").hide(); // skip
     $("#gameplay_page_control_panel_human_skip_invade_btn").show(); // skip
 
@@ -130,7 +135,7 @@ function gameplay_canvas_init_node_list()
         var tmp = {
             id: country["id"],
             label: "(id=" + country["id"] + ")\n" + "(cont=" + country["continent"] + ")\n" + "(Troops=" + country["troops_count"] + ")",
-            group: country["owner"]
+            group: country["owner"],
             //troops: country["troops_count"]
         };
         node_set.push(tmp);

@@ -18,13 +18,13 @@ class Controller:
         self.history = []
         self.history_counter = 0
         if player1_type == "astar":
-            history = self.player1.search(self.state, self.player2)
+            self.history = self.player1.search(self.state, self.player2)
         elif player1_type == "greedy":
-            history = self.player1.search(self.state, self.player2)
+            self.history = self.player1.search(self.state, self.player2)
         elif player2_type == "astar":
-            history = self.player2.search(self.state, self.player1)
+            self.history = self.player2.search(self.state, self.player1)
         elif player2_type == "greedy":
-            history = self.player2.search(self.state, self.player1)
+            self.history = self.player2.search(self.state, self.player1)
 
     def change_turn(self):
         self.turn ^= 1
@@ -37,9 +37,13 @@ class Controller:
         elif player1_type == "aggressive":
             return AggressiveAgent(player_id)
         elif player1_type == "pacifist":
-            return PacifistAgent
-        elif player1_type == "rtas":
+            return PacifistAgent(player_id)
+        elif player1_type == "rt-astar":
             return RTAStar(player_id)
+        elif player1_type == "astar":
+            return AStar(player_id)
+        elif player1_type == "greedy":
+            return Greedy(player_id)
 
     def deploy_human(self, target):
         target = int(target)
