@@ -12,10 +12,10 @@ class InvadeAction:
         self.reward = reward
 
     def repJson(self):
-        return dict(change="true",
+        return dict(change=1,
                     type="invade",
-                    country_from=self.country_from,
-                    country_to=self.country_to,
+                    from_country=self.country_from,
+                    to_country=self.country_to,
                     troops=self.troops,
                     reward=self.reward,
                     game_status=self.game_status.name,
@@ -40,7 +40,7 @@ class MarchAction:
         self.troops = troops
 
     def repJson(self):
-        return dict(change="true",
+        return dict(change=1,
                     type="march",
                     from_country=self.country_from,
                     to_country=self.country_to,
@@ -62,7 +62,7 @@ class DeployAction:
         self.troops = troops
 
     def repJson(self):
-        return dict(change="true",
+        return dict(change=1,
                     type="deploy",
                     target=self.country_to,
                     count=self.troops)
@@ -78,7 +78,7 @@ class DeployAction:
 class NoAction:
 
     def repJson(self):
-        return dict(change="false")
+        return dict(change=0)
 
     def __str__(self):
         return str(self.repJson())

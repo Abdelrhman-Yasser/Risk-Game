@@ -28,7 +28,7 @@ class AggressiveAgent(Player):
             for country in env_c.country_list:
                 if country.owner_id == self.player_id and country.troops_count > max_troops_count:
                     max_troops_count = country.troops_count
-                    max_troops_country_id = self.player_id
+                    max_troops_country_id = country.id
             env_c.deploy_reserve_troops(self.player_id, max_troops_country_id)
             return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
         except Exception as e:
@@ -95,7 +95,7 @@ class PacifistAgent(Player):
             for country in env_c.country_list:
                 if country.owner_id == self.player_id and country.troops_count < min_troops_count:
                     min_troops_count = country.troops_count
-                    min_troops_country_id = self.player_id
+                    min_troops_country_id = country.id
             env_c.deploy_reserve_troops(self.player_id, min_troops_country_id)
             return EnvState(env_c, state, MoveType.DEPLOY, self.player_id)
         except Exception as e:

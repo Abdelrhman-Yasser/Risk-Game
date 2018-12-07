@@ -14,7 +14,7 @@ import sys
 class Heuristic:
 
     countries_coff = 10
-    percentage_cont_coff = 100
+    percentage_cont_coff = 25
     army_coff = 2
 
     def sigmoid(self, x):
@@ -27,7 +27,7 @@ class Heuristic:
             if country.owner_id == player.player_id:
                 n += 1
             all += 1
-        return all , n
+        return all, n
 
     def get_continent_percentage(self, env, player):
         sum = 0
@@ -336,6 +336,9 @@ class RTAStar(Player):
         return n_states
 
     def search(self, initial_state, start_move_type):
+
+        initial_state = copy.deepcopy(initial_state)
+        initial_state.parent = None
 
         if self.player_id == GamePlayId.P1:
             enemy_id = GamePlayId.P2

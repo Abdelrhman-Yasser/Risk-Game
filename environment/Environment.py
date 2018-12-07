@@ -70,7 +70,9 @@ class Environment:
                     winner=self.__winner.name,
                     country_list=self.country_list,
                     border_list=self.border_list,
-                    continent_list=self.continent_list)
+                    continent_list=self.continent_list,
+                    reserve_1=self.reserve_1,
+                    reserve_2=self.reserve_2)
 
     def __readconfigfiles__(self, map_config_file, pop_config_file):
         read_data_map = MapFileParser(map_config_file)
@@ -181,13 +183,20 @@ class Environment:
 
     def invade(self, owner_id, from_country_id, to_country_id, troops):
 
+        if troops > 1:
+            if self.country_list[to_country_id - 1].troops_count >= troops \
+                    or self.country_list[from_country_id - 1].troops_count <= troops:
+                raise ValueError("Not enough troops not invade with")
+
+        if troops > 1:
+            troops = troops - self.country_list[to_country_id - 1].troops_count
+
         if troops == 0.9:
             troops = self.country_list[from_country_id - 1].troops_count \
                      - self.country_list[to_country_id - 1].troops_count - 1
         elif troops < 1:
             troops = math.floor((self.country_list[from_country_id - 1].troops_count -
                                  self.country_list[to_country_id - 1].troops_count) * troops)
-
         if troops < 1:
             raise ValueError("Not enough troops not invade with")
 
@@ -200,6 +209,8 @@ class Environment:
             raise ValueError("Can't invade from unowned country : country owner ("
                              + str(self.country_list[from_country_id - 1].owner_id) + ") ,"
                              + "player (" + str(owner_id) + ")")
+
+        troops_action = troops + self.country_list[to_country_id - 1].troops_count
 
         self.country_list[from_country_id - 1].troops_count -= troops + self.country_list[to_country_id - 1].troops_count
         self.country_list[to_country_id - 1].troops_count = troops
@@ -221,4 +232,4 @@ class Environment:
         else:
             self.reserve_2 += reward
 
-        self.change = InvadeAction(from_country_id, to_country_id, troops, self.game_status, self.winner, reward)
+        self.change = InvadeAction(from_country_id, to_country_id, troops_action , self.game_status, self.winner, reward)

@@ -28,6 +28,8 @@ class Controller:
             return AggressiveAgent(player_id)
         elif player1_type == "pacifist":
             return PacifistAgent
+        elif player1_type == "rtas":
+            return RTAStar(player_id)
 
     def deploy_human(self, target):
         target = int(target)
@@ -60,69 +62,76 @@ class Controller:
 
     def deploy_pc_agent(self, player):
         self.state = player.deploy_reserve_troops(self.state)
+        self.env = self.state.env
 
     def deploy_pc_rta(self, player):
         self.state = player.search(self.state, MoveType.DEPLOY)
+        self.env = self.state.env
 
     def deploy_pc(self):
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
                     isinstance(self.player1, PacifistAgent)):
-                self.deploy_pc_agent()
+                self.deploy_pc_agent(self.player1)
             elif isinstance(self.player1, RTAStar):
-                self.deploy_pc_rta()
+                self.deploy_pc_rta(self.player1)
         else:
             if (isinstance(self.player2, AggressiveAgent) or
                     isinstance(self.player2, PassiveAgent) or
                     isinstance(self.player2, PacifistAgent)):
-                self.deploy_pc_agent()
+                self.deploy_pc_agent(self.player2)
             elif isinstance(self.player2, RTAStar):
-                self.deploy_pc_rta()
-        return self.state.change
+                self.deploy_pc_rta(self.player2)
+        return self.state.env.change
 
     def march_pc_agent(self, player):
         self.state = player.march_troops(self.state)
+        self.env = self.state.env
 
     def march_pc_rta(self, player):
         self.state = player.search(self.state, MoveType.MARCH)
+        self.env = self.state.env
 
     def march_pc(self):
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
                     isinstance(self.player1, PacifistAgent)):
-                self.march_pc_agent()
+                self.march_pc_agent(self.player1)
             elif isinstance(self.player1, RTAStar):
-                self.march_pc_rta()
+                self.march_pc_rta(self.player1)
         else:
             if (isinstance(self.player2, AggressiveAgent) or
                     isinstance(self.player2, PassiveAgent) or
                     isinstance(self.player2, PacifistAgent)):
-                self.march_pc_agent()
+                self.march_pc_agent(self.player2)
             elif isinstance(self.player2, RTAStar):
-                self.march_pc_rta()
-        return self.state.change
+                self.march_pc_rta(self.player2)
+        return self.state.env.change
 
     def invade_pc_agent(self, player):
         self.state = player.invade(self.state)
+        self.env = self.state.env
 
     def invade_pc_rta(self, player):
         self.state = player.search(self.state, MoveType.INVADE)
+        self.env = self.state.env
 
     def invade_pc(self):
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
                     isinstance(self.player1, PacifistAgent)):
-                self.invade_pc_agent()
+                self.invade_pc_agent(self.player1)
             elif isinstance(self.player1, RTAStar):
-                self.invade_pc_rta()
+                self.invade_pc_rta(self.player1)
         else:
             if (isinstance(self.player2, AggressiveAgent) or
                     isinstance(self.player2, PassiveAgent) or
                     isinstance(self.player2, PacifistAgent)):
-                self.invade_pc_agent()
+                self.invade_pc_agent(self.player2)
             elif isinstance(self.player2, RTAStar):
-                self.invade_pc_rta()
-        return self.state.change
+                self.invade_pc_rta(self.player2)
+        self.turn ^= 1
+        return self.state.env.change

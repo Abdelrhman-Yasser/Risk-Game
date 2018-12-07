@@ -73,22 +73,22 @@ def invade_human(request):
 
 def deploy_pc(request):
     global __controller
-    action = __controller.deploy_pc
-    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+    action = __controller.deploy_pc()
+    return HttpResponse(json.dumps(action.repJson(), cls=Encoder),
                         content_type="application/json")
 
 
 def march_pc(request):
     global __controller
-    action = __controller.march_pc
-    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+    action = __controller.march_pc()
+    return HttpResponse(json.dumps(action.repJson(), cls=Encoder),
                         content_type="application/json")
 
 
 def invade_pc(request):
     global __controller
-    action = __controller.invade_pc
-    return HttpResponse(json.dumps(json.dumps(action.reprJson(), cls=Encoder)),
+    action = __controller.invade_pc()
+    return HttpResponse(json.dumps(action.repJson(), cls=Encoder),
                         content_type="application/json")
 
 def get_start_page(request):

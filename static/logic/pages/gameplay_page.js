@@ -126,10 +126,11 @@ function gameplay_canvas_init_node_list()
     for (var index in variables_country_list)
     {
         var country = variables_country_list[index];
+        variables_country_list[index]["owner"] = variables_country_list[index]["owner"].toLowerCase();
         var tmp = {
             id: country["id"],
             label: "(id=" + country["id"] + ")\n" + "(cont=" + country["continent"] + ")\n" + "(Troops=" + country["troops_count"] + ")",
-            group: country["owner"],
+            group: country["owner"]
             //troops: country["troops_count"]
         };
         node_set.push(tmp);
