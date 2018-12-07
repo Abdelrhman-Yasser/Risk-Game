@@ -125,12 +125,12 @@ app.post('/invade_human', urlencodedParser, function (req, res) {
     // 01. get player types
     var from_country = req.body.from;
     var to_country = req.body.to;
-    var residual_troops = req.body.residual_troops;
+    var troops = req.body.troops;
 
     console.log("human invade");
     console.log("from : " + from_country);
     console.log("to : "+ to_country)
-    console.log("to : "+ residual_troops);
+    console.log("to : "+ troops);
     console.log("****************************************");
 
     // 02. init new game with player types
@@ -171,8 +171,8 @@ app.get('/march_pc', function (req, res) {
     // 02. form response
     var response = {
       "change": 1,
-      "from": 3,
-      "to": 4,
+      "from_country": 3,
+      "to_country": 4,
       "count": 5
     };
 
