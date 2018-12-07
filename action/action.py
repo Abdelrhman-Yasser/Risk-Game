@@ -42,9 +42,9 @@ class MarchAction:
     def repJson(self):
         return dict(change="true",
                     type="march",
-                    country_from=self.country_from,
-                    country_to=self.country_to,
-                    troops=self.troops)
+                    from_country=self.country_from,
+                    to_country=self.country_to,
+                    count=self.troops)
 
     def __str__(self):
         return str(self.repJson())
@@ -64,8 +64,8 @@ class DeployAction:
     def repJson(self):
         return dict(change="true",
                     type="deploy",
-                    country_to=self.country_to,
-                    troops=self.troops)
+                    target=self.country_to,
+                    count=self.troops)
 
     def __str__(self):
         return str(self.repJson())

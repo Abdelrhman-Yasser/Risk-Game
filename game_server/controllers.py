@@ -10,11 +10,14 @@ class Controller:
     def __init__(self, player1_type, player2_type):
         self.player1 = self.get_player(player1_type, GamePlayId.P1)
         self.player2 = self.get_player(player2_type, GamePlayId.P2)
-        self.player1.reserve_troops = 2
-        self.player2.reserve_troops = 2
         self.env = Environment("/server_files/map_init.txt", "/server_files/population_init.txt")
+        self.env.reserve_1 = 2
+        self.env.reserve_2 = 2
         self.turn = True
         self.state = EnvState(self.env, None, None, GamePlayId.P1)
+
+    def change_turn(self):
+        self.turn ^= 1
 
     def get_player(self, player1_type, player_id):
         if player1_type == "human":
@@ -26,18 +29,18 @@ class Controller:
         elif player1_type == "pacifist":
             return PacifistAgent
 
-    def deploy_human(self, target, count):
+    def deploy_human(self, target):
         target = int(target)
-        count = int(count)
         if self.turn:
-            self.player1.deploy_reserve_troops(self.env, target, count)
+            self.player1.deploy_reserve_troops(self.env, target)
         else:
-            self.player2.deploy_reserve_troops(self.env, target, count)
+            self.player2.deploy_reserve_troops(self.env, target)
 
     def march_human(self, from_id, target_id, count):
         from_id = int(from_id)
         target_id = int(target_id)
         count = int(count)
+
         if self.turn:
             self.player1.march_troops(self.env, from_id, target_id, count)
         else:
@@ -51,7 +54,9 @@ class Controller:
             self.player1.invade(self.env, from_id, target_id, count)
         else:
             self.player2.invade(self.env, from_id, target_id, count)
-        self.turn != self.turn
+        self.turn ^= 1
+
+        return self.env.change.game_status, self.env.change.reward, self.env.change.winner
 
     def deploy_pc_agent(self, player):
         self.state = player.deploy_reserve_troops(self.state)

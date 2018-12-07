@@ -28,10 +28,9 @@ def new_game(request):
 
 def deploy_human(request):
     target = request.POST.get('target')
-    count = request.POST.get('count')
     try:
         global __controller
-        __controller.deploy_human(target, count)
+        __controller.deploy_human(target)
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
@@ -41,6 +40,9 @@ def march_human(request):
     from_id = request.POST.get('from')
     target_id = request.POST.get('to')
     count = request.POST.get('count')
+    skip = request.POST.get('skip')
+    if int(skip):
+        return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
     try:
         global __controller
         __controller.march_human(from_id, target_id, count)
@@ -52,11 +54,19 @@ def march_human(request):
 def invade_human(request):
     from_id = request.POST.get('from')
     target_id = request.POST.get('to')
-    count = request.POST.get('residual_troops')
-    try:
-        global __controller
-        __controller.invade_human(from_id, target_id, count)
+    count = request.POST.get('troops')
+    skip = request.POST.get('skip')
+    global __controller
+    if int(skip):
+        __controller.change_turn()
         return HttpResponse(json.dumps({'success': 1, 'msg': 'good'}), content_type="application/json")
+    try:
+        game_status, reward, winner = __controller.invade_human(from_id, target_id, count)
+        return HttpResponse(json.dumps({'success': 1,
+                                        'msg': 'good',
+                                        'game_status': game_status.name,
+                                        'winner': winner.name,
+                                        'reward': reward}), content_type="application/json")
     except Exception as e:
         return HttpResponse(json.dumps({'success': 0, 'msg': str(e)}), content_type="application/json")
 

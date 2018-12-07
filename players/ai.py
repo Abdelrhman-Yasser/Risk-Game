@@ -284,6 +284,7 @@ class AStar(Player):
                 elif child in in_fringe and fringe[child] > H + child.distance:
                     fringe[child] = H + child.distance
 
+
 class RTAStar(Player):
 
     def __init__(self, player_id):
@@ -295,28 +296,6 @@ class RTAStar(Player):
     def player_type(self):
         return self.__player_type
 
-    def writeout_path(self):
-        state = self.goal_state
-
-        path_states = []
-
-        while not state is None:
-            path_states.append(state)
-            state = state.parent
-
-        path_states.reverse()
-
-        path = []
-
-        for state in path_states:
-            path.append("Action to get state from before : " + str(state.env.change) + "\n")
-            path.append(str(state) + "\n")
-        path.append(("\n" + str(state.env.winner) + " wins\n"))
-
-        strg = ""
-        for s in path:
-            strg += s
-        return strg
 
     def expand(self, state):
         #x = input()
@@ -366,9 +345,6 @@ class RTAStar(Player):
         enemy_player = AggressiveAgent(enemy_id)
         initial_state.depth = 1
 
-        explored = set()
-        in_fringe = set()
-        fringe = heapdict()
         game_ended = False
 
         if start_move_type == MoveType.DEPLOY:
@@ -410,4 +386,6 @@ class RTAStar(Player):
         state.parent = None
 
         return state
+
+
 

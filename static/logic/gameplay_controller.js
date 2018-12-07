@@ -63,7 +63,6 @@ function gameplay_controller_handle_human_deployment()
 		"count" : variables_curr_player["reserve"]
 	};
 	var response = send_POST_request("deploy_human", send_data);
-	console.log(response)
 	// 03. apply move - or prompt error
 	if(response["success"] == 1)
 	{
@@ -125,6 +124,13 @@ function gameplay_controller_march_update_view(from_country_id, to_country_id, c
 
 function gameplay_controller_handle_human_skip_march()
 {
+	var send_data = {
+		"skip" : 1, // skip move flag
+		"from" : -1,
+		"to" : -1,
+		"count": -1
+	};
+	send_POST_request("march_human", send_data);
 	apply_next_in_chain(gameplay_controller_handle_invasion);
 }
 
@@ -136,6 +142,7 @@ function gameplay_controller_handle_human_marching()
 	var count = $("#gameplay_page_control_panel_troops_count_val").val();
 	// 02. send request to apply to server
 	var send_data = {
+		"skip" : 0, // skip move flag
 		"from" : from_country,
 		"to" : to_country,
 		"count": count
@@ -152,7 +159,7 @@ function gameplay_controller_handle_human_marching()
 		return;
 	}
 	// else an error occured
-	window.alert(response["msg"]);
+	window.alert("could not apply move!");
 }
 
 function gameplay_controller_handle_agent_marching()
@@ -166,8 +173,8 @@ function gameplay_controller_handle_agent_marching()
 		apply_next_in_chain(gameplay_controller_handle_invasion);
 		return;
 	}
-	var from_country = response["from"];
-	var to_country = response["to"];
+	var from_country = response["from_country"];
+	var to_country = response["to_country"];
 	var count = response["count"];
 	// 02. apply move on graph
 	// apply move on graph --------->> TODO
@@ -180,11 +187,11 @@ function gameplay_controller_handle_agent_marching()
 /*****************************************/
 /* handle invasion */
 /*****************************************/
-function gameplay_controller_invade_update_view(from_country_id, to_country_id, residual_troops)
+function gameplay_controller_invade_update_view(from_country_id, to_country_id, troops)
 {
-	var tmp = variables_country_list[to_country_id - 1]["troops_count"];
+	var to_troops = variables_country_list[to_country_id - 1]["troops_count"];
 	// from country
-	var from_new_count = variables_country_list[from_country_id - 1]["troops_count"] - tmp - residual_troops;
+	var from_new_count = variables_country_list[from_country_id - 1]["troops_count"] - troops;
 	variables_country_list[from_country_id - 1]["troops_count"] = from_new_count;
 	var from_node_update = {
 		id : from_country_id,
@@ -192,7 +199,7 @@ function gameplay_controller_invade_update_view(from_country_id, to_country_id, 
 	};
 	variables_canvas_nodes.update([from_node_update]);
 	// to country
-	var to_new_count = residual_troops;
+	var to_new_count = troops - to_troops;
 	variables_country_list[to_country_id - 1]["troops_count"] = to_new_count;
 	variables_country_list[to_country_id - 1]["owner"] = variables_player_turn.toLowerCase();
 	var to_node_update = {
@@ -205,6 +212,13 @@ function gameplay_controller_invade_update_view(from_country_id, to_country_id, 
 
 function gameplay_controller_handle_human_skip_invasion()
 {
+	var send_data = {
+		"skip" : 1,
+		"from" : -1,
+		"to" : -1,
+		"troops": -1
+	};
+	send_POST_request("invade_human", send_data);
 	gameplay_controller_update_player_turn();
 }
 
@@ -213,12 +227,13 @@ function gameplay_controller_handle_human_invasion()
 	// 01. get data move from user
 	var from_country = $("#gameplay_page_control_panel_from_country_id").val();
 	var to_country = $("#gameplay_page_control_panel_to_country_id").val();
-	var residual_troops = $("#gameplay_page_control_panel_troops_count_val").val();
+	var troops = $("#gameplay_page_control_panel_troops_count_val").val();
 	// 02. send request to apply to server
 	var send_data = {
+		"skip" : 0,
 		"from" : from_country,
 		"to" : to_country,
-		"residual_troops": residual_troops
+		"troops": troops
 	};
 	var response = send_POST_request("invade_human", send_data);
 	// 03. apply move - or prompt error
@@ -231,7 +246,7 @@ function gameplay_controller_handle_human_invasion()
 		var reward = response["reward"];
 		variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = reward;
 		// apply move on graph --------->> TODO
-		gameplay_controller_invade_update_view(from_country, to_country, residual_troops);
+		gameplay_controller_invade_update_view(from_country, to_country, troops);
 		// update view
 		$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 		// apply next in chain
@@ -253,16 +268,16 @@ function gameplay_controller_handle_agent_invasion()
 		gameplay_controller_update_player_turn();
 		return;
 	}
-	var from_country = response["from"];
-	var to_country = response["to"];
-	var residual_troops = response["residual_troops"];
+	var from_country = response["from_country"];
+	var to_country = response["to_country"];
+	var troops = response["troops"];
 	// 03. update game status
 	variables_game_status = response["game_status"];
 	variables_game_winner = response["winner"];
 	var reward = response["reward"];
 	variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = reward;
 	// apply move on graph --------->> TODO
-	gameplay_controller_invade_update_view(from_country, to_country, residual_troops);
+	gameplay_controller_invade_update_view(from_country, to_country, troops);
 	// update view
 	$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 	// apply next in chain
@@ -297,12 +312,12 @@ function gameplay_controller_update_player_turn()
 	{
 		variables_player_turn = "p2";
 	}else{
-		variables_player_turn = "p1";	
+		variables_player_turn = "p1";
 	}
 
 	// update view
 	$("#gameplay_page_control_panel_player_turn").text(variables_player_turn);
-	
+
 	// check game status
 	if(variables_game_status.toLowerCase() == "ongoing")
 	{
@@ -320,6 +335,7 @@ function gameplay_controller_update_player_turn()
 /*****************************************/
 function gameplay_controller_handle_deployment()
 {
+	$("#gameplay_page_control_panel_play_action").text("deploy");
 	if(variables_curr_player["reserve"] == 0)
 	{
 		apply_next_in_chain(gameplay_controller_handle_marching);
@@ -337,11 +353,12 @@ function gameplay_controller_handle_deployment()
 		$("#gameplay_page_control_panel_human_controls").hide();
 		gameplay_controller_handle_agent_deployment();
 	}
-	
+
 }
 
 function gameplay_controller_handle_marching()
 {
+	$("#gameplay_page_control_panel_play_action").text("march");
 	if(variables_curr_player["type"].toLowerCase() == "human")
 	{
 		gameplay_page_display_human_march_controls();
@@ -353,23 +370,24 @@ function gameplay_controller_handle_marching()
 		$("#gameplay_page_control_panel_human_controls").hide();
 		gameplay_controller_handle_agent_marching();
 	}
-	
+
 }
 
 function gameplay_controller_handle_invasion()
 {
+	$("#gameplay_page_control_panel_play_action").text("invade");
 	if(variables_curr_player["type"].toLowerCase() == "human")
 	{
 		gameplay_page_display_human_invade_controls();
 		// wait on user to click button
-		// which will call gameplay_controller_handle_human_invasion();	
+		// which will call gameplay_controller_handle_human_invasion();
 	}
 	else
 	{
 		$("#gameplay_page_control_panel_human_controls").hide();
 		gameplay_controller_handle_agent_invasion();
 	}
-	
+
 }
 
 /*****************************************/
@@ -377,6 +395,7 @@ function gameplay_controller_handle_invasion()
 /*****************************************/
 function gameplay_controller_start_game()
 {
+
 	gameplay_controller_update_curr_player();
 }
 
@@ -426,4 +445,3 @@ function gameplay_controller_start_game()
 	$("#gameplay_page_winner_modal").show();
 
 }*/
-
