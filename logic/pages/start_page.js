@@ -30,7 +30,7 @@ function start_page_init_event_listeners()
 			p1_type : p1_type,
 			p2_type : p2_type
 		};
-		var target_url = "http://127.0.0.1:9000/new_game";
+		var target_url = "http://127.0.0.1:" + variables_server_port + "/new_game";
 		$.post(target_url, send_data, function(data, status){
 			// obtain environment setup
 	    	environment = JSON.parse(data);
@@ -39,6 +39,9 @@ function start_page_init_event_listeners()
 	    	variables_country_list = environment["country_list"]; // console.log(country_list);
 	    	variables_border_list = environment["border_list"]; // console.log(border_list);
 	    	variables_continent_list = environment["continent_list"]; // console.log(continent_list);
+
+	    	variables_player_info["p1"]["reserve"] = environment["reserve_1"];
+	    	variables_player_info["p2"]["reserve"] = environment["reserve_2"];
 
 	    	// 03. redirect to new game
 			app_controller_load_gameplay_page();

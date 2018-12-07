@@ -9,7 +9,10 @@ var variables_border_list = [];
 var variables_continent_list = [];
 
 var variables_delay = 200;
+var variables_human_delay_period = 10; // milli seconds
+var variables_agent_delay_period = 500; // milli seconds
 
+var variables_server_port = 9000;
 
 var variables_curr_player;
 

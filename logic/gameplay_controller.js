@@ -3,7 +3,7 @@
 /*****************************************/
 function send_POST_request(req_url, send_data)
 {
-	var data_url = "http://127.0.0.1:8000/" + req_url;
+	var data_url = "http://127.0.0.1:" + variables_server_port + "/" + req_url;
 
 	return JSON.parse(
     	$.ajax({
@@ -17,7 +17,7 @@ function send_POST_request(req_url, send_data)
 
 function send_GET_request(req_url)
 {
-	var data_url = "http://127.0.0.1:8000/" + req_url;
+	var data_url = "http://127.0.0.1:" + variables_server_port + "/" + req_url;
 
     return JSON.parse(
     	$.ajax({
@@ -250,7 +250,7 @@ function gameplay_controller_handle_human_invasion()
 		// update view
 		$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 		// apply next in chain
-		gameplay_controller_update_player_turn();
+		apply_next_in_chain(gameplay_controller_update_player_turn);
 		return;
 	}
 	// else an error occured
@@ -281,7 +281,7 @@ function gameplay_controller_handle_agent_invasion()
 	// update view
 	$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 	// apply next in chain
-	gameplay_controller_update_player_turn();
+	apply_next_in_chain(gameplay_controller_update_player_turn);
 	return;
 }
 
@@ -298,10 +298,10 @@ function gameplay_controller_update_curr_player()
 		variables_curr_player = variables_player_info["p2"];
 	}
 	// apply next in chain
-	variables_delay = 500;
+	variables_delay = variables_agent_delay_period;
 	if(variables_curr_player["type"].toLowerCase() == "human")
 	{
-		variables_delay = 10;
+		variables_delay = variables_human_delay_period;
 	}
 	apply_next_in_chain(gameplay_controller_handle_deployment);
 }
@@ -317,6 +317,7 @@ function gameplay_controller_update_player_turn()
 
 	// update view
 	$("#gameplay_page_control_panel_player_turn").text(variables_player_turn);
+	$("#gameplay_page_control_panel_play_action").text("");
 	
 	// check game status
 	if(variables_game_status.toLowerCase() == "ongoing")
@@ -395,7 +396,6 @@ function gameplay_controller_handle_invasion()
 /*****************************************/
 function gameplay_controller_start_game()
 {
-
 	gameplay_controller_update_curr_player();
 }
 

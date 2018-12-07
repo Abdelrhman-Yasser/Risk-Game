@@ -11,7 +11,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 /* CREATE WEB SERVER */
 /*********************************************/
-var server = app.listen(9000, function () {
+var server_port = 9000;
+var server = app.listen(server_port, function () {
    var host = server.address().address;
    var port = server.address().port;
    console.log("Example app listening at http://%s:%s", host, port);
