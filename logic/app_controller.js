@@ -15,8 +15,10 @@ function app_controller_load_start_page()
     $("body").empty();
     $("body").load("./components/start_page/start_page.html", function(){
         $("#start_page_modal_container").load("./components/start_page/start_modal.html", function(){
-            start_page_init_layout();
+            
             start_page_init_event_listeners();
+            start_page_init_layout();
+            
         });
     });
 }

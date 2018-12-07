@@ -46,8 +46,53 @@ function start_page_init_event_listeners()
 	    	// 03. redirect to new game
 			app_controller_load_gameplay_page();
 		});
-
-
 	});
 
+
+
+	$("#start_page_p1_type").on("change", function(){
+		var tmp = $(this).val().toLowerCase();
+		
+		$("#spsm_p2_o1").attr("disabled", false);
+		$("#spsm_p2_o6").attr("disabled", false);
+		$("#spsm_p2_o7").attr("disabled", false);
+		
+		if(tmp == "human")
+		{
+			$("#spsm_p2_o6").attr("disabled", true);
+			$("#spsm_p2_o7").attr("disabled", true);
+			return;
+		}
+		if((tmp == "greedy")||(tmp == "astar"))
+		{
+			$("#spsm_p2_o1").attr("disabled", true);
+			$("#spsm_p2_o6").attr("disabled", true);
+			$("#spsm_p2_o7").attr("disabled", true);
+			return;
+		}
+	});
+
+	$("#start_page_p2_type").on("change", function(){
+		var tmp = $(this).val().toLowerCase();
+		
+		$("#spsm_p1_o1").attr("disabled", false);
+		$("#spsm_p1_o6").attr("disabled", false);
+		$("#spsm_p1_o7").attr("disabled", false);
+		
+		if(tmp == "human")
+		{
+			$("#spsm_p1_o6").attr("disabled", true);
+			$("#spsm_p1_o7").attr("disabled", true);
+			return;
+		}
+		if((tmp == "greedy")||(tmp == "astar"))
+		{
+			$("#spsm_p1_o1").attr("disabled", true);
+			$("#spsm_p1_o6").attr("disabled", true);
+			$("#spsm_p1_o7").attr("disabled", true);
+			return;
+		}
+	});
 }
+
+
