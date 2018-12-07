@@ -14,6 +14,8 @@ class AgentType(Enum):
     AGGRESSIVE = 3
     PACIFIST = 4
     GREEDY = 5
+    ASTAR = 6
+    RASTAR = 7
 
 
 class GamePlayId(Enum):

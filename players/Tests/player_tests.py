@@ -132,7 +132,7 @@ class AiTests(unittest.TestCase):
         state = EnvState(env, None, None, GamePlayId.P1)
         player1 = Greedy(GamePlayId.P1)
         player2 = PassiveAgent(GamePlayId.P2)
-        player1.search(state, player2)
+        res = player1.search(state, player2)
         print(player1.writeout_path())
 
     def test2_greedy(self):
@@ -170,9 +170,9 @@ class AiTests(unittest.TestCase):
     def test3_Astar(self):
         env = Environment("map_init.txt", "population_init.txt")
         state = EnvState(env, None, None, GamePlayId.P1)
-        player1 = AStar(GamePlayId.P1)
-        player2 = AggressiveAgent(GamePlayId.P2)
-        player1.search(state, player2)
+        player1 = AStar(GamePlayId.P2)
+        player2 = PassiveAgent(GamePlayId.P1)
+        res = player1.search(state, player2)
         print(player1.writeout_path())
 
     def test1_RTAstar(self):

@@ -137,6 +137,8 @@ class Greedy(Player):
 
     def search(self, initial_state, enemy_player):
 
+        initial_state.parent = None
+
         explored = set()
         in_fringe = set()
 
@@ -144,12 +146,14 @@ class Greedy(Player):
         fringe[initial_state] = 0
         in_fringe.add(initial_state)
 
-        while True:
+        finish = 1
+
+        while finish:
 
             try:
                 state = fringe.popitem()[0]
             except Exception as e:
-                print("end")
+                self.goal_state = min_child
                 break
             in_fringe.remove(state)
             explored.add(state)
@@ -164,8 +168,10 @@ class Greedy(Player):
             for child in n_children:
                 if child.env.game_status == GameStatus.ENDED:
                     self.goal_state = child
-                    return
+                    finish = 0
 
+            mini = 99999
+            min_child = None
             for child in n_children:
                 H = Heuristic()
                 H = H.H1(child, self)
@@ -174,13 +180,26 @@ class Greedy(Player):
                     in_fringe.add(child)
                 elif child in in_fringe and fringe[child] > H:
                     fringe[child] = H
+            if H + child.distance < mini:
+                min_child = child
+                mini = H + child.distance
+
+        change_path = []
+        state = self.goal_state
+        while state.env.change is not None:
+            change_path.append(state.env.change)
+            state = state.parent
+
+        change_path.reverse()
+
+        return change_path
 
 
 class AStar(Player):
 
     def __init__(self, player_id):
         Player.__init__(self, player_id)
-        self.__player_type = AgentType.GREEDY
+        self.__player_type = AgentType.ASTAR
         self.goal_state = None
 
     @property
@@ -247,6 +266,8 @@ class AStar(Player):
 
     def search(self, initial_state, enemy_player):
 
+        initial_state.parent = None
+
         explored = set()
         in_fringe = set()
 
@@ -254,12 +275,14 @@ class AStar(Player):
         fringe[initial_state] = 0
         in_fringe.add(initial_state)
 
-        while True:
+        finish = 1
+
+        while finish:
 
             try:
                 state = fringe.popitem()[0]
             except Exception as e:
-                print("end")
+                self.goal_state = min_child
                 break
             in_fringe.remove(state)
             explored.add(state)
@@ -273,8 +296,10 @@ class AStar(Player):
             for child in n_children:
                 if child.env.game_status == GameStatus.ENDED:
                     self.goal_state = child
-                    return
+                    finish = 0
 
+            mini = 99999
+            min_child = None
             for child in n_children:
                 H = Heuristic()
                 H = H.H1(child, self)
@@ -283,6 +308,18 @@ class AStar(Player):
                     in_fringe.add(child)
                 elif child in in_fringe and fringe[child] > H + child.distance:
                     fringe[child] = H + child.distance
+                if H + child.distance < mini:
+                    min_child = child
+                    mini = H + child.distance
+
+        change_path = []
+        state = self.goal_state
+        while state.env.change is not None:
+            change_path.append(state.env.change)
+            state = state.parent
+
+        change_path.reverse()
+        return change_path
 
 
 class RTAStar(Player):

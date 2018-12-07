@@ -15,6 +15,16 @@ class Controller:
         self.env.reserve_2 = 2
         self.turn = True
         self.state = EnvState(self.env, None, None, GamePlayId.P1)
+        self.history = []
+        self.history_counter = 0
+        if player1_type == "astar":
+            history = self.player1.search(self.state, self.player2)
+        elif player1_type == "greedy":
+            history = self.player1.search(self.state, self.player2)
+        elif player2_type == "astar":
+            history = self.player2.search(self.state, self.player1)
+        elif player2_type == "greedy":
+            history = self.player2.search(self.state, self.player1)
 
     def change_turn(self):
         self.turn ^= 1
@@ -69,6 +79,10 @@ class Controller:
         self.env = self.state.env
 
     def deploy_pc(self):
+        if len(self.history) > 0:
+            change = self.history[self.history_counter]
+            self.history_counter += 1
+            return change
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
@@ -94,6 +108,10 @@ class Controller:
         self.env = self.state.env
 
     def march_pc(self):
+        if len(self.history) > 0:
+            change = self.history[self.history_counter]
+            self.history_counter += 1
+            return change
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
@@ -119,6 +137,10 @@ class Controller:
         self.env = self.state.env
 
     def invade_pc(self):
+        if len(self.history) > 0:
+            change = self.history[self.history_counter]
+            self.history_counter += 1
+            return change
         if self.turn:
             if (isinstance(self.player1, AggressiveAgent) or
                     isinstance(self.player1, PassiveAgent) or
