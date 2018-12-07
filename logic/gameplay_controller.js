@@ -3,7 +3,7 @@
 /*****************************************/
 function send_POST_request(req_url, send_data)
 {
-	var data_url = "http://127.0.0.1:9000/" + req_url;
+	var data_url = "http://127.0.0.1:8000/" + req_url;
 
 	return JSON.parse(
     	$.ajax({
@@ -17,7 +17,7 @@ function send_POST_request(req_url, send_data)
 
 function send_GET_request(req_url)
 {
-	var data_url = "http://127.0.0.1:9000/" + req_url;
+	var data_url = "http://127.0.0.1:8000/" + req_url;
 
     return JSON.parse(
     	$.ajax({
@@ -124,6 +124,13 @@ function gameplay_controller_march_update_view(from_country_id, to_country_id, c
 
 function gameplay_controller_handle_human_skip_march()
 {
+	var send_data = {
+		"skip" : 1, // skip move flag
+		"from" : -1,
+		"to" : -1,
+		"count": -1
+	};
+	send_POST_request("march_human", send_data);
 	apply_next_in_chain(gameplay_controller_handle_invasion);
 }
 
@@ -135,6 +142,7 @@ function gameplay_controller_handle_human_marching()
 	var count = $("#gameplay_page_control_panel_troops_count_val").val();
 	// 02. send request to apply to server
 	var send_data = {
+		"skip" : 0, // skip move flag
 		"from" : from_country,
 		"to" : to_country,
 		"count": count
@@ -204,6 +212,13 @@ function gameplay_controller_invade_update_view(from_country_id, to_country_id, 
 
 function gameplay_controller_handle_human_skip_invasion()
 {
+	var send_data = {
+		"skip" : 1,
+		"from" : -1,
+		"to" : -1,
+		"troops": -1
+	};
+	send_POST_request("invade_human", send_data);
 	gameplay_controller_update_player_turn();
 }
 
@@ -215,6 +230,7 @@ function gameplay_controller_handle_human_invasion()
 	var troops = $("#gameplay_page_control_panel_troops_count_val").val();
 	// 02. send request to apply to server
 	var send_data = {
+		"skip" : 0,
 		"from" : from_country,
 		"to" : to_country,
 		"troops": troops
@@ -252,16 +268,16 @@ function gameplay_controller_handle_agent_invasion()
 		gameplay_controller_update_player_turn();
 		return;
 	}
-	var from_country = response["from"];
-	var to_country = response["to"];
-	var residual_troops = response["residual_troops"];
+	var from_country = response["from_country"];
+	var to_country = response["to_country"];
+	var troops = response["troops"];
 	// 03. update game status
 	variables_game_status = response["game_status"];
 	variables_game_winner = response["winner"];
 	var reward = response["reward"];
 	variables_player_info[variables_player_turn.toLowerCase()]["reserve"] = reward;
 	// apply move on graph --------->> TODO
-	gameplay_controller_invade_update_view(from_country, to_country, residual_troops);
+	gameplay_controller_invade_update_view(from_country, to_country, troops);
 	// update view
 	$(variables_curr_player["view_id_reserve_troops"]).text(reward);
 	// apply next in chain

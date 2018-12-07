@@ -100,11 +100,13 @@ app.post('/deploy_human', urlencodedParser, function (req, res) {
 app.post('/march_human', urlencodedParser, function (req, res) {
     
     // 01. get player types
+    var skip_flag = req.body.skip;
     var from_country = req.body.from; 
     var to_country = req.body.to;
     var count = req.body.count;
 
     console.log("human march");
+    console.log("skip : " + skip_flag);
     console.log("from : " + from_country);
     console.log("to : "+ to_country);
     console.log("count : "+ count);
@@ -123,11 +125,13 @@ app.post('/march_human', urlencodedParser, function (req, res) {
 app.post('/invade_human', urlencodedParser, function (req, res) {
     
     // 01. get player types
+    var skip_flag = req.body.skip;
     var from_country = req.body.from;
     var to_country = req.body.to;
     var troops = req.body.troops;
 
     console.log("human invade");
+    console.log("skip : " + skip_flag);
     console.log("from : " + from_country);
     console.log("to : "+ to_country)
     console.log("to : "+ troops);
@@ -189,9 +193,9 @@ app.get('/invade_pc', function (req, res) {
     // 02. form response
     var response = {
       "change": 1,
-      "from": 3,
-      "to": 2,
-      "residual_troops": 5,
+      "from_country": 3,
+      "to_country": 2,
+      "troops": 5,
       "game_status": "ongoing",
       "winner": "none",
       "reward": 5
